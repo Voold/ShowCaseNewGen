@@ -1,0 +1,12 @@
+:root {
+  --black: 29, 29, 31;
+  --green: 40, 190, 70;
+  --middle-gray: 207, 209, 211;
+  --light-gray: 240, 242, 245;
+  --dark-blue: 43, 43, 59;
+  --description: 129, 132, 152;
+}
+
+body.dark-theme {
+
+}

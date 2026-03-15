@@ -1,0 +1,132 @@
+.projectsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  user-select: none;
+}
+
+.titleBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.title, .subTitle, .bottomPart{
+  font-family: "ALS Sirius";
+}
+
+.title {
+  font-size: 32px;  
+}
+
+.subTitle {
+  color: #E6E6E6;
+  font-size: 18px;
+}
+
+.topPart {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.navPart {
+  display: flex;
+  gap: 24px;
+}
+
+.navEl {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.6;
+  color: #323541;
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 145%;
+}
+
+.navEl  input[type="checkbox"] {
+  position: absolute;
+  top: 2px;
+  left: -32px;
+  box-sizing: content-box;
+  width: 26px;
+  height: 12px;
+  border: 1px solid;
+  
+  border-radius: 36.64px;
+  cursor: pointer;
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.navEl  input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #323541;
+  transition: 0.2s;
+  transform: translateX(1px);
+}
+
+.navEl input[type="checkbox"]:checked::before {
+  transform: translateX(150%);
+}
+
+.navEl svg {
+  width: 8px;
+  height: 7px;
+  cursor: pointer;
+}
+
+
+.bottomPart {
+  z-index: 10;
+  display: flex;
+  margin: 0;
+  border-bottom: 0px solid;
+  padding: 0;
+  -webkit-box-shadow: 0px 1px 0px 0px #D9D9D9;
+  -moz-box-shadow: 0px 1px 0px 0px #D9D9D9;
+  box-shadow: 0px 1px 0px 0px #D9D9D9;
+  color: #D9D9D9;
+  font-size: 16px;
+  list-style: none;
+}
+
+.tab {
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bottomPart li {
+  border-bottom: 0px solid;
+  transition: 0.3s;
+}
+
+li.selected {
+  border-bottom: 0px solid;
+  -webkit-box-shadow: 0px 2px 0px 0px rgb(var(--green));
+  -moz-box-shadow: 0px 2px 0px 0px rgb(var(--green));
+  box-shadow: 0px 2px 0px 0px rgb(var(--green));
+  color: rgb(var(--green));
+}
+
+
+.sepLine {
+  width: 100%;
+}
+
+.gap {
+  width: 24px;
+}
+
+

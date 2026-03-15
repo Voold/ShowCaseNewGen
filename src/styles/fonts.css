@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "ALS Sirius";
+  src: url("./shrifts/ALS_Sirius_Regular_0.95.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "ALS Sirius";
+  src: url("./shrifts/ALS_Sirius_Bold_0.95.otf") format("opentype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./shrifts/Inter.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("./shrifts/OpenSans.ttf") format("opentype");
+}
+
+* {
+  box-sizing: border-box;
+}
