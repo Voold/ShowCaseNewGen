@@ -6,10 +6,13 @@ import ProjectsGrid from "./components/ProjectsGrid/ProjectsGrid.tsx";
 
 function App() {
 
+  
+
   return (
     <Routes>
       <Route path="/" element={<Catalog />}>
 
+        { /* Вот эту всю красоту надо будет нормально переделать, это вообще что за херобора */}
         <Route path="/" element = {<ProjectGallery/>} >
           <Route path=":tabNumber?" element = {<ProjectsGrid/>} />
         </Route>
