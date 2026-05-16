@@ -1,0 +1,26 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-gray-50);
+  align-items: center;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  margin-top: 26px;
+  
+}
+
+.filterPart {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 16px;
+}
+
+.projectsPart {
+  display: flex;
+  flex-direction: column;
+}

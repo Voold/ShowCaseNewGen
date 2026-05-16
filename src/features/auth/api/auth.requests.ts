@@ -1,7 +1,7 @@
-import { axiosInstance } from '@/api/instance';
+import { axiosInstance } from '@/shared/api';
 import type { AuthResponse, OAuthExchangeParams } from '../types';
-import type { User } from '@/types';
-import { ENDPOINTS } from '@/config/endpoints';
+import type { User } from '@/shared/types';
+import { ENDPOINTS } from '@/shared/config';
 
 class AuthRequests {
 
