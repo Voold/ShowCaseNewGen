@@ -4,7 +4,7 @@ import { authRequests } from './auth.requests';
 import { authKeys } from '../config/cacheKeys';
 import { pkceService } from '../utils/pkce';
 import type { AuthResponse, OAuthExchangeParams } from '../types';
-import type { User } from '@/types';
+import type { User } from '@/shared/types';
 import { AxiosError } from 'axios';
 
 export const authQueries = {
