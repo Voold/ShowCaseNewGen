@@ -1,0 +1,41 @@
+.navMenu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font: var(--label-interface);
+    color: var(--color-gray-900);
+    gap: 4px;
+    margin-top: 8px;
+    background-color: var(--color-gray-150);
+    border-radius: 24px;
+    padding: 4px;
+}
+
+.selector {
+    position: absolute;
+    height: calc(100% - 8px);
+    
+    border-radius: 20px;
+    background-color: white;
+    transition: left 0.25s ease, width 0.25s ease;
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: var(--tab-shadow);
+}
+
+.button {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+.active {
+   color: var(--color-gray-900);
+}

@@ -1,8 +1,27 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './SwitchWorkSpace.module.css';
 
 export default function SwitchWorkSpace() {
-  const [isCatalog, setIsCatalog] = useState(true);
+  type Tab = 'catalog' | 'mySpace' | 'research';
+  const [active, setActive] = useState<Tab>
+  ('catalog');
+  const [selectorStyle, setSelectorStyle] = useState({ left: 0, width: 0 })
+
+  const refs = {
+    catalog: useRef<HTMLDivElement>(null),
+    mySpace: useRef<HTMLDivElement>(null),
+    research: useRef<HTMLDivElement>(null),
+  }
+
+  useEffect(() => {
+    const el = refs[active].current
+    if (el) {
+      setSelectorStyle({
+        left: el.offsetLeft,
+        width: el.offsetWidth
+      })
+    }
+  }, [active])
 
   const square = (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,20 +30,32 @@ export default function SwitchWorkSpace() {
   );
 
   return (
-    <section className={styles.body}>
-      <div className={`${styles.selector} ${isCatalog ? styles.catalog : styles.mySpace}`}></div>
+    <nav className={styles.body}>
       <div
-        className={`${styles.buttonPart} ${isCatalog ? styles.active : ''}`}
-        onClick={() => { if (isCatalog) return; setIsCatalog(true); }}
+          className={styles.selector}
+          style={{ left: selectorStyle.left, width: selectorStyle.width }}
+      />
+      <div
+        className={`${styles.button} ${styles.catalog} ${active === 'catalog' ? styles.active : ''}`}
+        ref={refs.catalog}
+        onClick={() => setActive('catalog')}
       >
-        {square}Поиск новых проектов
+        {square}Проекты
       </div>
       <div
-        className={`${styles.buttonPart} ${!isCatalog ? styles.active : ''}`}
-        onClick={() => { if (!isCatalog) return; setIsCatalog(false); }}
+        className={`${styles.button} ${styles.mySpace} ${active === 'mySpace' ? styles.active : ''}`}
+        ref={refs.mySpace}
+        onClick={() => setActive('mySpace')}
       >
-        {square}Моё пространство
+        {square}Моя Платформа
       </div>
-    </section>
+      <div
+        className={`${styles.button} ${styles.research} ${active === 'research' ? styles.active : ''}`}
+        ref={refs.research}
+        onClick={() => setActive('research')}
+      >
+        {square}Исследования
+      </div>
+    </nav>
   );
 }
