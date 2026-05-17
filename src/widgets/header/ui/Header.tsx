@@ -7,7 +7,9 @@ export default function Header() {
   return (
     <header className={styles.wrap}>
       <img src={LogoTPU} />
-      <SwitchWorkSpace />
+      <div className={styles.center}>
+        <SwitchWorkSpace />
+      </div>
       <EnterButton />
     </header>
   );

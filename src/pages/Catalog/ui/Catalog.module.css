@@ -2,15 +2,21 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
+  overflow-y: auto;
   background-color: var(--color-gray-50);
   align-items: center;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .mainContent {
   display: flex;
   flex: 1;
   margin-top: 26px;
-  
+  padding: 0 120px;
 }
 
 .filterPart {
@@ -22,5 +28,6 @@
 
 .projectsPart {
   display: flex;
+  width: fit-content;
   flex-direction: column;
 }

@@ -27,6 +27,11 @@
   #A1D3F7 55%,
   #B2E8FF 100%
   );
+  --grad-green:   linear-gradient(180deg, 
+  #47C20A 0%, 
+  #80CC66 55%,
+  #94E085 100%
+  );
 
   --grad-brand:   linear-gradient(90deg, 
   #27FF6F 0%, 
@@ -69,9 +74,14 @@
   /* Я предположил размер для шрифта ниже */
   --info-descripte-platform: 500 13px/1.3 var(--font-open-sans);
   --description-platform: 500 10px/1.2 var(--font-open-sans);
+
+  --tab-shadow: 0 0px 7.5px rgba(16, 8, 72, 0.04);
+
+  --card-drop-shadow: 0 4px 7.5px rgba(16, 8, 72, 0.04), 0 0px 20px rgba(16, 8, 72, 0.04);
+
 }
 
-@media (max-width: 1280px) {
+/* @media (max-width: 1280px) {
   :root {
 
   }
@@ -81,4 +91,4 @@
   :root {
 
   }
-}
+} */

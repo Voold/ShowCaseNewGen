@@ -1,5 +1,6 @@
 import { Pagination } from '@/shared/ui';
 import styles from './ProjectsHeader.module.css';
+import { MagicToggle } from '@/shared/ui/magic-checkbox/MagicToggle';
 
 export default function ProjectsHeader() {
   const downArrow = (
@@ -17,10 +18,8 @@ export default function ProjectsHeader() {
         </div>
         <nav className={styles.navPart}>
           <div className={styles.navEl}>
-            <label>
-              <input type="checkbox" />
-              Наиболее подходящие
-            </label>
+            <MagicToggle/>
+            наиболее подходящие
           </div>
           <div className={styles.navEl}>
             Недавние {downArrow}
