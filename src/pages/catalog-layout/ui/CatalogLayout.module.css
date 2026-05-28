@@ -1,0 +1,10 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--color-gray-50);
+  align-items: center;
+  overflow: hidden;
+}

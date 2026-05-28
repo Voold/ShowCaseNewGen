@@ -1,20 +1,31 @@
 .cardBody {
   display: flex;
   flex-direction: column;
+  position: relative;
   border-radius: 20px;
   background-color: white;
   overflow: hidden;
   box-shadow: var(--card-drop-shadow);
   width: 100%;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+}
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: var(--card-drop-shadow-hover);
-    z-index: 1;
-  }
+.like {
+  position: absolute;
+  top: 21px;
+  right: 21px;
+  z-index: 3;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.cardBody:hover .like,
+.like.liked {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .header {
@@ -57,18 +68,23 @@
 .web {
   background: var(--grad-fiolet);
 }
+
 .mobile {
   background: var(--grad-green);
 }
+
 .engineering {
   background: var(--grad-blue);
 }
+
 .ml {
   background: var(--grad-fiolet);
 }
+
 .fintech {
   background: var(--grad-fiolet);
 }
+
 .design {
   background: var(--grad-fiolet);
 }
@@ -104,7 +120,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 12px 14px 8px 14px;
+  padding: 12px 14px 0 14px;
   flex: 1;
 }
 
@@ -251,8 +267,10 @@
   border-radius: 6px;
   padding: 2px 7px 3px 7px;
   border: 1px solid var(--color-gray-200);
-  font-size: 10px;
+  /* TODO */
+  font-family: var(--font-open-sans);
   font-weight: 700;
+  font-size: 10px;
   color: var(--color-gray-500);
 }
 

@@ -1,41 +1,56 @@
 import styles from './ProjectCardExtended.module.css';
-import type { ProjectCardData } from '../../model/types';
+import type { ProjectCardData, ProjectFormat } from '../../model/types';
 import { FolderIcon } from '@/shared/ui';
 import { CodeIcon } from '@/shared/ui/icons/CodeIcon';
 import { StarIcon } from '@/shared/ui/icons/StarIcon';
-
 import Pattern from '@/assets/svg/Pattern.svg'
+import { useState } from "react";
+import { LikeButton } from "@/shared/ui";
 
 interface Props {
   project: ProjectCardData;
 }
 
-const typeProject = (type: string) => {
+const typeProject = (type: ProjectFormat) => {
   switch (type) {
-    case 'case':
-      return <div className={styles.case}><FolderIcon pathClassName={styles.pathFolder}/>Кейсовый</div>;
-    case 'real':
-      return <div className={styles.real}><CodeIcon pathClassName={styles.pathCode}/>Реальный</div>;
-    case 'paid':
-      return <div className={styles.paid}><StarIcon pathClassName={styles.pathStar}/>Оплачиваемый</div>;
+    case 'CaseProjectRequest':
+      return <div className={styles.case}><FolderIcon pathClassName={styles.pathFolder} />Кейсовый</div>;
+    case 'RealProjectRequest':
+      return <div className={styles.real}><CodeIcon pathClassName={styles.pathCode} />Реальный</div>;
+    case 'PaidProjectRequest':
+      return <div className={styles.paid}><StarIcon pathClassName={styles.pathStar} />Оплачиваемый</div>;
     default:
       return null;
   }
 };
 
 export default function ProjectCardExtended({ project }: Props) {
-  const { id, title, directions, format, competencies, organization, description, accentColor } = project;
+  const { id, type, tags, partnerId, meta, roles, brandColor } = project;
 
-  const visibleDirections = directions.slice(0, 3);
-  const remainCount = directions.length - 3;
+  const [isLiked, setIsLiked] = useState(false);
+
+  const toggleLike = () => {
+    return setIsLiked(!isLiked)
+  }
+
+  const visibleDirections = tags.slice(0, 3);
+  const remainCount = tags.length - 3;
+
+  const competencies = roles.map(role => role.meta.name);
 
   return (
-    <div className={`${styles.cardBody}`} style={accentColor ? { '--accent': accentColor } as React.CSSProperties : undefined}>
+    <div className={`${styles.cardBody}`} style={brandColor ? { '--accent': brandColor.startsWith('#') ? brandColor : `#${brandColor}` } as React.CSSProperties : undefined}>
       <div className={styles.accentBody}>
 
-        <img className={styles.pattern} src={Pattern} alt='Узор'/>
+        <LikeButton
+          isLiked={isLiked}
+          onClick={toggleLike}
+          className={`${styles.like} ${isLiked ? styles.liked : ''}`}
+        />
 
-        <div className={`${styles.header} ${styles[directions[0]?.key]}`}>
+        <img className={styles.pattern} src={Pattern} alt='Узор' />
+
+        <div className={`${styles.header} ${styles[tags[0]?.key]}`}>
           <div className={styles.tags}>
             {visibleDirections.map((d) => (
               <div key={d.key} className={styles.tag}>{d.label}</div>
@@ -44,32 +59,32 @@ export default function ProjectCardExtended({ project }: Props) {
               <div className={styles.tagCount}>Ещё +{remainCount}</div>
             )}
           </div>
+
         </div>
 
         <div className={styles.body}>
-
           <div className={styles.titleAndOrg}>
             <div className={styles.metaContainer}>
               <div className={styles.meta}>
-              {typeProject(format)}
-              <div className={styles.id}>№ {id}</div>
+                {typeProject(type)}
+                <div className={styles.id}>№ {id}</div>
               </div>
-              <div className={styles.title}>{title}</div>
+              <div className={styles.title}>{meta.title}</div>
             </div>
 
-          
+
             <div className={styles.org}>
               <div className={styles.orgAvatar}>Т</div>
               <div className={styles.orgInfo}>
-                <span className={styles.orgName}>{organization}</span>
-              <span className={styles.orgSub}>публикационная активность</span>
+                <span className={styles.orgName}>{partnerId.verbose}</span>
+                <span className={styles.orgSub}>публикационная активность</span>
               </div>
             </div>
           </div>
 
-    
-          {description && <p className={styles.description}>{description}</p>}
-          
+
+          {meta.description && <p className={styles.description}>{meta.description}</p>}
+
           <div className={styles.competenciesBlock}>
             <div className={styles.competenciesLabel}>{competencies.length} компетенций:</div>
             <div className={styles.competenciesWrapper}>

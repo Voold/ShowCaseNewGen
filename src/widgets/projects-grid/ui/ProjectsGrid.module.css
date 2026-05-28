@@ -4,14 +4,13 @@
   grid-auto-flow: dense;
   gap: 12px;
   width: 100%;
+  box-sizing: border-box;
   min-width: 0;
-  max-height: 100%;
   padding: 16px;
-  overflow: auto;
   align-content: start;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   .body {
     grid-template-columns: repeat(3, 1fr);
   }

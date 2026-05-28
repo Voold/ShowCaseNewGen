@@ -1,0 +1,232 @@
+.freeCompetencies {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px 12px 8px;
+
+  background-color: var(--color-gray-100);
+  border-radius: 20px;
+
+  gap: 16px
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+.title {
+  font: var(--meta-title-interface);
+  color: var(--color-gray-750);
+}
+
+.description {
+  font: var(--body-small-platform);
+  color: var(--color-gray-600)
+}
+
+.competenciesList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px
+}
+
+.competency {
+  display: flex;
+  position: relative;
+  padding: 12px 16px;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: space-between;
+  gap: 8px;
+
+  cursor: pointer;
+
+  border: 2px solid transparent;
+}
+
+.leftHalfRole {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.role {
+  font: var(--meta-title-interface);
+  color: var(--color-brand-black);
+}
+
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-right: 36px;
+}
+
+.skill {
+  position: relative;
+  padding: 4px 10px 3.5px 10px;
+  border: 1px solid rgba(120, 120, 120, 0.5);
+  border-radius: 6px;
+
+  font: var(--description-platform);
+  color: var(--color-gray-600)
+}
+
+.skill.required::before {
+  content: '';
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 4px;
+
+  top: -4px;
+  right: -4px;
+  background-color: var(--color-gray-600)
+}
+
+
+.response {
+  display: flex;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  align-items: flex-end;
+  gap: 2px
+}
+
+.countRes {
+  display: flex;
+  font: var(--label-interface);
+  font-size: 10px;
+  inline-size: auto;
+  color: var(--color-gray-600);
+  align-content: center;
+}
+
+.checkIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  flex-shrink: 0;
+}
+
+.pathCheck {
+  stroke: var(--color-brand-green);
+}
+
+.like {
+  height: fit-content;
+}
+
+.selected {
+  border-color: transparent;
+  background-image:
+    linear-gradient(white, white),
+    var(--grad-brand);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.footer {
+  display: flex;
+  padding: 0 4px 0 8px;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.button {
+  padding: 14px 28px 12px 28px;
+  border: 1px solid var(--color-brand-green);
+  font: var(--label-interface);
+  color: var(--color-white);
+  background-color: var(--color-brand-green);
+  font-weight: 500;
+  border-radius: 59px;
+
+  transition: 0.2s;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.activeButton {
+  background-color: transparent;
+  color: var(--color-gray-900);
+  border: 1px solid var(--color-gray-900);
+}
+
+.questionIcon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.questionIconPath {
+  fill: var(--color-gray-350)
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  width: max-content;
+  max-width: 220px;
+  padding: 7px 8px 8px 8px;
+  background-color: #E6E6E6;
+  color: var(--color-gray-900);
+  font-family: var(--font-inter);
+  font-size: 9px;
+  line-height: 1.1;
+  border-radius: 4px 0 4px 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  white-space: normal;
+  font-weight: 300;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.2s;
+}
+
+.skill:hover .tooltip,
+.response:hover .tooltip,
+.questionIcon:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.skill .tooltip {
+  top: calc(100% + 8px);
+  right: 0;
+  transform: translateY(-4px);
+}
+
+.response .tooltip {
+  top: calc(100% + 8px);
+  right: 0;
+  transform: translateY(-4px);
+}
+
+.questionIcon .tooltip {
+  top: calc(100% + 8px);
+  right: 0;
+  transform: translateY(-4px);
+}

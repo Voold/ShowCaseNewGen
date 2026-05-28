@@ -9,18 +9,29 @@
   width: 100%;
 
   padding: 8px 86px 8px 8px;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 
   grid-column: span 2;
   aspect-ratio: auto;
+}
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: var(--card-drop-shadow-hover);
-    z-index: 1;
-  }
+.like {
+  position: absolute;
+  top: 21px;
+  right: 98px;
+  z-index: 3;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+}
+
+.cardBody:hover .like,
+.like.liked {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .pattern {
@@ -66,7 +77,7 @@
   flex-wrap: wrap;
   gap: 6px;
   justify-content: flex-end;
-  
+
 }
 
 .tag {

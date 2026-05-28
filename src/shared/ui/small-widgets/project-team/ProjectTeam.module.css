@@ -1,0 +1,88 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px 8px 8px;
+
+  background-color: var(--color-gray-100);
+  border-radius: 20px;
+  gap: 16px;
+  border: 1px solid #ffffff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+.title {
+  font: var(--meta-title-interface);
+  color: var(--color-gray-750);
+}
+
+.description {
+  font: var(--body-small-platform);
+  color: var(--color-gray-600)
+}
+
+.teamList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.role {
+  font: var(--meta-title-interface);
+  color: var(--color-gray-650);
+}
+
+.info {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--color-gray-400);
+}
+
+.name {
+  font: var(--body-small-platform);
+  color: var(--color-gray-400);
+}
+
+.avatarPlaceholder {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--color-gray-250);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.questionIcon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}

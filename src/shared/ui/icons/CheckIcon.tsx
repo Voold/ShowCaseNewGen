@@ -1,0 +1,12 @@
+interface CheckIconProps {
+  className: string;
+  color?: string;
+  stroke?: string;
+  pathClassName?: string;
+}
+
+export const CheckIcon = ({className, stroke = '#6E7181', pathClassName }: CheckIconProps) => (
+  <svg className={className} width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path className={pathClassName} d="M0.705078 3.79942L4.06582 7.14107C4.26124 7.33538 4.57704 7.33493 4.77191 7.14006L11.2051 0.707031" stroke={stroke} stroke-width="2"/>
+  </svg>
+);

@@ -1,1 +1,0 @@
-export { default as MySpacePage } from './ui/MySpace';

@@ -1,0 +1,95 @@
+.profileWidget {
+  width: 100%;
+
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--color-gray-100);
+  border-radius: 20px;
+
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-gray-750);
+}
+
+.avatarImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font: var(--meta-title-interface);
+  font-size: 13px;
+}
+
+.desc {
+  font: var(--field-label-interface);
+  font-size: 10px;
+}
+
+.questionIcon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.questionIconPath {
+  fill: var(--color-gray-350)
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  width: max-content;
+  max-width: 220px;
+  padding: 7px 8px 8px 8px;
+  background-color: #E6E6E6;
+  color: var(--color-gray-900);
+  font-family: var(--font-inter);
+  font-size: 9px;
+  line-height: 1.1;
+  border-radius: 4px 0 4px 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  white-space: normal;
+  font-weight: 300;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.2s;
+}
+
+.questionIcon:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.questionIcon .tooltip {
+  top: calc(100% + 8px);
+  right: 0;
+  transform: translateY(-4px);
+}

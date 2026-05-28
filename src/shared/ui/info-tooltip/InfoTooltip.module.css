@@ -1,0 +1,45 @@
+.questionIcon {
+    cursor: pointer;
+}
+
+.questionIconPath {
+    fill: var(--color-gray-350)
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 100;
+    display: block;
+    width: max-content;
+    max-width: 220px;
+    padding: 7px 8px 8px 8px;
+    background-color: #E6E6E6;
+    color: var(--color-gray-900);
+    font-family: var(--font-inter);
+    font-size: 9px;
+    line-height: 1.1;
+    border-radius: 4px 0 4px 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    white-space: normal;
+    font-weight: 300;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.2s;
+}
+
+.questionIcon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.questionIcon .tooltip {
+    top: calc(100% + 8px);
+    right: 0;
+    transform: translateY(-4px);
+}

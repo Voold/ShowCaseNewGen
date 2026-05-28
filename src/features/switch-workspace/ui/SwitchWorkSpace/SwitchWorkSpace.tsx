@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './SwitchWorkSpace.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function SwitchWorkSpace() {
   type Tab = 'catalog' | 'mySpace' | 'research';
   const [active, setActive] = useState<Tab>
   ('catalog');
   const [selectorStyle, setSelectorStyle] = useState({ left: 0, width: 0 })
+
+  const navigate = useNavigate()
 
   const refs = {
     catalog: useRef<HTMLDivElement>(null),
@@ -38,14 +41,24 @@ export default function SwitchWorkSpace() {
       <div
         className={`${styles.button} ${styles.catalog} ${active === 'catalog' ? styles.active : ''}`}
         ref={refs.catalog}
-        onClick={() => setActive('catalog')}
+        onClick={
+          () => {
+            setActive('catalog')
+            navigate('/catalog')
+          }
+        }
       >
         {square}Проекты
       </div>
       <div
         className={`${styles.button} ${styles.mySpace} ${active === 'mySpace' ? styles.active : ''}`}
         ref={refs.mySpace}
-        onClick={() => setActive('mySpace')}
+        onClick={
+          () => {
+            setActive('mySpace')
+            navigate('/my-platform')
+          }
+        }
       >
         {square}Моя Платформа
       </div>

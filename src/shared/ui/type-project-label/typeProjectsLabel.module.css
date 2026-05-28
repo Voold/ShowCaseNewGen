@@ -1,0 +1,49 @@
+.case {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+  font: var(--body-small-platform);
+  color: var(--color-gray-750);
+  gap: 5px;
+  padding: 3px 10px 3px 6px;
+  border: 1px solid var(--color-gray-350);
+  border-radius: 6px;
+}
+
+.pathFolder {
+  fill: var(--color-gray-750)
+}
+
+.real {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+  padding: 3px 10px 3px 6px;
+  gap: 5px;
+  border-radius: 6px;
+  font: var(--body-small-platform);
+
+  background: var(--color-brand-black);
+  color: white
+}
+
+.pathCode {
+  fill: white;
+}
+
+.paid {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+  padding: 3px 10px 3px 6px;
+  gap: 5px;
+  border-radius: 6px;
+  font: var(--body-small-platform);
+
+  background: var(--grad-line);
+  color: white
+}
+
+.pathStar {
+  fill: white;
+}

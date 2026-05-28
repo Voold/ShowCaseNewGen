@@ -1,10 +1,11 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { CatalogPage } from '@/pages/Catalog';
-import { MySpacePage } from '@/pages/my-space';
-import { ProjectsGallery } from '@/widgets/projects-gallery';
 import { ProjectsGrid } from '@/widgets/projects-grid';
 import { LoginPage } from '@/pages/login-page/ui/LoginPage';
 import { ProtectedRoute } from '@/shared/ui/ProtectedRoute/ProtectedRoute';
+import { MainLayout } from '@/pages/main-layout/ui/MainLayout';
+import { CatalogLayout, Catalog, ProjectPage } from "@/pages/catalog-layout";
+import { MyPlatformLayout } from '@/pages/my-platform-layout/ui/MyPlatformLayout';
+import { ProjectActivities } from '@/pages/my-platforms-pages/project-activities/ui/ProjectActivities';
 
 export const router = createBrowserRouter([
   {
@@ -12,46 +13,64 @@ export const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: '/',
-    element: <ProtectedRoute>
-                <CatalogPage />
-              </ProtectedRoute>,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: '',
-        element: <ProjectsGallery />,
+        path: '/',
+        element: <MainLayout />,
         children: [
           {
-            path: ':tabNumber?',
-            element: <ProjectsGrid />,
+            index: true,
+            element: <Navigate to="/catalog" replace />
           },
-        ],
-      },
-      {
-        path: 'inProgress',
-        element: <ProjectsGallery />,
-        children: [
           {
-            path: ':tabNumber?',
-            element: <ProjectsGrid />,
+            path: '/catalog',
+            element: <CatalogLayout />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="all-projects" replace />
+              },
+              {
+                element: <Catalog />,
+                children: [
+                  {
+                    path: 'all-projects',
+                    element: <ProjectsGrid />
+                  },
+                  {
+                    path: 'recruiting',
+                    element: <ProjectsGrid />
+                  },
+                  {
+                    path: 'in-work',
+                    element: <ProjectsGrid />
+                  }
+                ]
+              },
+              {
+                path: 'projects/:id',
+                element: <ProjectPage />
+              }
+            ]
           },
-        ],
-      },
-      {
-        path: 'completed',
-        element: <ProjectsGallery />,
-        children: [
           {
-            path: ':tabNumber?',
-            element: <ProjectsGrid />,
-          },
-        ],
-      },
+            path: '/my-platform',
+            element: <MyPlatformLayout />,
+            children: [
+              {
+                index: true,
+                element: <Navigate to="project-activities" replace />
+              },
+              {
+                path: 'project-activities',
+                element: <ProjectActivities />
+              }
+            ]
+          }
+        ]
+      }
     ],
-  },
-  {
-    path: '/my-space',
-    element: <ProtectedRoute><MySpacePage /></ProtectedRoute>,
   },
   {
     path: '*',
