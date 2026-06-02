@@ -21,7 +21,8 @@
   transition: background-color 0.3s;
 }
 
-.catalog, .research  {
+.catalog,
+.research {
   font-size: 13px;
   z-index: 1;
 }

@@ -6,40 +6,35 @@
 
   --color-red: #EE4E43;
   --color-yellow: #FFC929;
+  --color-blue: #6573FF;
 
-  --grad-line: linear-gradient(45deg, 
-  #28BE46 0%, 
-  #5AC823 50%,
-  #8FD600 100%
-  ); 
-  --grad-fiolet: linear-gradient(180deg, 
-  #AE94F9 0%, 
-  #D3B6FB 55%,
-  #F1DCFB 100%
-  ); 
-  --grad-orange:  linear-gradient(180deg, 
-  #F9948B 0%, 
-  #FFAE9E 55%,
-  #FFC9BC 100%
-  ); 
-  --grad-blue:   linear-gradient(180deg, 
-  #81BDF8 0%, 
-  #A1D3F7 55%,
-  #B2E8FF 100%
-  );
-  --grad-green:   linear-gradient(180deg, 
-  #47C20A 0%, 
-  #80CC66 55%,
-  #94E085 100%
-  );
+  --grad-line: linear-gradient(45deg,
+      #28BE46 0%,
+      #5AC823 50%,
+      #8FD600 100%);
+  --grad-fiolet: linear-gradient(180deg,
+      #AE94F9 0%,
+      #D3B6FB 55%,
+      #F1DCFB 100%);
+  --grad-orange: linear-gradient(180deg,
+      #F9948B 0%,
+      #FFAE9E 55%,
+      #FFC9BC 100%);
+  --grad-blue: linear-gradient(180deg,
+      #81BDF8 0%,
+      #A1D3F7 55%,
+      #B2E8FF 100%);
+  --grad-green: linear-gradient(180deg,
+      #47C20A 0%,
+      #80CC66 55%,
+      #94E085 100%);
 
-  --grad-brand:   linear-gradient(90deg, 
-  #27FF6F 0%, 
-  #29EDB8 30%,
-  #00C7E6 55%,
-  #0096FF 80%,
-  #6573FF 100%
-  );
+  --grad-brand: linear-gradient(90deg,
+      #27FF6F 0%,
+      #29EDB8 30%,
+      #00C7E6 55%,
+      #0096FF 80%,
+      #6573FF 100%);
 
   --color-gray-900: #2E3038;
   --color-gray-750: #454754;
@@ -60,15 +55,17 @@
 
   --section-title-interface: 600 20px/1 var(--font-inter);
   --field-label-interface: 400 18px/1 var(--font-ALS);
-  --meta-title-interface: 700 15px/1 var(--font-ALS);
+  --meta-title-interface: 700 15px/1.25 var(--font-ALS);
   --subhead-interface: 300 15px/1 var(--font-inter);
   --label-interface: 300 12px/1 var(--font-inter);
+
+
 
   --hero-title-platform: 700 32px/1 var(--font-ALS);
   --caption-platform: 700 18px/1 var(--font-ALS);
   --card-title-platform: 680 16px/1.25 var(--font-open-sans);
 
-  --widget-title-platform: 680 15px/1.25 var(--font-open-sans);
+  --widget-title-platform: 550 15px/1 var(--font-open-sans);
 
   --body-text-platform: 400 15px/1.45 var(--font-open-sans);
   --menu-title-platform: 700 13px/1 var(--font-open-sans);
@@ -78,6 +75,8 @@
   /* Я предположил размер для шрифта ниже */
   --info-descripte-platform: 500 13px/1.3 var(--font-open-sans);
   --description-platform: 500 10px/1.2 var(--font-open-sans);
+
+  --small-11-light: 300 11px/1.1 var(--font-inter);
 
   --tab-shadow: 0 0px 7.5px rgba(16, 8, 72, 0.04);
 

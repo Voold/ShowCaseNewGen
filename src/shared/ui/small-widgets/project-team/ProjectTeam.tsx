@@ -1,5 +1,6 @@
 import styles from './ProjectTeam.module.css'
 import { InfoTooltip } from '../../info-tooltip/InfoTooltip.tsx'
+import { CheckIcon } from '../../icons/CheckIcon.tsx';
 
 type ProjectTeamProps = {
   list: {
@@ -38,6 +39,7 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
                     {item.name}
                   </p>
                 </div>
+                <CheckIcon className={styles.checkIcon} color='var(--color-gray-600)'/>
               </li>
             )
           })
@@ -47,6 +49,7 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
         text="Здесь показаны все участники проекта"
         className={styles.questionIcon}
       />
+      
     </div>
   );
 };

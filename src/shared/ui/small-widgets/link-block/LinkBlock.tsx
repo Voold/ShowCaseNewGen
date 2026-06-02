@@ -14,7 +14,7 @@ export const LinkBlock = ({title, service, link} : LinkBlockProps) => {
       <p className={styles.title}>{title}</p>
       <a className={styles.linkBlock} href={link}>
         <p className={styles.service}>{service}</p>
-        <OpenIcon/>
+        <OpenIcon color={'var(--color-gray-600)'} size={11}/>
       </a>
     </div>
   )

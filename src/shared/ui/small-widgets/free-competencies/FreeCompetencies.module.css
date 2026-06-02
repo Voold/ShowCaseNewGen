@@ -4,7 +4,7 @@
   flex-direction: column;
   padding: 16px 8px 12px 8px;
 
-  background-color: var(--color-gray-100);
+  background-color: var(--color-blue);
   border-radius: 20px;
 
   gap: 16px
@@ -19,7 +19,7 @@
 
 .title {
   font: var(--meta-title-interface);
-  color: var(--color-gray-750);
+  color: white;
 }
 
 .description {
@@ -38,13 +38,13 @@
   position: relative;
   padding: 12px 16px;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 12px;
   justify-content: space-between;
   gap: 8px;
 
   cursor: pointer;
 
-  border: 2px solid transparent;
+  border: 2px solid white;
 }
 
 .leftHalfRole {
@@ -68,33 +68,24 @@
 
 .skill {
   position: relative;
-  padding: 4px 10px 3.5px 10px;
-  border: 1px solid rgba(120, 120, 120, 0.5);
+  padding: 4px 10px 6px 10px;
   border-radius: 6px;
 
   font: var(--description-platform);
-  color: var(--color-gray-600)
+  color: var(--color-gray-600);
+  background-color: var(--color-gray-100);
 }
 
-.skill.required::before {
-  content: '';
+.starIcon {
   position: absolute;
-
-  width: 8px;
-  height: 8px;
-
-  border-radius: 4px;
-
   top: -4px;
   right: -4px;
-  background-color: var(--color-gray-600)
 }
-
 
 .response {
   display: flex;
   position: absolute;
-  bottom: 12px;
+  top: 12px;
   right: 12px;
   align-items: flex-end;
   gap: 2px
@@ -109,63 +100,71 @@
   align-content: center;
 }
 
-.checkIcon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-
-  flex-shrink: 0;
-}
-
-.pathCheck {
-  stroke: var(--color-brand-green);
-}
-
 .like {
   height: fit-content;
 }
 
 .selected {
-  border-color: transparent;
-  background-image:
-    linear-gradient(white, white),
-    var(--grad-brand);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  background-color: var(--color-brand-green);
+}
+
+.dimmed {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+
+.selected .role {
+  color: white;
+}
+
+.selected .plusButton {
+  background-color: white;
+}
+
+.selected .countRes {
+  color: white;
+}
+
+.countFree {
+  font: var(--label-interface);
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  opacity: 0.85;
 }
 
 .footer {
   display: flex;
-  padding: 0 4px 0 8px;
+  padding: 0 12px 0 4px;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
 }
 
 .button {
   padding: 14px 28px 12px 28px;
-  border: 1px solid var(--color-brand-green);
+  border: 1px solid white;
   font: var(--label-interface);
-  color: var(--color-white);
-  background-color: var(--color-brand-green);
+  color: var(--color-brand-green);
+  background-color: white;
   font-weight: 500;
   border-radius: 59px;
 
   transition: 0.2s;
 }
 
-.button:active {
-  transform: scale(0.98);
-}
+
 
 .button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+  color: var(--color-gray-350);
 }
 
 .activeButton {
   background-color: transparent;
-  color: var(--color-gray-900);
-  border: 1px solid var(--color-gray-900);
+  color: var(--color-gray-200);
+  border: 1px solid var(--color-gray-100);
 }
 
 .questionIcon {
@@ -181,7 +180,7 @@
 
 .tooltip {
   position: absolute;
-  z-index: 100;
+  z-index: 10000;
   display: block;
   width: max-content;
   max-width: 220px;
@@ -195,6 +194,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   white-space: normal;
   font-weight: 300;
+
 
   opacity: 0;
   visibility: hidden;
@@ -215,9 +215,11 @@
 
 .skill .tooltip {
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
   transform: translateY(-4px);
+  border-radius: 0 4px 4px 4px;
 }
+
 
 .response .tooltip {
   top: calc(100% + 8px);
@@ -229,4 +231,24 @@
   top: calc(100% + 8px);
   right: 0;
   transform: translateY(-4px);
+}
+
+.plusButton {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--color-brand-black);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.countFree {
+  font: var(--subhead-interface);
+  color: var(--color-gray-150)
 }

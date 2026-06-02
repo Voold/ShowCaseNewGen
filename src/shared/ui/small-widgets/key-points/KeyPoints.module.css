@@ -38,13 +38,13 @@
 .listKeyPoints {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .keyPoint {
   display: flex;
   gap: 10px;
-  padding-left: 4px;
+  padding: 8px;
 }
 
 .index {
@@ -144,4 +144,9 @@
 .countdownDays {
   color: #E05353;
   font-style: italic;
+}
+
+.keyBodyActive {
+  background-color: white;
+  border-radius: 12px;
 }

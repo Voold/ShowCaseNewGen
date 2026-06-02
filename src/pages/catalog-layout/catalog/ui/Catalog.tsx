@@ -25,6 +25,7 @@ export const Catalog = () => {
   return (
       <main className={styles.mainContent}>
         <aside className={styles.searchPart}>
+          
           <SearchField />
         </aside>
         <aside className={styles.filterPart} ref={filterRef as React.RefObject<HTMLDivElement>} onScroll={handleScroll}>

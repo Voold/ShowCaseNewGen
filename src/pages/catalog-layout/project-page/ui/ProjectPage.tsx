@@ -1,4 +1,6 @@
-import { BackIcon, IdIcon, ShareIcon, typeProjectsLabel } from '@/shared/ui';
+import { useRef } from 'react';
+import { BackIcon, IdIcon, ShareIcon, TargetIcon } from '@/shared/ui';
+import { type ProjectCardData } from '@/entities/project';
 import styles from './ProjectPage.module.css'
 import { ProfileWidget } from '@/shared/ui/small-widgets/profile-widget/ProfileWidget';
 import { LinkBlock } from '@/shared/ui/small-widgets/link-block/LinkBlock';
@@ -7,13 +9,36 @@ import { FreeCompetencies } from '@/shared/ui/small-widgets/free-competencies/Fr
 import { ProjectTeam } from "@/shared/ui/small-widgets/project-team/ProjectTeam.tsx";
 
 import { useNavigate } from 'react-router-dom';
+import { ProjectInfo } from '@/shared/ui/project-info/ProjectInfo';
+import { ProjectPrd } from '@/shared/ui/project-prd/ProjectPrd';
 
 export function ProjectPage() {
   const navigate = useNavigate();
+  const leftWidgetsRef = useRef<HTMLDivElement>(null);
+  const projectsInfoRef = useRef<HTMLElement>(null);
+  const rightWidgetsRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    const target = e.currentTarget;
+    const scrollTop = target.scrollTop;
+
+    if (leftWidgetsRef.current && target !== leftWidgetsRef.current) {
+      leftWidgetsRef.current.scrollTop = scrollTop;
+    }
+
+    if (projectsInfoRef.current && target !== projectsInfoRef.current) {
+      projectsInfoRef.current.scrollTop = scrollTop;
+    }
+
+    if (rightWidgetsRef.current && target !== rightWidgetsRef.current) {
+      rightWidgetsRef.current.scrollTop = scrollTop;
+    }
+  };
+
   // Достаем id из пути /project/:id
   // const { id } = useParams<{ id: string }>();
 
-  const data = {
+  const data: ProjectCardData = {
     id: '8201',
     type: 'PaidProjectRequest' as const,
     tags: [
@@ -29,47 +54,11 @@ export function ProjectPage() {
       title: 'Проект ИСП РАН: Открытый инструмент моделирования',
       description: 'Конструктор мероприятий Т-банка: трёхкомпонентная система, состоящая из конструктора по созданию мероприятий, веб и мобильной версий для просмотра актуальных мероприятий, скачивания деталей мероприятий для просмотра в оффлайн-режиме, получения уведомлений о мероприятиях.',
     },
-    checkpoint: { value: 'MVP' },
+    checkpoints: "239892345",
     prdMeta: { problem: '', context: '', audience: '', requirements: [], mvp: [] },
 
     extended: true,
-    accentColor: '#28be46',
-
-    // Тут данные для большой карточки
-    name: 'Paven',
-    role: 'Разработчик',
-    avatarSrc: '',
-
-    leftTime: '4 месяца',
-    keyPoints: [
-      {
-        title: 'Старт работ',
-        deadline: '25-05-2026',
-        status: true
-      },
-      {
-        title: 'Постерная сессия 1',
-        deadline: '29-05-2026',
-        status: false
-      },
-      {
-        title: 'Защита',
-        deadline: '30-05-2026',
-        status: false
-      }
-    ],
-
-    links: [
-      {
-        title: 'Репозиторий', service: 'GitHub', link: 'https://github.com/mys2018'
-      },
-      {
-        title: 'Доска', service: 'Jira', link: 'https://github.com/mys2018'
-      },
-      {
-        title: 'Репозиторий', service: 'GitHub', link: 'https://github.com/mys2018'
-      }
-    ],
+    brandColor: '#28be46',
 
     roles: [
       {
@@ -77,18 +66,7 @@ export function ProjectPage() {
         placesCount: 5,
         minPlacesCount: 1,
         places: 1,
-        skills: [
-          {
-            "skillId": "1",
-            "skillName": "React",
-            requireSkill: true
-          },
-          {
-            "skillId": "2",
-            "skillName": "CSS",
-            requireSkill: false
-          }
-        ],
+        skills: [ { skillId: 'kotlin' , skillName: 'Kotlin', requireSkill: true} ],
         meta: {
           name: 'Frontend',
           description: ''
@@ -115,25 +93,36 @@ export function ProjectPage() {
         placesCount: 5,
         minPlacesCount: 1,
         places: 1,
-        skills: [
-          {
-            "skillId": "1",
-            "skillName": "React"
-          },
-          {
-            "skillId": "2",
-            "skillName": "CSS"
-          },
-          {
-            "skillId": "2",
-            "skillName": "CSS"
-          }
-        ],
+        skills: [ { skillId: 'kotlin', skillName: 'Kotlin' } ],
         meta: {
           name: 'Frontend',
           description: ''
         }
       },
+    ],
+
+    
+  }
+
+  const BigCargData = {
+
+    // Тут данные для большой карточки
+    name: 'Paven',
+    role: 'Разработчик',
+    avatarSrc: '',
+
+    leftTime: '4 месяца',
+
+    links: [
+      {
+        title: 'Репозиторий', service: 'GitHub', link: 'https://github.com/mys2018'
+      },
+      {
+        title: 'Доска', service: 'Jira', link: 'https://github.com/mys2018'
+      },
+      {
+        title: 'Репозиторий', service: 'GitHub', link: 'https://github.com/mys2018'
+      }
     ],
 
     dreamTeam: [
@@ -153,9 +142,60 @@ export function ProjectPage() {
         avatarSrc: ''
       }
     ]
-
   }
 
+  const checkpoints = [
+    {
+      title: 'Старт работ',
+      deadline: '25-05-2026',
+      status: true
+    },
+    {
+      title: 'Постерная сессия 1',
+      deadline: '29-05-2026',
+      status: false
+    },
+    {
+      title: 'Защита',
+      deadline: '30-05-2026',
+      status: false
+    }
+  ]
+
+  const PRDdata = {
+    prerequisites: 'test',
+    productVision: 'test',
+    audience: [
+      {
+        title: 'test',
+        description: 'test',
+        minAge: 10,
+        maxAge: 20
+      },
+      {
+        title: 'test',
+        description: 'test',
+        minAge: 10,
+        maxAge: 20
+      },
+      {
+        title: 'test',
+        description: 'test',
+        minAge: 10,
+        maxAge: 20
+      }
+    ],
+    goalsProjects: 'test',
+    goalsBusiness: 'test',
+    requirements: {
+      keyFunctionality: ['test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test', 'test', 'test'],
+      functional: ['test', 'test test test test test test test test test test test test test test test test test', 'test'],
+      nonFunctional: ['test', 'test test test test test test test test test test test test test test test test test test test test test test test test test', 'test']
+    },
+    problemStatement: 'test',
+    businessMetrics: ['test', 'test', 'test'],
+    projectPlan: ['test', 'test', 'test']
+  }
 
   return (
     <main className={styles.main}>
@@ -164,64 +204,46 @@ export function ProjectPage() {
         <p className={styles.back}>Назад к списку проектов</p>
       </div>
 
-
       {/* Левые виджеты */}
-      <aside className={styles.leftWidgets}>
+      <aside className={styles.leftWidgets} ref={leftWidgetsRef} onScroll={handleScroll}>
 
         {/* Виджет профиля */}
         <ProfileWidget
-          name={data.name}
-          role={data.role}
-          avatarSrc={data.avatarSrc}
+          name={BigCargData.name}
+          role={BigCargData.role}
+          avatarSrc={BigCargData.avatarSrc}
         />
 
         {/* Ключевые точки */}
         <KeyPoints
-          leftTime={data.leftTime}
-          keyPoints={data.keyPoints}
+          leftTime={BigCargData.leftTime}
+          keyPoints={checkpoints}
         />
 
         {/* Блок ссылок */}
         <div className={styles.links}>
-          {data.links.map((link, index) => (
+          {BigCargData.links.map((link, index) => (
             <LinkBlock key={index} title={link.title} service={link.service} link={link.link} />
           ))}
         </div>
 
       </aside>
 
-      <h1 className={styles.title}>{data.meta.title}</h1>
-
-      <section className={styles.projectsInfo}>
-
-        <div className={styles.topLabel}>
-          <div className={styles.mainInfo}>
-            <div className={styles.tags}>
-              {
-                data.tags.map(direction => (
-                  <div key={direction.key} className={styles.tag}>
-                    {direction.label}
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-          <div className={styles.format}>
-            {typeProjectsLabel(data.type)}
-          </div>
+      <section className={styles.title}>
+        <div className={styles.marqueeContent}>
+          <span className={styles.titleText}>{data.meta.title}</span>
+          <span className={styles.dot}>•</span>
+          <span className={styles.titleText}>{data.meta.title}</span>
+          <span className={styles.dot}>•</span>
         </div>
-
-        <div className={styles.orgBlock}>
-          <div className={styles.orgAvatar}>Т</div>
-          <div className={styles.orgInfo}>
-            <span className={styles.orgName}>{data.partnerId.verbose}</span>
-            <span className={styles.orgSub}>публикационная активность</span>
-          </div>
-        </div>
-
-        <p className={styles.description}>{data.meta.description}</p>
       </section>
 
+      <section className={styles.projectsInfo} ref={projectsInfoRef} onScroll={handleScroll}>
+        <ProjectInfo data={data}/>
+        <ProjectPrd {...PRDdata} />
+      </section>
+
+    
       {/* ID и Ссылка */}
       <aside className={styles.idBlock}>
         <p className={styles.id}>
@@ -235,21 +257,24 @@ export function ProjectPage() {
       </aside>
 
       {/* Правые виджеты */}
-      <aside className={styles.rightWidgets}>
+      <aside className={styles.rightWidgets} ref={rightWidgetsRef} onScroll={handleScroll}>
 
         {/* Статус проекта */}
         <div className={styles.projectStatus}>
           <span className={styles.statusLabel}>Статус:</span>
-          <span className={styles.status}>{
-            data.status === 'Active' ? 'Набор на проект' : 'Набор закрыт'
-          }</span>
+          <span className={`${styles.status} ${data.status === 'Active' ? '' : styles.inactive}`}>
+            <TargetIcon size={12} color={data.status === 'Active' ? 'var(--color-brand-green)' : 'var(--color-brand-red)'} />
+            {
+              data.status === 'Active' ? 'Набор на проект' : 'Набор закрыт'
+            }
+          </span>
         </div>
-
-        {/*Команда проекта*/}
-        <ProjectTeam list={data.dreamTeam} />
 
         {/* Компетенции */}
         <FreeCompetencies roles={data.roles} />
+
+        {/*Команда проекта*/}
+        <ProjectTeam list={BigCargData.dreamTeam} />
 
       </aside>
 

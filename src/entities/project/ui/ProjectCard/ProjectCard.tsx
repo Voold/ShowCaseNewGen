@@ -1,7 +1,7 @@
 import styles from './ProjectCard.module.css';
 import type { ProjectCardData } from '../../model/types';
 import { useNavigate } from 'react-router-dom';
-import { typeProjectsLabel } from '@/shared/ui';
+import { typeProjectsLabel } from '../../../../shared/ui/type-project-label/typeProjectsLabel';
 import { useState } from 'react';
 import { LikeButton } from '@/shared/ui';
 

@@ -16,32 +16,39 @@ export interface ProjectCardData {
     value: string,
     verbose: string
   },
-  status: 'Active',
+  status: string,
   meta: {
     title: string,
     description: string
   },
-  checkpoint: {
-    value: string
-  },
+  checkpoints: string,
   roles: {
       roleId: string,
       placesCount: number,
       minPlacesCount: number,
-      places: number[],
+      places: number,
       meta: {
         name: string,
         description: string
-      }
+      },
+      skills: [
+        {
+          skillId: string,
+          skillName: string,
+          requireSkill?: boolean
+        }
+      ]
   }[],
-  prdMeta: {
-    problem: string,
-    context: string,
-    audience: string,
-    requirements: string[],
-    mvp: string[]
-  }
+  prdMeta: PrdMeta,
 
-  EXTENDED: boolean,
+  extended?: boolean,
   brandColor?: string
+}
+
+export interface PrdMeta {
+  problem: string,
+  context: string,
+  audience: string,
+  requirements: string[],
+  mvp: string[]
 }

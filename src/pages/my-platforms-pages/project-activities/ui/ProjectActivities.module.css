@@ -1,0 +1,173 @@
+.mainContent {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  grid-template-rows: 48px 168px 132px 1fr;
+  padding: 0 calc(180px + 16px);
+  margin-top: 26px;
+
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+
+.profile {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 0 16px;
+}
+
+.welcomeMessage {
+  grid-column: 2 / 3;
+  grid-row: 1;
+  font: var(--hero-title-platform);
+  color: var(--color-brand-black);
+  padding: 0 16px;
+  width: 100%;
+
+}
+
+.contentWrapper {
+  grid-column: 2 / 4;
+  grid-row: 2 / 5;
+
+  margin-top: 8px;
+
+  display: grid;
+  grid-template-rows: 168px 132px 1fr;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.activities {
+  margin-top: 8px;
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  grid-column: 1;
+  grid-row: 2 / 5;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+.banner {
+  /* grid-column: 2 / 4;
+  grid-row: 2; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  width: 100%;
+  height: 100%;
+
+
+  background-color: var(--color-gray-150);
+  border-radius: 20px;
+  margin: 0 16px 0 16px;
+  overflow: hidden;
+  box-shadow: var(--card-drop-shadow);
+}
+
+.bannerImage {
+  display: block;
+  object-fit: cover;
+
+}
+
+.stagesWidget {
+  /* grid-column: 2 / 4;
+  grid-row: 3; */
+  grid-row: 2;
+  min-width: 0;
+}
+
+.projects {
+  /* grid-column: 2 / 4;
+  grid-row: 4; */
+
+  grid-row: 3;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.projectstitle {
+  font: var(--section-title-interface);
+  padding: 24px 12px 2px;
+}
+
+@media (max-width: 1600px) {
+  .mainContent {
+    padding: 0 40px;
+  }
+
+}
+
+@media (max-width: 1280px) {
+  .mainContent {
+    padding: 0 24px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+    padding: 0;
+    grid-template-rows: min-content 148px min-content min-content;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .contentWrapper {
+    display: contents;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .welcomeMessage {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .banner {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .stagesWidget {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .activities {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .projects {
+    grid-column: 1;
+    grid-row: 5;
+  }
+}

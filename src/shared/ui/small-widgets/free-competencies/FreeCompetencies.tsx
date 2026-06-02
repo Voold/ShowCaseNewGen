@@ -1,5 +1,5 @@
 import styles from './FreeCompetencies.module.css'
-import { CheckIcon, FeedBackIcon, LikeButton } from "@/shared/ui";
+import { CheckIcon, FeedBackIcon, LikeButton, PlusIcon, StarDetailIcon } from "@/shared/ui";
 import { InfoTooltip } from '../../info-tooltip/InfoTooltip.tsx';
 import { useState } from "react";
 
@@ -56,27 +56,30 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
     })
   }
 
+  const MAX_SELECTIONS = 2;
+  const isMaxSelected = selectedCometencies.length >= MAX_SELECTIONS;
+
 
   return (
     <div className={styles.freeCompetencies}>
 
       <div className={styles.header}>
-        <h3 className={styles.title}>Свободные компетенции</h3>
-        <p className={styles.description}>
-          Что-то из карточки проекта
-        </p>
+        <h3 className={styles.title}>
+          Выберите компетенции для отклика:
+        </h3>
       </div>
 
       <div className={styles.competenciesList}>
         {
           roles.map((role) => {
 
-            const isSelected = selectedCometencies.includes(role.roleId)
+            const isSelected = selectedCometencies.includes(role.roleId);
+            const isDimmed = isMaxSelected && !isSelected;
 
             return (
               <div
                 key={role.roleId}
-                className={`${styles.competency} ${isSelected ? styles.selected : ''} `}
+                className={`${styles.competency} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''}`}
                 onClick={() => toggleCometencySelect(role.roleId)}
               >
                 <div className={styles.leftHalfRole}>
@@ -90,27 +93,34 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
                           key={skill.skillName}>
                           {skill.skillName}
                           {skill.requireSkill && (
-                            <span className={styles.tooltip}>
-                              менеджер проекта считает этот навык приоритетным
-                            </span>
+                            <>
+                              <StarDetailIcon className={styles.starIcon} color={`${isSelected ? 'var(--color-brand-green)' :  'white' }`}/>
+                              <span className={styles.tooltip}>
+                                менеджер проекта считает этот навык приоритетным
+                              </span>
+                            </>
                           )}
                         </li>
                       ))
                     }
                   </ul>
                 </div>
+                <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>
+                    {isSelected ?
+                      <CheckIcon className={styles.checkIcon} size={9} color={'var(--color-brand-green)'}/> :
+                      <PlusIcon className={styles.plusIcon} size={9} fill={'white'}/> 
+                    }
+                    
+                </div>
                 <div className={styles.response}>
                   <p className={styles.countRes}>
                     {8}
                   </p>
-                  <FeedBackIcon />
+                  <FeedBackIcon size={11} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `} />
                   <span className={styles.tooltip}>
                     столько откликов на эту компетенцию
                   </span>
                 </div>
-                {isSelected && (
-                  <CheckIcon className={`${styles.checkIcon} ${styles.hide}`} pathClassName={styles.pathCheck} />
-                )}
 
               </div>
             )
@@ -120,12 +130,6 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
       </div>
 
       <div className={styles.footer}>
-
-        <LikeButton
-          isLiked={isLiked}
-          onClick={toggleLike}
-          className={styles.like}
-        />
         <button
           className={`${styles.button} ${isActiveFeedBack ? styles.activeButton : ''}`}
           onClick={toggleFeedBack}
@@ -134,12 +138,10 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
           {isActiveFeedBack ? 'Отменить отклик' : 'Откликнуться'}
         </button>
 
+        <p className={styles.countFree}>
+          {selectedCometencies.length}/{MAX_SELECTIONS}
+        </p>
       </div>
-
-      <InfoTooltip
-        text="Свободные компетенции - это те, которые еще не заняты другими участниками команды"
-        className={styles.questionIcon}
-      />
     </div>
-  )
+        )
 }

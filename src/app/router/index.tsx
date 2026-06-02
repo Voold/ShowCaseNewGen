@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ProjectsGrid } from '@/widgets/projects-grid';
 import { LoginPage } from '@/pages/login-page/ui/LoginPage';
-import { ProtectedRoute } from '@/shared/ui/ProtectedRoute/ProtectedRoute';
+import { ProtectedRoute } from './ProtectedRoute';
 import { MainLayout } from '@/pages/main-layout/ui/MainLayout';
 import { CatalogLayout, Catalog, ProjectPage } from "@/pages/catalog-layout";
 import { MyPlatformLayout } from '@/pages/my-platform-layout/ui/MyPlatformLayout';

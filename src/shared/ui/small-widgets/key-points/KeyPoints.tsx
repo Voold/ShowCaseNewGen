@@ -1,3 +1,4 @@
+import { formatDeadline, getDaysUntil } from '@/shared/lib/date';
 import { CalendarIcon } from '../../icons/CalendarIcon'
 import { CheckIcon } from '../../icons/CheckIcon';
 import { ClockIcon } from '../../icons/ClockIcon';
@@ -14,27 +15,27 @@ interface KeyPointsProps {
   keyPoints: KeyPoint[];
 }
 
-const parseDeadline = (deadline: string): Date | null => {
-  const parts = deadline.split('-')
-  if (parts.length !== 3) return null
-  const [day, month, year] = parts
-  return new Date(Number(year), Number(month) - 1, Number(day))
-}
+// const parseDeadline = (deadline: string): Date | null => {
+//   const parts = deadline.split('-')
+//   if (parts.length !== 3) return null
+//   const [day, month, year] = parts
+//   return new Date(Number(year), Number(month) - 1, Number(day))
+// }
 
-const formatDeadline = (deadline: string): string => {
-  const date = parseDeadline(deadline)
-  if (!date) return deadline
-  return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
-}
+// const formatDeadline = (deadline: string): string => {
+//   const date = parseDeadline(deadline)
+//   if (!date) return deadline
+//   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
+// }
 
-const getDaysUntil = (deadline: string): number | null => {
-  const date = parseDeadline(deadline)
-  if (!date) return null
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const diff = date.getTime() - today.getTime()
-  return Math.ceil(diff / (1000 * 60 * 60 * 24))
-}
+// const getDaysUntil = (deadline: string): number | null => {
+//   const date = parseDeadline(deadline)
+//   if (!date) return null
+//   const today = new Date()
+//   today.setHours(0, 0, 0, 0)
+//   const diff = date.getTime() - today.getTime()
+//   return Math.ceil(diff / (1000 * 60 * 60 * 24))
+// }
 
 export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
   const lastCompletedIndex = keyPoints.reduce((acc, kp, i) => kp.status ? i : acc, -1)
@@ -45,7 +46,7 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
       <div className={styles.header}>
         <p className={styles.title}>Ключевые точки</p>
         <div className={styles.leftTimeBlock}>
-          <CalendarIcon />
+          <CalendarIcon size={11} color={'var(--color-gray-600)'}/>
           <p className={styles.leftTime}>{leftTime}</p>
         </div>
       </div>
@@ -69,12 +70,12 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
           ].join(' ')
 
           return (
-            <div key={index} className={`${styles.keyPoint} ${isCompleted ? styles.completed : ''}`}>
+            <div key={index} className={`${styles.keyPoint} ${isActive ? styles.keyBodyActive : ''} ${isCompleted ? styles.completed : ''}`}>
               <div className={indexClass}>
 
                   {isActive ? (
                     <div className={styles.clockIcon}>
-                      <ClockIcon color={'#1D1D1F'}/>
+                      <ClockIcon color={'var(--color-blue)'}/>
                     </div>
                   ) : (
                   <p className={styles.indexNumber}>
@@ -91,7 +92,7 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
                 </p>
                 <p className={styles.keyDeadline}>
                   {isCompleted ? (
-                    <span className={styles.completedText}>Завершено <CheckIcon stroke='#28BE46' className={''}/></span>
+                    <span className={styles.completedText}>Завершено <CheckIcon color='#28BE46'/></span>
                   ) : (
                     <>
                       {formatDeadline(keyPoint.deadline)}

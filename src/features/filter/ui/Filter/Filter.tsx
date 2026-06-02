@@ -18,7 +18,7 @@ export default function Filter() {
                 className={`${styles.project} ${projectTypes[project] ? styles.selected : ''}`}
                 onClick={() => toggleProjectType(project)}
               >
-                <FolderIcon pathClassName={styles.folderPath} />
+                <FolderIcon pathClassName={styles.folderPath} size={12} />
                 <p className={styles.projectTitle}>
                   {project}
                 </p>

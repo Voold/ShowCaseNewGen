@@ -319,3 +319,9 @@
   aspect-ratio: auto;
   min-height: 260px;
 }
+
+@media (max-width: 768px) {
+  .cardBody {
+    grid-column: 1;
+  }
+}

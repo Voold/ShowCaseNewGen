@@ -5,8 +5,8 @@ import styles from './ProjectsGrid.module.css';
 export default function ProjectsGrid() {
   return (
     <div className={styles.body}>
-      {MOCK_PROJECTS.map((project) => (
-        ProjectCardFactory({project})
+      {MOCK_PROJECTS.map((project, index) => (
+        ProjectCardFactory({project, index})
       ))}
     </div>
   );
