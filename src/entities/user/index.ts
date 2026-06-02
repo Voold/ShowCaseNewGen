@@ -1,1 +1,12 @@
-export type { User } from '@/shared/types';
+export { queryKeys as userKeys } from "./api/queryKeys";
+export { login, logout } from "./api/requests";
+export {
+  useAuthStatus,
+  useMe,
+  useUserById,
+} from "./api/queries";
+export { type AuthStatusResponse, type OAuthExchangeParams } from "./api/types";
+export { useAuthStore } from "./model/store/useAuthStore";
+export { type User, type UserRole } from "./model/types";
+export { getHighestRole } from "./lib/getHighestRole";
+export { placeholderUser, ROLES_TRANSLATIONS } from "./config/constants";

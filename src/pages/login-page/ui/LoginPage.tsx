@@ -1,20 +1,22 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
-import styles from './LoginPage.module.css';
+import styles from "./LoginPage.module.css";
+import { pkceService } from "@/features/auth";
 
 export const LoginPage = () => {
-  const login = useAuthStore((state) => state.login);
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    login();
-    navigate('/');
+  const handleLogin = async (): Promise<void> => {
+    try {
+      await pkceService.startAuth();
+    } catch (error) {
+      console.error("Не удалось начать авторизацию:", error);
+    }
   };
 
   return (
-    <main className={styles.wrap}>
-      <h1>Вход</h1>
-      <button onClick={handleLogin}>Войти</button>
-    </main>
+    <div className={styles.mainContainer}>
+      Страница входа
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+      <button className={styles.loginButton} onClick={handleLogin}>
+        Войти
+      </button>
+    </div>
   );
 };

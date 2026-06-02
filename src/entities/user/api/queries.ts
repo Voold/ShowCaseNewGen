@@ -1,0 +1,39 @@
+import { useQuery, type UseQueryResult } from '@tanstack/react-query'
+import type { User } from '../model/types'
+import type { AuthStatusResponse } from './types'
+import type { AxiosError } from 'axios'
+import { queryKeys } from './queryKeys'
+import { getAuthStatus, getMe } from './requests'
+import { placeholderUser } from '../config/constants'
+import { getUserById } from './requests'
+
+export const useAuthStatus = (enabled = true): UseQueryResult<AuthStatusResponse, AxiosError> => {
+  return useQuery({
+    queryKey: queryKeys.status,
+    queryFn: getAuthStatus,
+    retry: false,
+    enabled,
+    staleTime: Infinity
+  })
+}
+
+export const useMe = (enabled = true): UseQueryResult<User, AxiosError> => {
+  return useQuery({
+    queryKey: queryKeys.me(),
+    queryFn: getMe,
+    retry: false,
+    enabled,
+    staleTime: Infinity,
+    placeholderData: placeholderUser
+  })
+}
+
+export const useUserById = (uid: string) => {
+  return useQuery({
+    queryKey: queryKeys.user(uid),
+    queryFn: () => getUserById(uid),
+    retry: false,
+    enabled: !!uid,
+    staleTime: Infinity
+  })
+}
