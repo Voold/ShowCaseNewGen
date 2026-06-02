@@ -18,49 +18,49 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        element: <ProtectedRoute />,
+        path: ROUTES.MAIN,
+        element: <MainLayout />,
         children: [
           {
-            path: ROUTES.MAIN,
-            element: <MainLayout />,
+            index: true,
+            element: <Navigate to={ROUTES.CATALOG} replace />,
+          },
+
+          {
+            path: ROUTES.CATALOG,
+            element: <CatalogLayout />,
             children: [
               {
                 index: true,
-                element: <Navigate to={ROUTES.CATALOG} replace />,
+                element: <Navigate to={ROUTES.CATALOG_ALL_PROJECTS} replace />,
               },
               {
-                path: ROUTES.CATALOG,
-                element: <CatalogLayout />,
+                element: <Catalog />,
                 children: [
                   {
-                    index: true,
-                    element: (
-                      <Navigate to={ROUTES.CATALOG_ALL_PROJECTS} replace />
-                    ),
+                    path: ROUTES.CATALOG_ALL_PROJECTS,
+                    element: <ProjectsGrid />,
                   },
                   {
-                    element: <Catalog />,
-                    children: [
-                      {
-                        path: ROUTES.CATALOG_ALL_PROJECTS,
-                        element: <ProjectsGrid />,
-                      },
-                      {
-                        path: ROUTES.CATALOG_RECRUITING,
-                        element: <ProjectsGrid />,
-                      },
-                      {
-                        path: ROUTES.CATALOG_IN_WORK,
-                        element: <ProjectsGrid />,
-                      },
-                    ],
+                    path: ROUTES.CATALOG_RECRUITING,
+                    element: <ProjectsGrid />,
                   },
                   {
-                    path: ROUTES.CATALOG_PROJECT,
-                    element: <ProjectPage />,
+                    path: ROUTES.CATALOG_IN_WORK,
+                    element: <ProjectsGrid />,
                   },
                 ],
               },
+              {
+                path: ROUTES.CATALOG_PROJECT,
+                element: <ProjectPage />,
+              },
+            ],
+          },
+
+          {
+            element: <ProtectedRoute />,
+            children: [
               {
                 path: ROUTES.MY_PLATFORM,
                 element: <MyPlatformLayout />,
@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        // Если есть NotFoundPage — лучше рендерить её, иначе редирект на логин
+        // TODO - сделать NotFoundPage
         element: <Navigate to={ROUTES.LOGIN} replace />,
       },
     ],

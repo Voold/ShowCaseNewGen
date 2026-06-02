@@ -1,8 +1,9 @@
-import LogoTPU from '@/shared/assets/svg/LogoTPU.svg';
-import { SwitchWorkSpace } from '@/features/switch-workspace';
-import EnterButton from './EnterButton/EnterButton.tsx';
-import styles from './Header.module.css';
+import LogoTPU from "@/shared/assets/svg/LogoTPU.svg";
+import { SwitchWorkSpace } from "@/features/switch-workspace";
+import EnterButton from "./EnterButton/EnterButton.tsx";
+import styles from "./Header.module.css";
 
+import { UserCard } from "./UserCard.tsx";
 
 export default function Header() {
   return (
@@ -12,9 +13,9 @@ export default function Header() {
         <div className={styles.center}>
           <SwitchWorkSpace />
         </div>
-        <EnterButton />
+        {/*<EnterButton /> */}
+        <UserCard />
       </header>
     </div>
-
   );
 }
