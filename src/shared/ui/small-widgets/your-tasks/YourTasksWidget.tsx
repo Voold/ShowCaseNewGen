@@ -1,0 +1,139 @@
+import { formatDeadline, getDaysUntil } from '@/shared/lib/date';
+import { ClockIcon } from '../../icons/ClockIcon';
+import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
+import type { Activity } from './model/types';
+import styles from './YourTasksWidget.module.css'
+import { CheckIcon } from '../..';
+
+type YourTasksWidgetProps = {
+  data?: Activity[]
+};
+
+const getActivityName = (type: Activity['type']) => {
+  switch (type) {
+    case 'keyPoint':
+      return 'Ключевая точка';
+    case 'currentStage':
+      return 'Текущий этап';
+    case 'upcomingStage':
+      return 'Следующий этап';
+    case 'completedStage':
+      return 'Завершенный этап';
+    default:
+      return 'Задача';
+  }
+}
+
+
+export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
+  return (
+    <div className={styles.container}>
+      <h2 className={styles.title}>Ваши задачи</h2>
+      <p className={styles.description}>{'Создать единую и надёжную систему уведомлений, которая станет'}</p>
+      <ul className={styles.taskList}>
+        {
+          data?.map((activity: Activity, index) => {
+            
+            const dayUntilDeadline = activity.deadline ? getDaysUntil(activity.deadline) : null
+            const showCountdown = dayUntilDeadline !== null && dayUntilDeadline > 0 && dayUntilDeadline <= 7 && activity.type !== 'completedStage'
+
+            const completedStage = activity.type === 'currentStage' && activity.proggressCurrentStep === activity.proggressSteps
+            console.log(completedStage)
+
+            return (
+              <li key={index} className={`${styles.taskItem} ${activity.type === 'currentStage' ? styles.currentStage : ''} ${activity.type === 'upcomingStage' ? styles.upcomingStage : ''} ${activity.type === 'completedStage' ? styles.completedStage : ''}`}>
+                <div className={styles.taskHeader}>
+                  <span className={styles.taskType}>
+                    {
+                      getActivityName(activity.type)
+                    }
+                  </span>
+                  <span className={styles.extra}>
+                    {activity.extra === 'tooltip' && !completedStage && (
+                      <InfoTooltip text={'Дополнительная информация по задаче'} className={''} />
+                    )}
+                    {activity.extra === 'all' && !completedStage  && <a href="#" className={styles.allLink}>{"Все>"}</a>}
+                    {
+                      completedStage && (
+                        <div className={styles.completedStage}>
+                          Выполнено
+                        </div>
+                      )
+                    }
+                  </span>
+                </div>
+                <div className={`${styles.taskContent} ${activity.status === 'completed' ? styles.completedTask : ''}`}>
+                  <div className={`${styles.taskIcon} ${activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage' ? styles.stageIcon : ''}`}>
+                    {activity.type === 'keyPoint' && (
+                      activity.status !== 'completed' ? <ClockIcon /> : <p className={styles.taskNumber}>{activity.number}</p>
+                    )}
+                  </div>
+                  <div className={styles.taskInfo}>
+                    <p className={styles.taskTitle}>{activity.title}</p>
+                    {
+                      (activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage') && (
+                        <div className={styles.progress}>
+                          <div className={styles.progressBar}>
+                            <div className={styles.progressFill} style={{ width: `${(activity.proggressCurrentStep! / activity.proggressSteps!) * 100}%` }}></div>
+                          </div>
+                          <span className={styles.progressText}>
+                            {activity.proggressCurrentStep}/{activity.proggressSteps} {activity.unitType === 'percent' ? '%' : ''}
+                          </span>
+                        </div>
+                      )
+                    }
+                    {
+                      activity.type === 'keyPoint' && activity.deadline && activity.status !== 'completed' &&(
+                        <div className={`${styles.deadline} ${showCountdown ? styles.urgentDeadline : ''}`}>
+                          {formatDeadline(activity.deadline!)}
+                        </div>
+                      )
+                    }
+                    {activity.status === 'completed' && (
+                      <div className={styles.completedLabel}>
+                        Пройдено
+                        <CheckIcon color='#28BE46' />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {
+                  !activity.deadline || activity.status !== 'completed' && (
+                    <div className={styles.taskFooter}>
+                      {
+                        (activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage') && activity.deadline && (
+                          <div className={styles.deadlineContainer}>
+                            {
+                              activity.type === 'currentStage' && (
+                                'Окончание: '
+                              )
+                            }
+                            {
+                              activity.type === 'upcomingStage' && (
+                                'Ожидание '
+                              )
+                            }
+                            <span className={`${showCountdown ? styles.urgentDeadline : ''}`}>
+                              {formatDeadline(activity.deadline)}
+                            </span>
+                          </div>
+                        )
+                      }
+                      {
+                        showCountdown && (
+                          <div className={styles.countdown}>
+                            {`через ${dayUntilDeadline} дней`}
+                          </div>
+                        )
+                      }
+                    </div>
+                  )
+                }
+              </li>    
+            )
+          })
+        }
+      </ul>
+    </div>
+  );
+};

@@ -1,0 +1,211 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px 16px 16px;
+  background-color: white;
+  border-radius: 20px;
+
+  box-shadow: var(--card-drop-shadow);
+}
+
+.title {
+  font: var(--meta-title-interface);
+  color: var(--color-gray-750);
+}
+
+.description {
+  font: var(--body-small-platform);
+  color: var(--color-gray-600);
+  margin-top: 6px;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.taskItem {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: var(--color-gray-150);
+  gap: 16px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+}
+
+.currentStage {
+  background-image: 
+    linear-gradient(var(--color-gray-150), var(--color-gray-150)), 
+    var(--grad-brand);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.upcomingStage {
+  border: 1px dashed var(--color-gray-350);
+}
+
+.taskHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskType {
+  font: var(--label-interface);
+  color: var(--color-gray-600);
+}
+
+.extra {
+  position: relative;
+}
+
+.completedStage {
+  font-size: 11px;
+  width: fit-content;
+  font-family: var(--font-open-sans);
+  color: white;
+  background-color: var(--color-brand-green);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  padding: 5px 9px 6px 9px;
+  border-radius: 12px;
+}
+
+.allLink {
+  font-weight: 300;
+  font-size: 11px;
+  font-family: var(--font-inter);
+  color: var(--color-gray-500);
+  text-decoration: none;
+}
+
+.taskContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskIcon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--color-gray-500);
+}
+
+.taskNumber {
+  font: var(--meta-title-interface);
+  color: var(--color-gray-500);
+  font-size: 14px;
+}
+
+.stageIcon {
+  background-color: var(--color-gray-500);
+}
+
+.taskTitle {
+  color: var(--brand-black);
+  font: var(--widget-title-platform);
+  font-size: 13px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  width: 100%;
+}
+
+.taskInfo {
+  display: flex;
+  gap: 3px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.deadline {
+  font: var(--body-small-platform);
+  color: var(--color-gray-650);
+  line-height: 1.1;
+  font-size: 12px;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 6px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-gray-50);
+  border-radius: 3px;
+  margin-top: 2px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-brand-green);
+  border-radius: 3px;
+}
+
+.progressText {
+  font-size: 12px;
+  font-family: var(--font-inter);
+  color: var(--color-gray-650);
+  font-weight: 300;
+}
+
+.completedLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--body-small-platform);
+  font-size: 12px
+}
+
+.urgentDeadline {
+  color: var(--color-red);
+}
+
+.deadlineContainer {
+  font: var(--info-descripte-platform);
+  color: var(--color-gray-650);
+  font-size: 12px;
+}
+
+.taskFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.countdown {
+  font-size: 11px;
+  width: fit-content;
+  font-family: var(--font-open-sans);
+  color: white;
+  background-color: var(--color-red);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  padding: 4px 10px 6px 10px;
+  border-radius: 4px;
+}
+
+.completedTask {
+  opacity: 0.4;
+}

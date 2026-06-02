@@ -1,0 +1,58 @@
+import { GoIcon } from '../../icons/GoIcon';
+import { TpuPoint } from '../../icons/TpuPoint';
+import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
+import type { ClosingDiscipline } from './model/types';
+import styles from './YourPointsWidget.module.css'
+
+type YourPointsWidgetProps = {
+  disciplines?: ClosingDiscipline[]
+  tpuPoints: number
+};
+
+export const YourPointsWidget = ({ disciplines, tpuPoints }: YourPointsWidgetProps) => {
+  return (
+    <div className={styles.mainContainer}>
+      <p className={styles.mainTitle}>Ваши баллы</p>
+      <p className={styles.description}>{'Здесь показан прогресс вашего завершения и баллы магазина'}</p>
+
+      <div className={styles.container}>
+        <p className={styles.title}>Закрытие дисциплин</p>
+        <ul className={styles.disciplinesList}>
+          {disciplines?.map((discipline) => (
+            <li key={discipline.title} className={styles.disciplineItem}>
+              <span className={styles.disciplineName}>{discipline.title}</span>
+              <div className={styles.progressContainer}>
+                <div
+                  className={styles.progressBar}
+                >
+                  <span className={styles.progressFill} style={{ width: `${(discipline.currentProgress / discipline.maxProgress) * 100}%` }} />
+                </div>
+                <span className={styles.progressText}>
+                  {`${discipline.currentProgress}/${discipline.maxProgress} `}
+                  <span className={styles.pointsText}>
+                    бал.
+                  </span>
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <InfoTooltip text={'Информация о закрытии дисциплин'} className={styles.infoTooltip} />
+      </div>
+
+      <div className={styles.shop}>
+        <div className={styles.shopTitle}>
+          {'Магазин ТПУ'}
+          <div className={styles.goIcon}>
+            <GoIcon/>
+          </div>
+        </div>
+        <div className={styles.pointContainer}>
+          {tpuPoints}
+          <TpuPoint/>
+        </div>
+      </div>
+
+    </div>
+  );
+};
