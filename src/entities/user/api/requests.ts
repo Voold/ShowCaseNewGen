@@ -1,0 +1,27 @@
+import type { AuthStatusResponse, OAuthExchangeParams } from './types'
+import type { User, UserDto } from '../model/types'
+import {  mapUserDto } from '../lib/mappers'
+import { api, ENDPOINTS } from '@/shared'
+
+export async function login(params: OAuthExchangeParams): Promise<void> {
+  await api.post(ENDPOINTS.LOGIN, params)
+}
+
+export async function getAuthStatus(): Promise<AuthStatusResponse> {
+  const { data } = await api.get<AuthStatusResponse>(ENDPOINTS.STATUS)
+  return data
+}
+
+export async function getMe(): Promise<User> {
+  const { data } = await api.get<UserDto>(ENDPOINTS.ME)
+  return mapUserDto(data)
+}
+
+export async function logout(): Promise<void> {
+  await api.post(ENDPOINTS.LOGOUT)
+}
+
+export async function getUserById(uid: string): Promise<User> {
+  const { data } = await api.get<UserDto>(`${ENDPOINTS.USER_BY_ID}/${uid}`)
+  return mapUserDto(data)
+}

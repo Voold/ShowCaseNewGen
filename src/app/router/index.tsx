@@ -1,79 +1,91 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { ProjectsGrid } from '@/widgets/projects-grid';
-import { LoginPage } from '@/pages/login-page/ui/LoginPage';
-import { ProtectedRoute } from './ProtectedRoute';
-import { MainLayout } from '@/pages/main-layout/ui/MainLayout';
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { LoginPage } from "@/pages/login-page/ui/LoginPage";
+import { MainLayout } from "@/pages/main-layout/ui/MainLayout";
 import { CatalogLayout, Catalog, ProjectPage } from "@/pages/catalog-layout";
-import { MyPlatformLayout } from '@/pages/my-platform-layout/ui/MyPlatformLayout';
-import { ProjectActivities } from '@/pages/my-platforms-pages/project-activities/ui/ProjectActivities';
+import { MyPlatformLayout } from "@/pages/my-platform-layout/ui/MyPlatformLayout";
+import { ProjectsGrid } from "@/widgets/projects-grid";
+import { ProjectActivities } from "@/pages/my-platforms-pages/project-activities/ui/ProjectActivities";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { ROUTES } from "@/shared";
+import { RootRoute } from "./RootRoute";
 
 export const router = createBrowserRouter([
   {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    element: <ProtectedRoute />,
+    element: <RootRoute />,
     children: [
       {
-        path: '/',
+        path: ROUTES.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: ROUTES.MAIN,
         element: <MainLayout />,
         children: [
           {
             index: true,
-            element: <Navigate to="/catalog" replace />
+            element: <Navigate to={ROUTES.CATALOG} replace />,
           },
+
           {
-            path: '/catalog',
+            path: ROUTES.CATALOG,
             element: <CatalogLayout />,
             children: [
               {
                 index: true,
-                element: <Navigate to="all-projects" replace />
+                element: <Navigate to={ROUTES.CATALOG_ALL_PROJECTS} replace />,
               },
               {
                 element: <Catalog />,
                 children: [
                   {
-                    path: 'all-projects',
-                    element: <ProjectsGrid />
+                    path: ROUTES.CATALOG_ALL_PROJECTS,
+                    element: <ProjectsGrid />,
                   },
                   {
-                    path: 'recruiting',
-                    element: <ProjectsGrid />
+                    path: ROUTES.CATALOG_RECRUITING,
+                    element: <ProjectsGrid />,
                   },
                   {
-                    path: 'in-work',
-                    element: <ProjectsGrid />
-                  }
-                ]
+                    path: ROUTES.CATALOG_IN_WORK,
+                    element: <ProjectsGrid />,
+                  },
+                ],
               },
               {
-                path: 'projects/:id',
-                element: <ProjectPage />
-              }
-            ]
+                path: ROUTES.CATALOG_PROJECT,
+                element: <ProjectPage />,
+              },
+            ],
           },
+
           {
-            path: '/my-platform',
-            element: <MyPlatformLayout />,
+            element: <ProtectedRoute />,
             children: [
               {
-                index: true,
-                element: <Navigate to="project-activities" replace />
+                path: ROUTES.MY_PLATFORM,
+                element: <MyPlatformLayout />,
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Navigate to={ROUTES.MY_PLATFORM_ACTIVITIES} replace />
+                    ),
+                  },
+                  {
+                    path: ROUTES.MY_PLATFORM_ACTIVITIES,
+                    element: <ProjectActivities />,
+                  },
+                ],
               },
-              {
-                path: 'project-activities',
-                element: <ProjectActivities />
-              }
-            ]
-          }
-        ]
-      }
+            ],
+          },
+        ],
+      },
+      {
+        path: "*",
+        // TODO - сделать NotFoundPage
+        element: <Navigate to={ROUTES.LOGIN} replace />,
+      },
     ],
-  },
-  {
-    path: '*',
-    element: <Navigate to="/login" replace />,
   },
 ]);

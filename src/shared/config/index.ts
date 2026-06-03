@@ -1,1 +1,2 @@
-export { ENDPOINTS } from './endpoints';
+export { ENDPOINTS } from "./endpoints";
+export { ROUTES } from "./routes";
