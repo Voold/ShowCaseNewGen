@@ -1,6 +1,5 @@
 import styles from './FreeCompetencies.module.css'
-import { CheckIcon, FeedBackIcon, LikeButton, PlusIcon, StarDetailIcon } from "@/shared/ui";
-import { InfoTooltip } from '../../info-tooltip/InfoTooltip.tsx';
+import { CheckIcon, FeedBackIcon, PlusIcon, StarDetailIcon } from "@/shared/ui";
 import { useState } from "react";
 
 interface FreeCompetenciesProps {
@@ -26,13 +25,7 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
 
   const [selectedCometencies, setSelectedCometencies] = useState<string[]>([])
 
-  const [isLiked, setIsLiked] = useState(false)
-
   const [isActiveFeedBack, setIsActiveFeedBack] = useState<boolean>(false)
-
-  const toggleLike = () => {
-    return setIsLiked(!isLiked)
-  }
 
   const toggleFeedBack = () => {
     return setIsActiveFeedBack(!isActiveFeedBack)
@@ -108,7 +101,7 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
                 <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>
                     {isSelected ?
                       <CheckIcon className={styles.checkIcon} size={9} color={'var(--color-brand-green)'}/> :
-                      <PlusIcon className={styles.plusIcon} size={9} fill={'white'}/> 
+                      <PlusIcon className={styles.plusIcon} size={7} fill={'white'}/> 
                     }
                     
                 </div>

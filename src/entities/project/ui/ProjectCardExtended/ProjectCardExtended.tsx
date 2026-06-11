@@ -1,8 +1,6 @@
 import styles from './ProjectCardExtended.module.css';
-import type { ProjectCardData, ProjectFormat } from '../../model/types';
-import { FolderIcon } from '@/shared/ui';
-import { CodeIcon } from '@/shared/ui/icons/CodeIcon';
-import { StarIcon } from '@/shared/ui/icons/StarIcon';
+import type { ProjectCardData } from '../../model/types';
+import { typeProjectsLabel } from '@/shared/ui/type-project-label/typeProjectsLabel';
 import Pattern from '@/assets/svg/Pattern.svg'
 import { useState } from "react";
 import { LikeButton } from "@/shared/ui";
@@ -10,19 +8,6 @@ import { LikeButton } from "@/shared/ui";
 interface Props {
   project: ProjectCardData;
 }
-
-const typeProject = (type: ProjectFormat) => {
-  switch (type) {
-    case 'CaseProjectRequest':
-      return <div className={styles.case}><FolderIcon pathClassName={styles.pathFolder} />Кейсовый</div>;
-    case 'RealProjectRequest':
-      return <div className={styles.real}><CodeIcon pathClassName={styles.pathCode} />Реальный</div>;
-    case 'PaidProjectRequest':
-      return <div className={styles.paid}><StarIcon pathClassName={styles.pathStar} />Оплачиваемый</div>;
-    default:
-      return null;
-  }
-};
 
 export default function ProjectCardExtended({ project }: Props) {
   const { id, type, tags, partnerId, meta, roles, brandColor } = project;
@@ -66,7 +51,7 @@ export default function ProjectCardExtended({ project }: Props) {
           <div className={styles.titleAndOrg}>
             <div className={styles.metaContainer}>
               <div className={styles.meta}>
-                {typeProject(type)}
+                {typeProjectsLabel(type)}
                 <div className={styles.id}>№ {id}</div>
               </div>
               <div className={styles.title}>{meta.title}</div>

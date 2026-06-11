@@ -3,9 +3,6 @@ import { FolderIcon } from '../icons/FolderIcon';
 import { LikeIcon } from '../icons/LikeIcon';
 import styles from './StagesWidget.module.css'
 
-type StagesWidgetProps = {
-  
-};
 
 interface StagesData {
   type: 'projects' | 'feedback' | 'likes',
@@ -38,9 +35,9 @@ const getIcon = (type: string) => {
 };
 
 
-export const StagesWidget = (props: StagesWidgetProps) => {
+export const StagesWidget = () => {
 
-  const stagesData = [
+  const stagesData: StagesData[] = [
     {
       type: 'projects',
       count: 2,

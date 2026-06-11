@@ -90,11 +90,11 @@ export const ProjectActivities = () => {
         const target = e.currentTarget;
         const scrollTop = target.scrollTop;
 
-        if (widgetRef.current && target !== widgetRef.current) {
+        if (widgetRef.current) {
             widgetRef.current.scrollTop = scrollTop;
         }
 
-        if (contentRef.current && target !== contentRef.current) {
+        if (contentRef.current) {
             contentRef.current.scrollTop = scrollTop;
         }
     }
@@ -107,7 +107,7 @@ export const ProjectActivities = () => {
             <h1 className={styles.welcomeMessage}>C возвращением, {data.name}!</h1>
             <aside className={styles.activities} ref={widgetRef} onScroll={handleScroll}>
                 <YourTasksWidget data={data.activities} />
-                <YourPointsWidget disciplines={data.сlosingDisciplines} tpuPoints={307}/>
+                <YourPointsWidget disciplines={data.сlosingDisciplines} tpuPoints={307} />
             </aside>
             <div className={styles.contentWrapper} ref={contentRef} onScroll={handleScroll}>
                 <section className={styles.banner}>
@@ -121,7 +121,7 @@ export const ProjectActivities = () => {
                     <ProjectsGrid />
                 </section>
             </div>
-        
+
         </main>
     );
 }

@@ -66,7 +66,7 @@ export function ProjectPage() {
         placesCount: 5,
         minPlacesCount: 1,
         places: 1,
-        skills: [ { skillId: 'kotlin' , skillName: 'Kotlin', requireSkill: true} ],
+        skills: [{ skillId: 'kotlin', skillName: 'Kotlin', requireSkill: true }],
         meta: {
           name: 'Frontend',
           description: ''
@@ -93,7 +93,7 @@ export function ProjectPage() {
         placesCount: 5,
         minPlacesCount: 1,
         places: 1,
-        skills: [ { skillId: 'kotlin', skillName: 'Kotlin' } ],
+        skills: [{ skillId: 'kotlin', skillName: 'Kotlin' }],
         meta: {
           name: 'Frontend',
           description: ''
@@ -101,7 +101,7 @@ export function ProjectPage() {
       },
     ],
 
-    
+
   }
 
   const BigCargData = {
@@ -239,11 +239,11 @@ export function ProjectPage() {
       </section>
 
       <section className={styles.projectsInfo} ref={projectsInfoRef} onScroll={handleScroll}>
-        <ProjectInfo data={data}/>
+        <ProjectInfo data={data} />
         <ProjectPrd {...PRDdata} />
       </section>
 
-    
+
       {/* ID и Ссылка */}
       <aside className={styles.idBlock}>
         <p className={styles.id}>

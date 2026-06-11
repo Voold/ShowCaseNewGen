@@ -1,6 +1,5 @@
 import LogoTPU from "@/shared/assets/svg/LogoTPU.svg";
 import { SwitchWorkSpace } from "@/features/switch-workspace";
-import EnterButton from "./EnterButton/EnterButton.tsx";
 import styles from "./Header.module.css";
 
 import { UserCard } from "./UserCard.tsx";

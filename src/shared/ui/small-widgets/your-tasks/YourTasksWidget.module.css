@@ -29,6 +29,7 @@
 
 .taskItem {
   display: flex;
+  position: relative;
   flex-direction: column;
   padding: 16px;
   background-color: var(--color-gray-150);
@@ -61,11 +62,11 @@
   color: var(--color-gray-600);
 }
 
-.extra {
-  position: relative;
-}
 
 .completedStage {
+  position: absolute;
+  top: 14px;
+  right: 14px;
   font-size: 11px;
   width: fit-content;
   font-family: var(--font-open-sans);
@@ -74,7 +75,7 @@
   font-style: italic;
   font-weight: 400;
   display: inline-block;
-  padding: 5px 9px 6px 9px;
+  padding: 3px 9px 5px 9px;
   border-radius: 12px;
 }
 

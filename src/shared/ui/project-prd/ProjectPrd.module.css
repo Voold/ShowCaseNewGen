@@ -5,7 +5,7 @@
   background-color: white;
   border-radius: 20px;
   gap: 48px;
-  margin: 0 16px;
+  margin: 0 16px 18px;
 }
 
 .smallBlock {
@@ -127,4 +127,11 @@
 .path {
   stroke-width: 1;
 }
+
+@media (max-width: 1280px) {
+  .container {
+    gap: 36px
+  }
+}
+
 

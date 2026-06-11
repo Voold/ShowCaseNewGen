@@ -8,6 +8,7 @@ import { ProjectActivities } from "@/pages/my-platforms-pages/project-activities
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ROUTES } from "@/shared";
 import { RootRoute } from "./RootRoute";
+import { MyProfile } from "@/pages/my-profile";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,11 @@ export const router = createBrowserRouter([
               },
             ],
           },
+
+          {
+            path: ROUTES.MY_PFOFILE,
+            element: <MyProfile/>
+          }
         ],
       },
       {

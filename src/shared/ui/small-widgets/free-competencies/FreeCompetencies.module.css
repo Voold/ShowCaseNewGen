@@ -36,7 +36,7 @@
 .competency {
   display: flex;
   position: relative;
-  padding: 12px 16px;
+  padding: 12px 12px;
   background-color: white;
   border-radius: 12px;
   justify-content: space-between;
@@ -44,7 +44,7 @@
 
   cursor: pointer;
 
-  border: 2px solid white;
+  border: 1px solid white;
 }
 
 .leftHalfRole {
@@ -54,7 +54,7 @@
 }
 
 .role {
-  font: var(--meta-title-interface);
+  font: var(--widget-title-platform);
   color: var(--color-brand-black);
 }
 
@@ -68,7 +68,7 @@
 
 .skill {
   position: relative;
-  padding: 4px 10px 6px 10px;
+  padding: 4px 10px 5px 10px;
   border-radius: 6px;
 
   font: var(--description-platform);
@@ -100,17 +100,13 @@
   align-content: center;
 }
 
-.like {
-  height: fit-content;
-}
-
 .selected {
   background-color: var(--color-brand-green);
 }
 
 .dimmed {
   opacity: 0.45;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 
@@ -153,8 +149,6 @@
   transition: 0.2s;
 }
 
-
-
 .button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
@@ -195,7 +189,6 @@
   white-space: normal;
   font-weight: 300;
 
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -217,9 +210,8 @@
   top: calc(100% + 8px);
   left: 0;
   transform: translateY(-4px);
-  border-radius: 0 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
 }
-
 
 .response .tooltip {
   top: calc(100% + 8px);
@@ -246,6 +238,11 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.plusIcon, .checkIcon  {
+  padding-top: 1px;
+  padding-right: 1px
 }
 
 .countFree {

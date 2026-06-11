@@ -39,6 +39,11 @@ export type UserDto = {
     skills: string
     experience: string
   }
+
+  // TODO ДОБАВИТЬ
+  group?: string,
+  grade?: string,
+
   roles: {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Default?: {}

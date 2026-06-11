@@ -113,11 +113,12 @@
   width: 100%;
   grid-column: 2;
   grid-row: 1;
+  padding: 0 16px;
 
   display: flex;
   overflow: hidden;
   position: relative;
-  align-items: center;
+  align-items: start;
 }
 
 .marqueeContent {
@@ -126,9 +127,16 @@
   white-space: nowrap;
   flex-shrink: 0;
   will-change: transform;
-  
+
   /* 12s cycle: 2s pause (16.67%) + 10s slide */
   animation: marquee 12s infinite linear;
+}
+
+.marqueeContentStatic {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .titleText {
@@ -215,6 +223,6 @@
 
 @media (max-width: 1280px) {
   .main {
-    padding: 0 16px;
+    padding: 0 20px;
   }
 }
