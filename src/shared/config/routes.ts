@@ -14,5 +14,5 @@ export const ROUTES = {
   MY_PLATFORM_ACTIVITIES: 'project-activities',
 
   // Роуты пользователя
-  MY_PFOFILE: 'profile'
+  MY_PROFILE: 'profile'
 };

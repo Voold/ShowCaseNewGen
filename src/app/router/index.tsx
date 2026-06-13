@@ -82,9 +82,9 @@ export const router = createBrowserRouter([
           },
 
           {
-            path: ROUTES.MY_PFOFILE,
-            element: <MyProfile/>
-          }
+            path: ROUTES.MY_PROFILE,
+            element: <MyProfile />
+          },
         ],
       },
       {
