@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ROUTES } from "@/shared";
 import { RootRoute } from "./RootRoute";
 import { MyProfile } from "@/pages/my-profile";
+import CreateProjectPage from "@/pages/create-project/ui/CreateProjectPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.LOGIN,
         element: <LoginPage />,
+      },
+      {
+        /*create project \\ temp*/
+        path: '/projects/create',
+        element: <CreateProjectPage/>
       },
       {
         path: ROUTES.MAIN,
