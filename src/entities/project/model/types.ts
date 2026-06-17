@@ -1,9 +1,9 @@
 export type ProjectDirection = 'web' | 'mobile' | 'engineering' | 'ml' | 'fintech' | 'design';
-export type ProjectFormat = 'CaseProjectRequest' | 'RealProjectRequest' | 'PaidProjectRequest';
+export type ProjectFormat = 'Case' | 'Real' | 'Study';
 export type CreateProjectRequestType = 
-  | 'CreateCaseProjectRequest' 
-  | 'CreateRealProjectRequest' 
-  | 'CreateStudyProjectRequest';
+  | 'Case' 
+  | 'Real' 
+  | 'Study';
 
 export interface ProjectDirectionItem {
   key: ProjectDirection;
@@ -164,7 +164,7 @@ export interface BaseCreateProjectDto {
 }
 
 export interface CreateStudyProjectDto extends BaseCreateProjectDto {
-  type: 'CreateStudyProjectRequest';
+  type: 'Study';
   prdMeta: {
     prerequisites: string;
     projectGoal: string;
@@ -173,12 +173,12 @@ export interface CreateStudyProjectDto extends BaseCreateProjectDto {
 }
 
 export interface CreateCaseProjectDto extends BaseCreateProjectDto {
-  type: 'CreateCaseProjectRequest';
+  type: 'Case';
   prdMeta: Record<string, any>;
 }
 
 export interface CreateRealProjectDto extends BaseCreateProjectDto {
-  type: 'CreateRealProjectRequest';
+  type: 'Real';
   prdMeta: Record<string, any>;
 }
 
