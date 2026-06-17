@@ -3,6 +3,7 @@ import styles from './MyProfile.module.css'
 import { BackIcon } from '@/shared';
 import type { UserDto } from '@/entities/user/model/types';
 import { ProfileHeader } from '@/widgets/profile-header';
+import {AboutMe} from "@/features/about-me/ui/AboutMe.tsx";
 
 export const MyProfile = () => {
 
@@ -17,7 +18,7 @@ export const MyProfile = () => {
     meta: {
       firstName: 'Олег',
       lastName: 'Тинькофф',
-      bio: 'Дурак',
+      bio: 'Имею профильное образование в (X) и сильную теоретическую базу. Быстро обучаюсь, умею работать с большими объемами информации. Прошел(ла) обучение по направлению \\(X\\), владею инструментами \\(A\\) и \\(B\\). Высоко мотивирован(а) на развитие в сфере \\(X\\) и готов(а) брать на себя ответственность за результат. Имею профильное образование в \\(X\\) и сильную теоретическую базу. Быстро обучаюсь, умею работать с большими объемами информации. Прошел(ла) обучение по направлению \\(X\\), владею инструментами.',
       skills: 'dfdfdfd',
       experience: 'dfdfdfd'
     },
@@ -43,6 +44,8 @@ export const MyProfile = () => {
       type: 'vk',
     },
     {
+      anotherType: 'Max',
+      link: '@mys2018'
     },
   ]
 
@@ -60,8 +63,11 @@ export const MyProfile = () => {
         </h2>
       </section>
 
-      <section className={styles.body}>
+      <section className={styles.profile}>
         <ProfileHeader data={data} links={links} />
+        <div className={styles.body}>
+          <AboutMe bio={data.meta.bio} className={styles.wid}/>
+        </div>
       </section>
     </div>
   );

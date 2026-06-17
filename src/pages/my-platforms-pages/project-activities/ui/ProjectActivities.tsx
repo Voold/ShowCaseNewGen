@@ -15,7 +15,7 @@ export const ProjectActivities = () => {
         role?: string;
         avatarSrc?: string;
         activities?: Activity[];
-        сlosingDisciplines?: ClosingDiscipline[]
+        closingDisciplines?: ClosingDiscipline[]
     } = {
         name: 'Paven',
         role: 'Разработчик',
@@ -42,34 +42,34 @@ export const ProjectActivities = () => {
                 type: 'currentStage',
                 title: 'Подготовка презентации',
                 deadline: '5-06-2026',
-                proggressSteps: 5,
-                proggressCurrentStep: 2,
+                progressSteps: 5,
+                progressCurrentStep: 2,
                 unitType: 'points'
             },
             {
                 type: 'currentStage',
                 title: 'Подготовка презентации',
                 deadline: '5-06-2026',
-                proggressSteps: 5,
-                proggressCurrentStep: 5,
+                progressSteps: 5,
+                progressCurrentStep: 5,
                 unitType: 'points'
             },
             {
                 type: 'upcomingStage',
                 title: 'Подготовка презентации',
-                proggressSteps: 1,
-                proggressCurrentStep: 0,
+                progressSteps: 1,
+                progressCurrentStep: 0,
                 unitType: 'points'
             },
             {
                 type: 'keyPoint',
                 title: 'Финальный отчёт',
-                deadline: '05-06-2026',
+                deadline: '30-06-2026',
                 number: 2,
                 extra: 'all'
             }
         ],
-        сlosingDisciplines: [
+        closingDisciplines: [
             {
                 title: 'УИРС-1',
                 currentProgress: 18,
@@ -107,7 +107,7 @@ export const ProjectActivities = () => {
             <h1 className={styles.welcomeMessage}>C возвращением, {data.name}!</h1>
             <aside className={styles.activities} ref={widgetRef} onScroll={handleScroll}>
                 <YourTasksWidget data={data.activities} />
-                <YourPointsWidget disciplines={data.сlosingDisciplines} tpuPoints={307} />
+                <YourPointsWidget disciplines={data.closingDisciplines} tpuPoints={307} />
             </aside>
             <div className={styles.contentWrapper} ref={contentRef} onScroll={handleScroll}>
                 <section className={styles.banner}>

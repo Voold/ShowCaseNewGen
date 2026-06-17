@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <header className={styles.wrap}>
-        <img src={LogoTPU} />
+        <img src={LogoTPU}  alt={'Лого'}/>
         <div className={styles.center}>
           <SwitchWorkSpace />
         </div>

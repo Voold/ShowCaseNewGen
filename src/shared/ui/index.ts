@@ -9,6 +9,7 @@ export { YourTasksWidget } from './small-widgets/your-tasks/YourTasksWidget.tsx'
 export type { Activity } from './small-widgets/your-tasks/model/types.ts'
 export { YourPointsWidget } from './small-widgets/your-points/YourPointsWidget.tsx'
 export type { ClosingDiscipline } from './small-widgets/your-points/model/types.ts'
+export { TextArea } from './textarea/TextArea.tsx'
 
 
 export { BackIcon } from './icons/BackIcon'

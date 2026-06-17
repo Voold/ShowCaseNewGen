@@ -20,6 +20,8 @@ export const ProfileHeader = ({ data, links }: ProfileHeaderProps) => {
   return (
     <div className={styles.mainInfo}>
 
+
+
       <div className={styles.infoGrid}>
 
         <section className={styles.mainInfoContainer}>

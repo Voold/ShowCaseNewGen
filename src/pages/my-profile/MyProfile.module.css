@@ -53,7 +53,7 @@
   color: var(--color-brand-black);
 }
 
-.body {
+.profile {
   display: flex;
   flex-direction: column;
   padding: 0 16px;
@@ -61,6 +61,16 @@
   grid-column: 2 / 4;
   grid-row: 2 / 4;
 }
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  gap: 32px;
+  width: 100%;
+}
+
+
 
 
 @media (max-width: 1600px) {
