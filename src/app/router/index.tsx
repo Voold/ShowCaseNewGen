@@ -59,9 +59,9 @@ export const router = createBrowserRouter([
             ],
           },
 
-          {
-            element: <ProtectedRoute />,
-            children: [
+          // {
+          //   element: <ProtectedRoute />,
+          //   children: [
               {
                 path: ROUTES.MY_PLATFORM,
                 element: <MyPlatformLayout />,
@@ -78,8 +78,8 @@ export const router = createBrowserRouter([
                   },
                 ],
               },
-            ],
-          },
+          //   ],
+          // },
 
           {
             path: ROUTES.MY_PROFILE,

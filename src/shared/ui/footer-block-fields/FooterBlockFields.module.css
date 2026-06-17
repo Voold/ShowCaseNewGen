@@ -1,0 +1,39 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerLabel {
+  font: var(--inter-12-300);
+  color: var(--color-gray-400)
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 16px;
+  align-items: center;
+}
+
+.buttonContainer button {
+  font: var(--inter-13-600);
+}
+
+.cancelButton {
+  color: var(--color-gray-500)
+}
+
+.saveButton {
+  padding: 14px 24px 15px 24px;
+  border-radius: 50px;
+  background-color: var(--color-brand-green);
+  color: white;
+}
+
+.disable {
+  opacity: 0.25;
+}
+
+.error {
+  color: var(--color-red);
+}

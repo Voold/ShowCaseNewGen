@@ -1,7 +1,7 @@
 import styles from './AboutMe.module.css';
 import Pencil from '@/shared/ui/icons/pencil.svg?react'
 import {type ChangeEvent, useState} from "react";
-import {TextArea} from "@/shared";
+import {FooterBlockFields, TextArea} from "@/shared";
 
 type AboutMeProps = {
   bio: string,
@@ -13,15 +13,22 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   const MIN_LENGTH = 100
   // Вроде не приходит с сервера, поэтому так
   const [value, setValue] = useState<string>(bio || '')
+  const [prevValue, setPrevValue] = useState<string>('')
   const [isDisable, setIsDisable] = useState<boolean>(true)
 
-  // Вычисляем валидность на лету
   const isValid = value.length >= MIN_LENGTH && value.length <= MAX_LENGTH
   const hasUpdate = value.trim() !== bio.trim()
+
+  const disabled = !hasUpdate || !isValid
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
     const text = e.target.value
     setValue(text)
+  }
+
+  const handleCancel = () => {
+    setIsDisable(!isDisable)
+    setValue(prevValue)
   }
 
   const handleSubmit = () => {
@@ -30,7 +37,7 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   }
 
   const label = () => {
-
+    // TODO
   }
 
   return (
@@ -42,7 +49,11 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           </h3>
           <button
             className={styles.editButton}
-            onClick={() => setIsDisable(!isDisable)}
+            onClick={() => {
+              setIsDisable(!isDisable)
+              setPrevValue(value)
+            }
+          }
           >
             <Pencil />
             Редактировать
@@ -54,27 +65,13 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           handleChange={handleChange}
           isDisable={isDisable}
         />
-        <div className={styles.footer}>
-          <p className={`${styles.footerLabel} ${!isValid ? styles.error : ''}`}>
-            {
-              `Мин: ${MIN_LENGTH} символов`
-            }
-          </p>
-          {!isDisable && (
-            <div className={styles.buttonContainer}>
-              <button className={styles.cancelButton} onClick={() => setIsDisable(!isDisable)}>
-                Отмена
-              </button>
-              <button
-                className={`${styles.saveButton} ${(!hasUpdate || !isValid) ? styles.disable : ''}`}
-                onClick={handleSubmit}
-                disabled={!hasUpdate || !isValid}
-              >
-                Сохранить изменения
-              </button>
-            </div>
-          )}
-        </div>
+        <FooterBlockFields
+            MIN_LENGTH={MIN_LENGTH}
+            isValid={isValid}
+            isDisable={isDisable}
+            disabled={disabled}
+            handleCancel={handleCancel}
+            handleSubmit={handleSubmit}/>
       </div>
     </section>
   );

@@ -9,9 +9,9 @@ export function UserCard() {
   const navigate = useNavigate()
   const { data: user = placeholderUser } = useMe(status === "authenticated");
 
-  if (status !== "authenticated" && status !== "loading") {
-    return <EnterButton />;
-  }
+  // if (status !== "authenticated" && status !== "loading") {
+  //   return <EnterButton />;
+  // }
 
   return (
     <div className={styles.profileContainer}>
