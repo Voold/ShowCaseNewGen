@@ -64,4 +64,4 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           source: "dist/*"
-          target: "~/tempAdm"
+          target: "~/tempMain"
