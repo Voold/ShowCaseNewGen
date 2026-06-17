@@ -1,4 +1,5 @@
-import type { ProjectCardData } from './types';
+
+/*import type { ProjectCardData } from './types';
 
 export const MOCK_PROJECTS: ProjectCardData[] = [
   {
@@ -229,4 +230,4 @@ export const MOCK_PROJECTS: ProjectCardData[] = [
     ],
     prdMeta: { problem: '', context: '', audience: '', requirements: [], mvp: [] },
   },
-];
+];*/

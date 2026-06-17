@@ -22,7 +22,6 @@ export const projectApi = {
     return mapProjectDtoToEntity(response.data);
   },
 
-  // ДОБАВЛЕН МЕТОД СОЗДАНИЯ ПРОЕКТА
   createProject: async (data: CreateProjectDto): Promise<ProjectCardData> => {
     const response = await api.post<any>('/projects', data);
     return mapProjectDtoToEntity(response.data);

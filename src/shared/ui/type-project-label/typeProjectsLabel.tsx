@@ -6,11 +6,11 @@ import type { ProjectFormat } from '../../../entities/project/model/types';
 
 export const typeProjectsLabel = (type: ProjectFormat) => {
   switch (type) {
-    case 'CaseProjectRequest':
+    case 'Case':
       return <div className={styles.case}><FolderIcon pathClassName={styles.pathFolder} size={12} />Кейсовый</div>;
-    case 'RealProjectRequest':
+    case 'Study':
       return <div className={styles.real}><CodeIcon pathClassName={styles.pathCode} size={12} />Реальный</div>;
-    case 'PaidProjectRequest':
+    case 'Real':
       return <div className={styles.paid}><StarIcon pathClassName={styles.pathStar} size={12} />Оплачиваемый</div>;
     default:
       return null;
