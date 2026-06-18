@@ -37,3 +37,7 @@
 .error {
   color: var(--color-red);
 }
+
+.success {
+  color: var(--color-brand-green);
+}

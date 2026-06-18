@@ -16,15 +16,41 @@
   width: 100%;
   background-color: transparent;
   flex-grow: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar{
+    width: 0;
+  }
 }
 
+
 .textContainer textarea:focus{
-  outline: 2px solid var(--color-brand-green);
+  outline: none;
   border-radius: 4px;
 }
 
 .textContainer p{
   font: var(--inter-12-400);
-  color: var(--color-gray-400);
   text-align: end;
+}
+
+.error {
+  color: var(--color-red);
+}
+
+.valid {
+  color: var(--color-gray-400);
+}
+
+.errorOutline {
+  border-color: var(--color-red);
+}
+
+.validOutline {
+  color: var(--color-gray-400);
+}
+
+.edit {
+  border-color: var(--color-brand-violet);
 }

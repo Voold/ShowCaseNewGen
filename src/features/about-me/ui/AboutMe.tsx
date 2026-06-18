@@ -14,9 +14,14 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   // Вроде не приходит с сервера, поэтому так
   const [value, setValue] = useState<string>(bio || '')
   const [prevValue, setPrevValue] = useState<string>('')
-  const [isDisable, setIsDisable] = useState<boolean>(true)
+  const [isEditing, setIsEditing] = useState<boolean>(true)
 
-  const isValid = value.length >= MIN_LENGTH && value.length <= MAX_LENGTH
+
+  // Валидация для количества символов
+  const isValidSymbol = value.length >= MIN_LENGTH && value.length <= MAX_LENGTH
+  const isValidAnother = true
+  const isValid = isValidSymbol && isValidAnother
+
   const hasUpdate = value.trim() !== bio.trim()
 
   const disabled = !hasUpdate || !isValid
@@ -27,16 +32,12 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   }
 
   const handleCancel = () => {
-    setIsDisable(!isDisable)
+    setIsEditing(!isEditing)
     setValue(prevValue)
   }
 
   const handleSubmit = () => {
-    setIsDisable(!isDisable)
-    // TODO
-  }
-
-  const label = () => {
+    setIsEditing(!isEditing)
     // TODO
   }
 
@@ -50,7 +51,7 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           <button
             className={styles.editButton}
             onClick={() => {
-              setIsDisable(!isDisable)
+              setIsEditing(!isEditing)
               setPrevValue(value)
             }
           }
@@ -63,16 +64,25 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           value={value}
           maxLength={MAX_LENGTH}
           handleChange={handleChange}
-          isDisable={isDisable}
+          isDisable={isEditing}
+          isValid={isValidSymbol}
+          isEditing={isEditing}
         />
-        <FooterBlockFields
-            MIN_LENGTH={MIN_LENGTH}
-            isValid={isValid}
-            isDisable={isDisable}
-            disabled={disabled}
-            handleCancel={handleCancel}
-            handleSubmit={handleSubmit}/>
+        {
+          !isEditing && (
+            <FooterBlockFields
+              MIN_LENGTH={MIN_LENGTH}
+              valueLength={value.length}
+              isValidSymbol={isValidSymbol}
+              isValidAnother={isValidAnother}
+              isValid={isValid}
+              disabled={disabled}
+              handleCancel={handleCancel}
+              handleSubmit={handleSubmit}
+            />
+          )
+        }
       </div>
     </section>
   );
-};
+}

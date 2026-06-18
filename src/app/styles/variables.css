@@ -1,12 +1,12 @@
 :root {
   --color-brand-green: #28BE46;
   --color-brand-black: #1D1D1F;
+  --color-brand-violet: #6573FF;
+
   --color-white: #FFFFFF;
-
-
   --color-red: #EE4E43;
   --color-yellow: #FFC929;
-  --color-blue: #6573FF;
+
 
   --grad-line: linear-gradient(45deg,
       #28BE46 0%,
@@ -88,6 +88,7 @@
   --inter-11-400: 400 11px/1.1 var(--font-inter);
   --OS-14-550: 550 14px/1 var(--font-open-sans);
   --OS-14-400: 400 14px/1 var(--font-open-sans);
+  --OS-14-500: 500 14px/1 var(--font-open-sans);
 
   --small-11-light: 300 11px/1.1 var(--font-inter);
 

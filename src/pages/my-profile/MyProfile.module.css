@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 300px 1fr 300px;
   grid-template-rows: 48px 168px 132px 1fr;
-  padding: 26px calc(180px + 16px);
+  padding: 26px calc(180px + 16px) 0;
   /* padding: 0 calc(180px + 16px); */
   /* margin-top: 26px; */
 
@@ -25,7 +25,7 @@
 }
 
 .backIcon {
-  fill: '#93959B'
+  fill: #93959B
 }
 
 .back {
@@ -59,8 +59,16 @@
   padding: 0 16px;
 
   grid-column: 2 / 4;
-  grid-row: 2 / 4;
+  grid-row: 2 / 5;
+
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+
+.profile::-webkit-scrollbar {
+  display: none;
+}
+
 
 .body {
   display: flex;
@@ -69,8 +77,6 @@
   gap: 32px;
   width: 100%;
 }
-
-
 
 
 @media (max-width: 1600px) {

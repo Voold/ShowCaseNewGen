@@ -1,0 +1,48 @@
+.body {
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-250)
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.mainContainer h5 {
+  font: var(--label-interface);
+  color: var(--color-gray-500);
+  flex-grow: 1;
+}
+
+.competenciesContainer {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.competency {
+  display: flex;
+  padding: 8px 12px;
+  gap: 10px;
+  background-color: var(--color-gray-100);
+  border-radius: 8px;
+  align-items: center;
+  color: var(--color-gray-750);
+  font: var(--OS-14-500);
+
+}
+
+.pencilIcon {
+  width: 19.4px;
+  height: 19.4px;
+  color: #00C7E6;
+}

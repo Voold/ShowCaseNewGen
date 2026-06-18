@@ -3,7 +3,8 @@ import styles from './MyProfile.module.css'
 import { BackIcon } from '@/shared';
 import type { UserDto } from '@/entities/user/model/types';
 import { ProfileHeader } from '@/widgets/profile-header';
-import {AboutMe} from "@/features/about-me/ui/AboutMe.tsx";
+import { AboutMe } from "@/features/about-me/ui/AboutMe.tsx";
+import { MyCompetenciesList } from "@/widgets/my-competencies-list";
 
 export const MyProfile = () => {
 
@@ -49,6 +50,84 @@ export const MyProfile = () => {
     },
   ]
 
+  const myCompetencies = [
+    {
+      label: 'Frontend',
+      competencies: [
+        {
+          id: 'React',
+          title: 'React'
+        },
+        {
+          id: 'CSS',
+          title: 'CSS'
+        },
+        {
+          id: 'SASS',
+          title: 'SASS'
+        },
+        {
+          id: 'TanStack',
+          title: 'TanStack'
+        },
+        {
+          id: 'Redux',
+          title: 'Redux'
+        },
+      ]
+    },
+    {
+      label: 'Frontend',
+      competencies: [
+        {
+          id: 'React',
+          title: 'React'
+        },
+        {
+          id: 'CSS',
+          title: 'CSS'
+        },
+        {
+          id: 'SASS',
+          title: 'SASS'
+        },
+        {
+          id: 'TanStack',
+          title: 'TanStack'
+        },
+        {
+          id: 'Redux',
+          title: 'Redux'
+        },
+      ]
+    },
+    {
+      label: 'Frontend',
+      competencies: [
+        {
+          id: 'React',
+          title: 'React'
+        },
+        {
+          id: 'CSS',
+          title: 'CSS'
+        },
+        {
+          id: 'SASS',
+          title: 'SASS'
+        },
+        {
+          id: 'TanStack',
+          title: 'TanStack'
+        },
+        {
+          id: 'Redux',
+          title: 'Redux'
+        },
+      ]
+    },
+  ]
+
   return (
     <div className={styles.mainContent}>
 
@@ -66,7 +145,13 @@ export const MyProfile = () => {
       <section className={styles.profile}>
         <ProfileHeader data={data} links={links} />
         <div className={styles.body}>
-          <AboutMe bio={data.meta.bio} className={styles.wid}/>
+          <AboutMe
+            bio={data.meta.bio}
+            className={styles.wid}
+          />
+          <MyCompetenciesList
+            myCompetencies={myCompetencies}
+          />
         </div>
       </section>
     </div>

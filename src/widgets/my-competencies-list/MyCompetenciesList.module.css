@@ -1,0 +1,36 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.bioContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bioContainer h3 {
+  font: var(--field-label-interface);
+  color: var(--color-brand-black);
+}
+
+.editButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--inter-12-300);
+  color: var(--color-brand-green)
+}
+
+.myCompetenciesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.competencyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
