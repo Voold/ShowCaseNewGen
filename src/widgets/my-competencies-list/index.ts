@@ -1,1 +1,0 @@
-export { MyCompetenciesList } from './MyCompetenciesList.tsx'

@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from './MyProfile.module.css'
-import { BackIcon } from '@/shared';
-import type { UserDto } from '@/entities/user/model/types';
-import { ProfileHeader } from '@/widgets/profile-header';
-import { AboutMe } from "@/features/about-me/ui/AboutMe.tsx";
-import { MyCompetenciesList } from "@/widgets/my-competencies-list";
+import {BackIcon} from '@/shared';
+import type {UserDto} from '@/entities/user/model/types';
+import {ProfileHeader} from '@/widgets/profile-header';
+import {AboutMe} from "@/features/about-me/ui/AboutMe.tsx";
+// TODO
+import { MyCompetenciesList } from "@/features/my-competencies";
 
 export const MyProfile = () => {
 
@@ -50,110 +51,52 @@ export const MyProfile = () => {
     },
   ]
 
-  const myCompetencies = [
+  const myCompetencies = [{
+    roleTypeId: 'Frontend',
+    roleTypeName: 'Frontend',
+    skills: [
+      {skillId: '1', skillName: 'React'},
+      {skillId: '2', skillName: 'HTML'},
+      {skillId: '3', skillName: 'CSS'}
+    ]
+  },
     {
-      label: 'Frontend',
-      competencies: [
-        {
-          id: 'React',
-          title: 'React'
-        },
-        {
-          id: 'CSS',
-          title: 'CSS'
-        },
-        {
-          id: 'SASS',
-          title: 'SASS'
-        },
-        {
-          id: 'TanStack',
-          title: 'TanStack'
-        },
-        {
-          id: 'Redux',
-          title: 'Redux'
-        },
+      roleTypeId: 'Backend',
+      roleTypeName: 'Backend',
+      skills: [
+        {skillId: '1', skillName: 'Java'},
+        {skillId: '2', skillName: 'Kotlin'},
+        {skillId: '3', skillName: 'Scala'}
       ]
-    },
-    {
-      label: 'Frontend',
-      competencies: [
-        {
-          id: 'React',
-          title: 'React'
-        },
-        {
-          id: 'CSS',
-          title: 'CSS'
-        },
-        {
-          id: 'SASS',
-          title: 'SASS'
-        },
-        {
-          id: 'TanStack',
-          title: 'TanStack'
-        },
-        {
-          id: 'Redux',
-          title: 'Redux'
-        },
-      ]
-    },
-    {
-      label: 'Frontend',
-      competencies: [
-        {
-          id: 'React',
-          title: 'React'
-        },
-        {
-          id: 'CSS',
-          title: 'CSS'
-        },
-        {
-          id: 'SASS',
-          title: 'SASS'
-        },
-        {
-          id: 'TanStack',
-          title: 'TanStack'
-        },
-        {
-          id: 'Redux',
-          title: 'Redux'
-        },
-      ]
-    },
+    }
   ]
 
   return (
-    <div className={styles.mainContent}>
+      <div className={styles.mainContent}>
 
-      <section className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
-        <BackIcon pathClassName={styles.backIcon} color='#93959B' />
-        <p className={styles.back}>Назад к списку проектов</p>
-      </section>
+        <section className={styles.headerLeft} onClick={() => navigate(-1)} style={{cursor: 'pointer'}}>
+          <BackIcon pathClassName={styles.backIcon} color='#93959B'/>
+          <p className={styles.back}>Назад к списку проектов</p>
+        </section>
 
-      <section className={styles.title}>
-        <h2>
-          Мой профиль
-        </h2>
-      </section>
+        <section className={styles.title}>
+          <h2>
+            Мой профиль
+          </h2>
+        </section>
 
-      <section className={styles.profile}>
-        <ProfileHeader data={data} links={links} />
-        <div className={styles.body}>
-          <AboutMe
-            bio={data.meta.bio}
-            className={styles.wid}
-          />
-          <MyCompetenciesList
-            myCompetencies={myCompetencies}
-          />
-        </div>
-      </section>
-    </div>
+        <section className={styles.profile}>
+          <ProfileHeader data={data} links={links}/>
+          <div className={styles.body}>
+            <AboutMe
+                bio={data.meta.bio}
+                className={styles.wid}
+            />
+            <MyCompetenciesList
+                myCompetencies={myCompetencies}
+            />
+          </div>
+        </section>
+      </div>
   );
 };
