@@ -3,7 +3,7 @@ import { MyCompetencies } from "@/features/my-competencies/ui/MyCompetencies.tsx
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import { FooterBlockFields } from "@/shared";
 // import type {Competence} from "@/features/my-competencies/model/types.ts";
-import {useSkillsStore} from "@/features/my-competencies/model/store/useSkillsStore.ts";
+import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
 
 // type MyCompetenciesListProps = {
 //   myCompetencies: Competence[]
@@ -13,19 +13,18 @@ import {useSkillsStore} from "@/features/my-competencies/model/store/useSkillsSt
 export function MyCompetenciesList() {
 
   const {
-    originalData ,
+    originalData,
     draftData,
     editingId,
+    popoverOpenFor,
+    currentFullSkills,
     startEditing,
     cancelEditing,
     saveChanges,
-
     removeSkill,
     addSkill,
     removeCompetency,
-
     setPopoverOpenFor,
-
     getSkillsForCompetence,
   } = useSkillsStore()
 
@@ -51,16 +50,19 @@ export function MyCompetenciesList() {
           draftData.map((competency) => (
             <div key={competency.roleTypeId} className={styles.competencyContainer}>
               <MyCompetencies
-                  data={competency}
-                  removeSkill={removeSkill}
-                  addSkill={addSkill}
-                  removeCompetency={removeCompetency}
-                  setPopoverOpenFor={setPopoverOpenFor}
-                  startEditing={startEditing}
-                  editingId={editingId}
+                data={competency}
+                removeSkill={removeSkill}
+                addSkill={addSkill}
+                removeCompetency={removeCompetency}
+                popoverOpenFor={popoverOpenFor}
+                setPopoverOpenFor={setPopoverOpenFor}
+                startEditing={startEditing}
+                editingId={editingId}
+                getSkillsForCompetence={getSkillsForCompetence}
+                currentFullSkills={currentFullSkills}
               />
               {
-                  editingId && <FooterBlockFields handleCancel={cancelEditing} handleSubmit={() => { }} />
+                editingId === competency.roleTypeId && <FooterBlockFields handleCancel={cancelEditing} handleSubmit={() => { }} />
               }
 
             </div>

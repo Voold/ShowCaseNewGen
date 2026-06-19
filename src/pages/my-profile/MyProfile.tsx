@@ -50,27 +50,6 @@ export const MyProfile = () => {
       link: '@mys2018'
     },
   ]
-
-  const myCompetencies = [{
-    roleTypeId: 'Frontend',
-    roleTypeName: 'Frontend',
-    skills: [
-      {skillId: '1', skillName: 'React'},
-      {skillId: '2', skillName: 'HTML'},
-      {skillId: '3', skillName: 'CSS'}
-    ]
-  },
-    {
-      roleTypeId: 'Backend',
-      roleTypeName: 'Backend',
-      skills: [
-        {skillId: '1', skillName: 'Java'},
-        {skillId: '2', skillName: 'Kotlin'},
-        {skillId: '3', skillName: 'Scala'}
-      ]
-    }
-  ]
-
   return (
       <div className={styles.mainContent}>
 
@@ -92,9 +71,7 @@ export const MyProfile = () => {
                 bio={data.meta.bio}
                 className={styles.wid}
             />
-            <MyCompetenciesList
-                myCompetencies={myCompetencies}
-            />
+            <MyCompetenciesList/>
           </div>
         </section>
       </div>

@@ -1,4 +1,6 @@
 .body {
+  position: relative;
+
   display: flex;
   padding: 18px;
   align-items: center;
@@ -44,7 +46,7 @@
 .pencilIcon {
   width: 19.4px;
   height: 19.4px;
-  color: #00C7E6;
+  color: var(--color-gray-400, #9ca3af);
 }
 
 .plusButton {

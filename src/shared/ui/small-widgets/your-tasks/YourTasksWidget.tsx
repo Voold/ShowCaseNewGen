@@ -1,5 +1,5 @@
 import { formatDeadline, getDaysUntil } from '@/shared/lib/date';
-import { ClockIcon } from '../../icons/ClockIcon';
+import ClockIcon from '@/shared/ui/icons/clock.svg?react'
 import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
 import type { Activity } from './model/types';
 import styles from './YourTasksWidget.module.css'
