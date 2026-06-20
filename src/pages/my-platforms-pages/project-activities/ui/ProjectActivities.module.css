@@ -9,6 +9,8 @@
 
   overflow: auto;
   overflow-y: hidden;
+
+  max-width: calc(1560px + 180px*2);
 }
 
 

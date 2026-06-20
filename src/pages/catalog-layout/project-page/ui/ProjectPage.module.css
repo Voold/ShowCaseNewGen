@@ -11,6 +11,8 @@
   position: relative;
 
   overflow: hidden;
+
+  max-width: calc(1560px + 180px*2);
 }
 
 .leftWidgets {

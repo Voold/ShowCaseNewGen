@@ -9,6 +9,7 @@
   padding: 0 180px;
   overflow: hidden;
   position: relative;
+  max-width: calc(1560px + 180px*2);
 }
 
 .searchPart {
