@@ -14,6 +14,12 @@ export const typeProjectsLabel = (type: ProjectFormat) => {
       return <div className={`${styles.base} ${styles.paid}`}><StarIcon pathClassName={styles.pathStar} size={12} />Оплачиваемый</div>;
     case 'StudyProjectRequest':
       return <div className={`${styles.base} ${styles.paid}`}><StarIcon pathClassName={styles.pathStar} size={12} />Оплачиваемый</div>;
+    case 'Case':
+      return <div className={styles.case}><FolderIcon pathClassName={styles.pathFolder} size={12} />Кейсовый</div>;
+    case 'Study':
+      return <div className={styles.real}><CodeIcon pathClassName={styles.pathCode} size={12} />Реальный</div>;
+    case 'Real':
+      return <div className={styles.paid}><StarIcon pathClassName={styles.pathStar} size={12} />Оплачиваемый</div>;
     default:
       return null;
   }
