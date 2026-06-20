@@ -1,5 +1,4 @@
 import { useMe, useAuthStore, placeholderUser } from "@/entities/user";
-import EnterButton from "./EnterButton/EnterButton.tsx";
 import styles from './UserCard.module.css'
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/index.ts";

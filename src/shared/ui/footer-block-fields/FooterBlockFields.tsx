@@ -20,7 +20,6 @@ export const FooterBlockFields = ({
    MIN_LENGTH = 100,
    valueLength = 200,
    isValidSymbol,
-   isValidAnother,
    isValid,
    disabled,
    handleCancel,

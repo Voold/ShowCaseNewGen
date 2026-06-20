@@ -1,1 +1,1 @@
-export { FooterBlockFields } from './ui/AboutMe.tsx'
+export { AboutMe } from './ui/AboutMe.tsx'
