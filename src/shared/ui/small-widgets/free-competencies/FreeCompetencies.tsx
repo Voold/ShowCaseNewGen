@@ -1,5 +1,5 @@
 import styles from './FreeCompetencies.module.css'
-import {CheckIcon, FeedBackIcon, PlusIcon, StarDetailIcon} from "@/shared/ui";
+import {CheckIcon, FeedBackIcon, StarDetailIcon} from "@/shared/ui";
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import {useState} from "react";
 
