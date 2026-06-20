@@ -2,15 +2,16 @@ import { useMe, useAuthStore, placeholderUser } from "@/entities/user";
 import styles from './UserCard.module.css'
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/index.ts";
+import EnterButton from "@/widgets/header/ui/EnterButton/EnterButton.tsx";
 
 export function UserCard() {
   const status = useAuthStore((s) => s.status);
   const navigate = useNavigate()
   const { data: user = placeholderUser } = useMe(status === "authenticated");
 
-  // if (status !== "authenticated" && status !== "loading") {
-  //   return <EnterButton />;
-  // }
+  if (status !== "authenticated" && status !== "loading") {
+    return <EnterButton />;
+  }
 
   return (
     <div className={styles.profileContainer}>
