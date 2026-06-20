@@ -23,5 +23,14 @@
   color: var(--color-brand-green)
 }
 
+.myCompetenciesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
 
-
+.competencyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}

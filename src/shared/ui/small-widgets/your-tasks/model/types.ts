@@ -12,7 +12,7 @@ export interface Activity {
     number?: number; // Какая это ключевая точка, для отображения в виде "1 из 3" и т.п.
 
     // Для этапов
-    proggressSteps?: number; // Сколько всего шагов в этапе
-    proggressCurrentStep?: number; // На каком шаге сейчас находится пользователь
+    progressSteps?: number; // Сколько всего шагов в этапе
+    progressCurrentStep?: number; // На каком шаге сейчас находится пользователь
     unitType?: 'percent' | 'none' | 'points'; // В процентах, ничего или баллы
 }

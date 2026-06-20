@@ -5,9 +5,11 @@ import { ROUTES } from "@/shared";
 export const ProtectedRoute = () => {
   const authStatus = useAuthStore((state) => state.status);
 
-  if ( authStatus != 'loading' && authStatus != 'authenticated') {
+  if (authStatus != 'loading' && authStatus != 'authenticated') {
     return <Navigate to={ROUTES.LOGIN} replace />;
   }
 
+
   return <Outlet />;
+
 };

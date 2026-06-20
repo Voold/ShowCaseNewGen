@@ -25,7 +25,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const competencies = roles.map(role => role.meta.name);
   // Если есть описание — считаем карточку расширенной
 
-
   return (
     <div className={`${styles.cardBody}`} data-bg={tags[0]?.label}
       onClick={() => navigate(`/catalog/projects/${id}`)}

@@ -33,12 +33,25 @@ export default defineConfig({
             key: fs.readFileSync(keyPath),
             cert: fs.readFileSync(certPath),
           },
+          proxy: {
+            '/dev/api': {
+              target: 'https://project.tpu.ru',
+              changeOrigin: true,
+              secure: false,
+            }
+          }
         };
       }
     } catch (e) {
       console.warn("Ошибка при загрузке сертификатов HTTPS:", e);
     }
 
-    return { https: {} };
+    return { https: {}, proxy: {
+            '/dev/api': {
+              target: 'https://project.tpu.ru',
+              changeOrigin: true,
+              secure: false,
+            }
+          } };
   })(),
 });

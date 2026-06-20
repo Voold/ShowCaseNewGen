@@ -1,5 +1,5 @@
 import { formatDeadline, getDaysUntil } from '@/shared/lib/date';
-import { ClockIcon } from '../../icons/ClockIcon';
+import ClockIcon from '@/shared/ui/icons/clock.svg?react'
 import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
 import type { Activity } from './model/types';
 import styles from './YourTasksWidget.module.css'
@@ -37,8 +37,12 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
             const dayUntilDeadline = activity.deadline ? getDaysUntil(activity.deadline) : null
             const showCountdown = dayUntilDeadline !== null && dayUntilDeadline > 0 && dayUntilDeadline <= 7 && activity.type !== 'completedStage'
 
-            const completedStage = activity.type === 'currentStage' && activity.proggressCurrentStep === activity.proggressSteps
+            const completedStage = activity.type === 'currentStage' && activity.progressCurrentStep === activity.progressSteps
             console.log(completedStage)
+
+            const isStage = activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage';
+            const showFooterDeadlineInfo = isStage && Boolean(activity.deadline);
+            const showFooter = (showFooterDeadlineInfo || showCountdown) && activity.status !== 'completed';
 
             return (
               <li key={index} className={`${styles.taskItem} ${activity.type === 'currentStage' ? styles.currentStage : ''} ${activity.type === 'upcomingStage' ? styles.upcomingStage : ''} ${activity.type === 'completedStage' ? styles.completedStage : ''}`}>
@@ -74,10 +78,10 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
                       (activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage') && (
                         <div className={styles.progress}>
                           <div className={styles.progressBar}>
-                            <div className={styles.progressFill} style={{ width: `${(activity.proggressCurrentStep! / activity.proggressSteps!) * 100}%` }}></div>
+                            <div className={styles.progressFill} style={{ width: `${(activity.progressCurrentStep! / activity.progressSteps!) * 100}%` }}></div>
                           </div>
                           <span className={styles.progressText}>
-                            {activity.proggressCurrentStep}/{activity.proggressSteps} {activity.unitType === 'percent' ? '%' : ''}
+                            {activity.progressCurrentStep}/{activity.progressSteps} {activity.unitType === 'percent' ? '%' : ''}
                           </span>
                         </div>
                       )
@@ -98,10 +102,10 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
                   </div>
                 </div>
                 {
-                  !activity.deadline || activity.status !== 'completed' && (
+                  showFooter && (
                     <div className={styles.taskFooter}>
                       {
-                        (activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage') && activity.deadline && (
+                        showFooterDeadlineInfo && (
                           <div className={styles.deadlineContainer}>
                             {
                               activity.type === 'currentStage' && (
@@ -114,7 +118,7 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
                               )
                             }
                             <span className={`${showCountdown ? styles.urgentDeadline : ''}`}>
-                              {formatDeadline(activity.deadline)}
+                              {formatDeadline(activity.deadline!)}
                             </span>
                           </div>
                         )
