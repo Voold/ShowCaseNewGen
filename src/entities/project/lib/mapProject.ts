@@ -42,13 +42,15 @@ export const mapProjectDtoToEntity = (dto: ProjectDto): ProjectCardData => {
       })),
     })),
     
-    prdMeta: {
-      problem: dto.prdMeta?.problemStatement || '',
-      context: dto.prdMeta?.prerequisites || '',
-      audience: dto.prdMeta?.audience?.map(a => a.title).join(', ') || '',
-      requirements: dto.prdMeta?.functional || [],
-      mvp: [],
-    },
+    // prdMeta: {
+    //   problem: dto.prdMeta?.problemStatement || '',
+    //   context: dto.prdMeta?.prerequisites || '',
+    //   audience: dto.prdMeta?.audience?.map(a => a.title).join(', ') || '',
+    //   requirements: dto.prdMeta?.functional || [],
+    //   mvp: [],
+    // },
+
+    prdMeta: dto.prdMeta,
     
     extended: dto.tags?.some(t => t.tagId === 'ml' || t.tagId === 'fintech'), 
     brandColor: dto.id === '8201' ? '28be46' : undefined,

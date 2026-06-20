@@ -1,12 +1,29 @@
 import styles from './ProjectCard.module.css';
 import type { ProjectCardData } from '../../model/types';
 import { useNavigate } from 'react-router-dom';
-import { typeProjectsLabel } from '../../../../shared/ui/type-project-label/typeProjectsLabel';
+import { typeProjectsLabel } from '@/shared/ui/type-project-label/typeProjectsLabel.tsx';
 import { useState } from 'react';
 import { LikeButton } from '@/shared/ui';
 
 interface ProjectCardProps {
   project: ProjectCardData;
+}
+
+const getColorFromTag = (tag: string) => {
+  switch (tag) {
+    case 'Веб-разработка':
+      return styles.violet
+    case 'Инженерия':
+      return styles.blue
+    case 'E-commerce':
+      return styles.pink
+    case 'VR/AR':
+      return styles.pink
+    case 'Мобайл-разработка':
+      return styles.green
+    default:
+      return styles.blue
+  }
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
@@ -36,7 +53,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className={`${styles.like} ${isLiked ? styles.liked : ''}`}
       />
 
-      <div className={`${styles.header} ${styles[tags[0]?.key]}`} data-bg={tags[0]?.label}>
+      <div className={`${styles.header} ${getColorFromTag(tags[0].label)}`} data-bg={tags[0]?.label}>
         <div className={styles.directionTag}>{visibleDirections[0]?.label}</div>
         {remainCount > 0 && (
           <div className={styles.tags}>

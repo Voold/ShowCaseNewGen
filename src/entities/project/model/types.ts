@@ -11,11 +11,29 @@ export interface ProjectDirectionItem {
 }
 
 export interface PrdMeta {
-  problem: string;
-  context: string;
-  audience: string;
-  requirements: string[];
-  mvp: string[];
+  prerequisites?: string,
+  productVision?: string,
+  audience?: {
+    title: string,
+    description: string,
+    minAge: number,
+    maxAge: number,
+  }[],
+  goalsProjects?: string,
+  goalsBusiness?: string,
+  requirements?: {
+    keyFunctionality?: string[],
+    functional?: string[],
+    nonFunctional?: string[]
+  },
+  problemStatement?: string,
+  businessMetrics?: string[],
+  projectPlan?: string[],
+  projectGoal?: string,
+  businessGoal?: string,
+  functional?: string[],
+  nonFunctional?: string[],
+  keyFunctionality?: string[]
 }
 
 export interface ProjectCardData {
@@ -95,11 +113,29 @@ export interface BackendPrdAudience {
 }
 
 export interface BackendPrdMeta {
-  prerequisites: string;
-  audience: BackendPrdAudience[];
-  projectGoal: string;
-  functional: string[];
-  problemStatement: string;
+  prerequisites?: string,
+  productVision?: string,
+  audience?: {
+    title: string,
+    description: string,
+    minAge: number,
+    maxAge: number,
+  }[],
+  goalsProjects?: string,
+  goalsBusiness?: string,
+  requirements?: {
+    keyFunctionality?: string[],
+    functional?: string[],
+    nonFunctional?: string[]
+  },
+  problemStatement?: string,
+  businessMetrics?: string[],
+  projectPlan?: string[],
+  projectGoal?: string,
+  businessGoal?: string,
+  functional?: string[],
+  nonFunctional?: string[],
+  keyFunctionality?: string[]
 }
 
 export interface ProjectDto {

@@ -23,7 +23,7 @@
   display: inline-block;
   border-radius: 20px;
   font: var(--description-platform);
-  padding: 7px 12px 8px 12px;
+  padding: 7px 12px 6px 12px;
   background-color: #fff;
   color: var(--color-gray-900);
   white-space: nowrap;

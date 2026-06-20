@@ -1,6 +1,7 @@
 import styles from './FreeCompetencies.module.css'
-import { CheckIcon, FeedBackIcon, PlusIcon, StarDetailIcon } from "@/shared/ui";
-import { useState } from "react";
+import {CheckIcon, FeedBackIcon, PlusIcon, StarDetailIcon} from "@/shared/ui";
+import Plus from '@/shared/ui/icons/plus.svg?react'
+import {useState} from "react";
 
 interface FreeCompetenciesProps {
   roles: {
@@ -9,11 +10,11 @@ interface FreeCompetenciesProps {
     minPlacesCount: number,
     places: number,
     skills:
-    {
-      skillId: string,
-      skillName: string,
-      requireSkill?: boolean
-    }[],
+        {
+          skillId: string,
+          skillName: string,
+          requireSkill?: boolean
+        }[],
     meta: {
       name: string,
       description: string
@@ -21,7 +22,7 @@ interface FreeCompetenciesProps {
   }[]
 }
 
-export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
+export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
 
   const [selectedCometencies, setSelectedCometencies] = useState<string[]>([])
 
@@ -54,87 +55,93 @@ export const FreeCompetencies = ({ roles }: FreeCompetenciesProps) => {
 
 
   return (
-    <div className={styles.freeCompetencies}>
+      <div className={styles.freeCompetencies}>
 
-      <div className={styles.header}>
-        <h3 className={styles.title}>
-          Выберите компетенции для отклика:
-        </h3>
-      </div>
+        <div className={styles.header}>
+          <h3 className={styles.title}>
+            Выберите компетенции для отклика:
+          </h3>
+        </div>
 
-      <div className={styles.competenciesList}>
-        {
-          roles.map((role) => {
+        <div className={styles.competenciesList}>
+          {
+            roles.map((role) => {
 
-            const isSelected = selectedCometencies.includes(role.roleId);
-            const isDimmed = isMaxSelected && !isSelected;
+              const isSelected = selectedCometencies.includes(role.roleId);
+              const isDimmed = isMaxSelected && !isSelected;
 
-            return (
-              <div
-                key={role.roleId}
-                className={`${styles.competency} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''}`}
-                onClick={() => toggleCometencySelect(role.roleId)}
-              >
-                <div className={styles.leftHalfRole}>
-                  <p className={styles.role}>
-                    {role.meta.name}
-                  </p>
-                  <ul className={styles.skillsList}>
-                    {
-                      role.skills.map((skill) => (
-                        <li className={`${styles.skill} ${skill.requireSkill ? styles.required : ''}`}
-                          key={skill.skillName}>
-                          {skill.skillName}
-                          {skill.requireSkill && (
-                            <>
-                              <StarDetailIcon className={styles.starIcon} color={`${isSelected ? 'var(--color-brand-green)' :  'white' }`}/>
-                              <span className={styles.tooltip}>
+              return (
+                  <div
+                      key={role.roleId}
+                      className={`${styles.competency} ${isSelected ? styles.selected : ''} ${isDimmed ? styles.dimmed : ''}`}
+                      onClick={() => toggleCometencySelect(role.roleId)}
+                  >
+                    <div className={styles.leftHalfRole}>
+                      <p className={styles.role}>
+                        {role.meta.name}
+                      </p>
+                      <ul className={styles.skillsList}>
+                        {
+                          role.skills.map((skill) => (
+                              <li className={`${styles.skill} ${skill.requireSkill ? styles.required : ''}`}
+                                  key={skill.skillName}>
+                                {skill.skillName}
+                                {skill.requireSkill && (
+                                    <>
+                                      <StarDetailIcon className={styles.starIcon}
+                                                      color={`${isSelected ? 'var(--color-brand-green)' : 'white'}`}/>
+                                      <span className={styles.tooltip}>
                                 менеджер проекта считает этот навык приоритетным
                               </span>
-                            </>
-                          )}
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </div>
-                <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>
-                    {isSelected ?
-                      <CheckIcon className={styles.checkIcon} size={9} color={'var(--color-brand-green)'}/> :
-                      <PlusIcon className={styles.plusIcon} size={7} fill={'white'}/> 
-                    }
-                    
-                </div>
-                <div className={styles.response}>
-                  <p className={styles.countRes}>
-                    {8}
-                  </p>
-                  <FeedBackIcon size={11} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `} />
-                  <span className={styles.tooltip}>
-                    столько откликов на эту компетенцию
-                  </span>
-                </div>
+                                    </>
+                                )}
+                              </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
 
-              </div>
-            )
+                    <div className={styles.aside}>
 
-          })
-        }
+                      <div className={styles.response}>
+                        <p className={styles.countRes}>
+                          {67}
+                        </p>
+                        <FeedBackIcon size={11} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `}/>
+                        <span className={styles.tooltip}>
+                          столько откликов на эту компетенцию
+                        </span>
+                      </div>
+
+                      <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>
+                        {isSelected ?
+                            <CheckIcon className={styles.checkIcon} size={9} color={'var(--color-brand-green)'}/> :
+                            <Plus className={styles.plusIcon}/>
+                        }
+                      </div>
+
+                    </div>
+
+                  </div>
+              )
+
+            })
+          }
+        </div>
+
+        <div className={styles.footer}>
+          <button
+              className={`${styles.button} ${isActiveFeedBack ? styles.activeButton : ''}`}
+              onClick={toggleFeedBack}
+              disabled={selectedCometencies.length === 0}
+          >
+            {isActiveFeedBack ? 'Отменить отклик' : 'Откликнуться'}
+          </button>
+
+          <p className={styles.countFree}>
+            {selectedCometencies.length}/{MAX_SELECTIONS}
+          </p>
+        </div>
       </div>
-
-      <div className={styles.footer}>
-        <button
-          className={`${styles.button} ${isActiveFeedBack ? styles.activeButton : ''}`}
-          onClick={toggleFeedBack}
-          disabled={selectedCometencies.length === 0}
-        >
-          {isActiveFeedBack ? 'Отменить отклик' : 'Откликнуться'}
-        </button>
-
-        <p className={styles.countFree}>
-          {selectedCometencies.length}/{MAX_SELECTIONS}
-        </p>
-      </div>
-    </div>
-        )
+  )
 }

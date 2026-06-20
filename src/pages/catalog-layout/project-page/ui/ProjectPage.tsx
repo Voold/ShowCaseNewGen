@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BackIcon, IdIcon, ShareIcon, TargetIcon } from '@/shared/ui';
+import { BackIcon, IdIcon, ShareIcon } from '@/shared/ui';
 import styles from './ProjectPage.module.css';
 import { ProfileWidget } from '@/shared/ui/small-widgets/profile-widget/ProfileWidget';
 import { LinkBlock } from '@/shared/ui/small-widgets/link-block/LinkBlock';
@@ -10,6 +10,8 @@ import { ProjectTeam } from "@/shared/ui/small-widgets/project-team/ProjectTeam.
 import { ProjectInfo } from '@/shared/ui/project-info/ProjectInfo';
 import { ProjectPrd } from '@/shared/ui/project-prd/ProjectPrd';
 import { useProjectDetails } from '@/entities/project/api/queries';
+import TargetIcon from '@/shared/ui/icons/target.svg?react'
+
 
 export function ProjectPage() {
   const navigate = useNavigate();
@@ -52,21 +54,23 @@ export function ProjectPage() {
     { title: 'Постерная сессия', deadline: '29-05-2026', status: false }
   ];
 
-  const PRDdata = {
-    prerequisites: project.prdMeta.context || 'Нет информации',
-    productVision: 'Видение продукта (заглушка)', 
-    audience: project.prdMeta.audience ? [{ title: project.prdMeta.audience, description: '', minAge: 0, maxAge: 99 }] : [],
-    goalsProjects: 'Цели (заглушка)',
-    goalsBusiness: 'Бизнес цели (заглушка)',
-    requirements: {
-      keyFunctionality: project.prdMeta.requirements,
-      functional: project.prdMeta.requirements,
-      nonFunctional: []
-    },
-    problemStatement: project.prdMeta.problem || 'Нет проблемы',
-    businessMetrics: [],
-    projectPlan: []
-  };
+  console.log(project)
+
+  // const PRDdata = {
+  //   prerequisites: project.prdMeta.context || 'Нет информации',
+  //   productVision: '',
+  //   audience: project.prdMeta.audience ? [{ title: project.prdMeta.audience, description: '', minAge: 0, maxAge: 99 }] : [],
+  //   goalsProjects: '',
+  //   goalsBusiness: '',
+  //   requirements: {
+  //     keyFunctionality: project.prdMeta.requirements,
+  //     functional: project.prdMeta.requirements,
+  //     nonFunctional: []
+  //   },
+  //   problemStatement: project.prdMeta.problem || 'Нет проблемы',
+  //   businessMetrics: [],
+  //   projectPlan: []
+  // };
 
   return (
     <main className={styles.main}>
@@ -103,7 +107,7 @@ export function ProjectPage() {
 
       <section className={styles.projectsInfo} ref={projectsInfoRef} onScroll={handleScroll}>
         <ProjectInfo data={project} />
-        <ProjectPrd {...PRDdata} />
+        <ProjectPrd PRD={project.prdMeta} />
       </section>
 
       <aside className={styles.idBlock}>
@@ -121,7 +125,7 @@ export function ProjectPage() {
         <div className={styles.projectStatus}>
           <span className={styles.statusLabel}>Статус:</span>
           <span className={`${styles.status} ${project.status === 'Active' ? '' : styles.inactive}`}>
-            <TargetIcon size={12} color={project.status === 'Active' ? 'var(--color-brand-green)' : 'var(--color-brand-red)'} />
+            <TargetIcon className={project.status === 'Active' ? styles.green : styles.red} />
             {project.status === 'Active' ? 'Набор на проект' : 'Набор закрыт'}
           </span>
         </div>

@@ -65,35 +65,27 @@
   top: -40px;
 }
 
-.web {
+.violet {
   background: var(--grad-fiolet);
 }
 
-.mobile {
+.green {
   background: var(--grad-green);
 }
 
-.engineering {
+.blue {
   background: var(--grad-blue);
 }
 
-.ml {
-  background: var(--grad-fiolet);
-}
-
-.fintech {
-  background: var(--grad-fiolet);
-}
-
-.design {
-  background: var(--grad-fiolet);
+.pink {
+  background: var(--grad-orange);
 }
 
 .directionTag {
   display: inline-block;
   border-radius: 20px;
   font: var(--description-platform);
-  padding: 7px 12px 8px 12px;
+  padding: 7px 12px 6px 12px;
   background-color: #fff;
   color: var(--color-gray-900);
   white-space: nowrap;
@@ -181,7 +173,7 @@
   border-radius: 6px;
   font: var(--body-small-platform);
 
-  background: var(--grad-line);
+  background: var(--grad-lime);
   color: white
 }
 

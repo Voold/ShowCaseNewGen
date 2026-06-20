@@ -1,209 +1,229 @@
 import { CheckIcon } from '../icons/CheckIcon';
 import styles from './ProjectPrd.module.css'
+import type {PrdMeta} from "@/entities/project";
+//
+// type ProjectPrdProps = {
+//   prerequisites: string,
+//   productVision: string,
+//   audience: {
+//     title: string,
+//     description: string,
+//     minAge: number,
+//     maxAge: number,
+//   }[],
+//   goalsProjects: string,
+//   goalsBusiness: string,
+//   requirements: {
+//     keyFunctionality: string[],
+//     functional: string[],
+//     nonFunctional: string[]
+//   },
+//   problemStatement: string,
+//   businessMetrics: string[],
+//   projectPlan: string[]
+// };
 
 type ProjectPrdProps = {
-  prerequisites: string,
-  productVision: string,
-  audience: {
-    title: string,
-    description: string,
-    minAge: number,
-    maxAge: number,
-  }[],
-  goalsProjects: string,
-  goalsBusiness: string,
-  requirements: {
-    keyFunctionality: string[], 
-    functional: string[],
-    nonFunctional: string[]
-  },
-  problemStatement: string,
-  businessMetrics: string[],
-  projectPlan: string[]
-};
+  PRD: PrdMeta;
+}
 
-export const ProjectPrd = ( PRD : ProjectPrdProps ) => {
-
+export const ProjectPrd = ({ PRD }: ProjectPrdProps) => {
+  const prerequisites = PRD?.prerequisites;
+  const productVision = PRD?.productVision;
+  const audience = PRD?.audience;
   
+  // Поддержка полей из DTO бэкенда (projectGoal -> goalsProjects, businessGoal -> goalsBusiness)
+  const goalsProjects = PRD?.goalsProjects || PRD?.projectGoal;
+  const goalsBusiness = PRD?.goalsBusiness || PRD?.businessGoal;
+  
+  // Поддержка плоской структуры функционала/требований
+  const keyFunctionality = PRD?.requirements?.keyFunctionality || PRD?.keyFunctionality;
+  const functional = PRD?.requirements?.functional || PRD?.functional;
+  const nonFunctional = PRD?.requirements?.nonFunctional || PRD?.nonFunctional;
+  const hasRequirements = !!(keyFunctionality || functional || nonFunctional);
+
+  const problemStatement = PRD?.problemStatement;
+  const businessMetrics = PRD?.businessMetrics;
+  const projectPlan = PRD?.projectPlan;
+
   return (
     <section className={styles.container}>
 
-      <article className={styles.smallBlock}>
+      {prerequisites && <article className={styles.smallBlock}>
         <h3 className={styles.title}>
           Предпосылки
         </h3>
-        <p className={styles.bodyText}>{PRD.prerequisites}</p>
-      </article>
+        <p className={styles.bodyText}>{prerequisites}</p>
+      </article>}
 
-      <article className={styles.smallBlock}>
+      {productVision && <article className={styles.smallBlock}>
         <h3 className={styles.title}>
           Product vision
         </h3>
-        <p className={styles.bodyText}>{PRD.productVision}</p>
-      </article>
+        <p className={styles.bodyText}>{productVision}</p>
+      </article>}
 
-      <article className={styles.block}>
+      {audience && audience.length > 0 && <article className={styles.block}>
         <h3 className={styles.title}>
           Целевая аудитория
         </h3>
         <div className={styles.audienceGrid}>
-          {PRD.audience.map((audience, index) => (
-            <div key={index} className={styles.audienceItem}>
-              <header className={styles.audienceTitle}>
+          {audience.map((item, index) => (
+              <div key={index} className={styles.audienceItem}>
+                <header className={styles.audienceTitle}>
                 <span className={styles.segment}>
                   Сегмент {index + 1}
                 </span>
-                <p className={styles.description}>
-                  {audience.minAge}–{audience.maxAge} лет
-                </p>
-              </header>
-              <div className={styles.audienceBody}>
-                <p className={styles.bodyText}>
-                  {audience.title}
-                </p>
-                <p className={styles.description}>
-                  {audience.description}
-                </p>
+                  <p className={styles.description}>
+                    {item.minAge}–{item.maxAge} лет
+                  </p>
+                </header>
+                <div className={styles.audienceBody}>
+                  <p className={styles.bodyText}>
+                    {item.title}
+                  </p>
+                  <p className={styles.description}>
+                    {item.description}
+                  </p>
+                </div>
               </div>
-            </div>
           ))}
         </div>
-      </article>
+      </article>}
 
-      <article className={styles.block}>
+      {(goalsProjects || goalsBusiness) && <article className={styles.block}>
         <h3 className={styles.title}>
           Цели
         </h3>
-          
-        <div className={styles.miniBlock}>
+
+        {goalsProjects && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Цель проекта:
           </h4>
           <p className={styles.bodyText}>
-            {PRD.goalsProjects}
+            {goalsProjects}
           </p>
-        </div>
+        </div>}
 
-        <div className={styles.miniBlock}>
+        {goalsBusiness && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Цель бизнеса:
           </h4>
           <p className={styles.bodyText}>
-            {PRD.goalsBusiness}
+            {goalsBusiness}
           </p>
-        </div>
-        
-      </article>
+        </div>}
 
-      <article className={styles.block}>
+      </article>}
+
+      {hasRequirements && <article className={styles.block}>
         <h3 className={styles.title}>
           Требования
         </h3>
 
         <div className={styles.reqList}>
 
-          <div className={styles.funcBody}>
+          {keyFunctionality && keyFunctionality.length > 0 && <div className={styles.funcBody}>
             <h4 className={`${styles.funcTitleFill} ${styles.segment}`}>
               Ключевой функционал
             </h4>
 
             <div className={styles.funcList}>
               {
-                PRD.requirements.keyFunctionality.map((req, index) => (
-                  <div className={styles.fun}>
-                    <p className={styles.index}>{index + 1}.</p>
-                    <p className={styles.bodyText}> {req}</p>
-                  </div>
+                keyFunctionality.map((req, index) => (
+                    <div key={index} className={styles.fun}>
+                      <p className={styles.index}>{index + 1}.</p>
+                      <p className={styles.bodyText}> {req}</p>
+                    </div>
                 ))
               }
             </div>
-          </div>
+          </div>}
 
-          <div className={styles.funcBody}>
+          {functional && functional.length > 0 && <div className={styles.funcBody}>
             <h4 className={`${styles.segment}`}>
               Функциональные требования
             </h4>
 
             <div className={styles.funcList}>
               {
-                PRD.requirements.functional.map((req) => (
-                  <div className={styles.fun}>
-                    <p className={styles.index}><CheckIcon className={styles.path}/></p>
-                    <p className={styles.bodyText}> {req}</p>
-                  </div>
+                functional.map((req, index) => (
+                    <div key={index} className={styles.fun}>
+                      <p className={styles.index}><CheckIcon className={styles.path}/></p>
+                      <p className={styles.bodyText}> {req}</p>
+                    </div>
                 ))
               }
             </div>
-          </div>
+          </div>}
 
-          <div className={styles.funcBody}>
+          {nonFunctional && nonFunctional.length > 0 && <div className={styles.funcBody}>
             <h4 className={`${styles.segment}`}>
               Нефункциональные требования
             </h4>
 
             <div className={styles.funcList}>
               {
-                PRD.requirements.nonFunctional.map((req) => (
-                  <div className={styles.fun}>
-                    <p className={styles.index}>—</p>
-                    <p className={styles.bodyText}> {req}</p>
-                  </div>
+                nonFunctional.map((req, index) => (
+                    <div key={index} className={styles.fun}>
+                      <p className={styles.index}>—</p>
+                      <p className={styles.bodyText}> {req}</p>
+                    </div>
                 ))
               }
             </div>
-          </div>
+          </div>}
 
         </div>
-      </article>
+      </article>}
 
-      <article className={styles.block}>
+      {(problemStatement || businessMetrics) && <article className={styles.block}>
         <h3 className={styles.title}>
           Реализация
         </h3>
-          
-        <div className={styles.miniBlock}>
+
+        {problemStatement && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Постановка задачи:
           </h4>
           <p className={styles.bodyText}>
-            {PRD.problemStatement}
+            {problemStatement}
           </p>
-        </div>
+        </div>}
 
-        <div className={styles.miniBlock}>
+        {businessMetrics && businessMetrics.length > 0 && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Бизнес метрики:
           </h4>
           <div className={styles.funcList}>
-              {
-                PRD.businessMetrics.map((metric) => (
-                  <div className={styles.metric}>
+            {
+              businessMetrics.map((metric, index) => (
+                  <div key={index} className={styles.metric}>
                     <p className={styles.index}>—</p>
                     <p className={styles.bodyText}> {metric}</p>
                   </div>
-                ))
-              }
-            </div>
-        </div>
-        
-      </article>
+              ))
+            }
+          </div>
+        </div>}
 
-      <article className={styles.smallBlock}>
+      </article>}
+
+      {projectPlan && projectPlan.length > 0 && <article className={styles.smallBlock}>
         <h3 className={styles.title}>
           План проекта
         </h3>
         <div className={styles.funcList}>
-              {
-                PRD.projectPlan.map((paragraph, index) => (
-                  <div className={styles.fun}>
-                    <p className={styles.index}>{index + 1}.</p>
-                    <p className={styles.bodyText}> {paragraph}</p>
-                  </div>
-                ))
-              }
-            </div>
-      </article>
-      
+          {
+            projectPlan.map((paragraph, index) => (
+                <div key={index} className={styles.fun}>
+                  <p className={styles.index}>{index + 1}.</p>
+                  <p className={styles.bodyText}> {paragraph}</p>
+                </div>
+            ))
+          }
+        </div>
+      </article>}
 
     </section>
   );

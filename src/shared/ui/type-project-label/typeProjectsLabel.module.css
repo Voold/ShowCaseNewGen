@@ -8,6 +8,7 @@
   border: 1px solid var(--color-gray-350);
   border-radius: 6px;
   color: var(--color-gray-750);
+  background-color: white;
 }
 
 
@@ -21,7 +22,12 @@
 
 .real {
   background: var(--color-brand-black);
+  border-color: var(--color-brand-black);
   color: white
+}
+
+.study {
+  border-color: var(--color-brand-green);
 }
 
 .pathCode {
@@ -36,7 +42,7 @@
   background-origin: border-box;
   background-clip: padding-box, border-box;
 
-  background: var(--grad-line);
+  background: var(--grad-lime);
   color: white
 }
 

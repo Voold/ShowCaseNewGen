@@ -38,6 +38,7 @@
   position: relative;
   padding: 12px 12px;
   background-color: white;
+
   border-radius: 12px;
   justify-content: space-between;
   gap: 8px;
@@ -45,6 +46,9 @@
   cursor: pointer;
 
   border: 1px solid white;
+
+  height: fit-content;
+  min-height: 58px;
 }
 
 .leftHalfRole {
@@ -63,7 +67,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-right: 36px;
 }
 
 .skill {
@@ -84,11 +87,12 @@
 
 .response {
   display: flex;
-  position: absolute;
+  /*position: absolute;*/
   top: 12px;
   right: 12px;
   align-items: flex-end;
-  gap: 2px
+  gap: 2px;
+  flex-shrink: 0;
 }
 
 .countRes {
@@ -226,10 +230,10 @@
 }
 
 .plusButton {
-  position: absolute;
+  /*position: absolute;*/
   bottom: 8px;
   right: 8px;
-  width: 20px;
+  width: 20px ;
   height: 20px;
   border-radius: 10px;
   background-color: var(--color-brand-black);
@@ -238,11 +242,24 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
-.plusIcon, .checkIcon  {
-  padding-top: 1px;
-  padding-right: 1px
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/*.plusIcon, .checkIcon  {*/
+/*  padding-top: 1px;*/
+/*  padding-right: 1px*/
+/*}*/
+.plusIcon {
+  color: white;
 }
 
 .countFree {

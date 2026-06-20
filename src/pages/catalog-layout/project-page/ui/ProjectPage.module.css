@@ -215,6 +215,14 @@
   color: var(--color-red);
 }
 
+.green {
+  color: var(--color-brand-green);
+}
+
+.red {
+  color: var(--color-red);
+}
+
 @media (max-width: 1600px) {
   .main {
     padding: 0 40px;
