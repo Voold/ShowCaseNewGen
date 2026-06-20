@@ -1,5 +1,5 @@
 export type ProjectDirection = 'web' | 'mobile' | 'engineering' | 'ml' | 'fintech' | 'design';
-export type ProjectFormat = 'Case' | 'Real' | 'Study';
+export type ProjectFormat = 'Case' | 'Real' | 'Study' | 'Paid';
 export type CreateProjectRequestType = 
   | 'Case' 
   | 'Real' 
