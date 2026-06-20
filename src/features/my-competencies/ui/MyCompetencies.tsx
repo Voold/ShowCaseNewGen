@@ -20,7 +20,7 @@ type MyCompetenciesProps = {
 
 };
 
-export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill, addSkill, removeCompetency, popoverOpenFor, setPopoverOpenFor, startEditing }: MyCompetenciesProps) {
+export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill, addSkill, removeCompetency, popoverOpenFor, setPopoverOpenFor, startEditing, getSkillsForCompetence }: MyCompetenciesProps) {
 
   return (
     <section className={styles.body}>
@@ -31,13 +31,13 @@ export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill
         <div className={styles.competenciesContainer}>
           {
             data.skills.map((competency) => (
-              <div className={styles.competency}>
+              <div className={`${styles.competency} ${editingId === data.roleTypeId ? styles.editing : ''}`}>
                 {competency.skillName}
                 {editingId === data.roleTypeId &&
                   <button
                     onClick={() => removeSkill(data.roleTypeId, competency.skillId)}
                   >
-                    <Cross />
+                    <Cross className={styles.crossIcon} />
                   </button>
                 }
               </div>
@@ -45,7 +45,10 @@ export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill
           }
           {
             editingId === data.roleTypeId &&
-            <button className={styles.plusButton} onClick={() => setPopoverOpenFor(data.roleTypeId)}>
+            <button className={styles.plusButton} onClick={() => {
+              getSkillsForCompetence(data.roleTypeId);
+              setPopoverOpenFor(data.roleTypeId);
+            }}>
               <Plus
                 className={styles.plus}
 

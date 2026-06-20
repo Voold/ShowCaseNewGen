@@ -2,22 +2,16 @@ import styles from './MyCompetenciesList.module.css'
 import { MyCompetencies } from "@/features/my-competencies/ui/MyCompetencies.tsx";
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import { FooterBlockFields } from "@/shared";
-// import type {Competence} from "@/features/my-competencies/model/types.ts";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
 
-// type MyCompetenciesListProps = {
-//   myCompetencies: Competence[]
-// }
-
-// export function MyCompetenciesList({}: MyCompetenciesListProps) {
 export function MyCompetenciesList() {
 
   const {
-    originalData,
     draftData,
     editingId,
     popoverOpenFor,
     currentFullSkills,
+    hasChanges,
     startEditing,
     cancelEditing,
     saveChanges,
@@ -61,9 +55,12 @@ export function MyCompetenciesList() {
                 getSkillsForCompetence={getSkillsForCompetence}
                 currentFullSkills={currentFullSkills}
               />
-              {
-                editingId === competency.roleTypeId && <FooterBlockFields handleCancel={cancelEditing} handleSubmit={() => { }} />
-              }
+              {editingId === competency.roleTypeId &&
+                <FooterBlockFields
+                  handleCancel={cancelEditing}
+                  handleSubmit={handleSave}
+                  disabled={!hasChanges}
+                />}
 
             </div>
           ))

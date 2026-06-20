@@ -63,3 +63,13 @@
   width: 12px;
   height: 12px;
 }
+
+.editing {
+  color: white;
+  background-color: var(--color-brand-violet);
+  border-color: var(--color-brand-violet);
+}
+
+.crossIcon {
+  color: var(--color-gray-200);
+}

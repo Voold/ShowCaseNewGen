@@ -1,6 +1,6 @@
 export type ProjectDirection = 'web' | 'mobile' | 'engineering' | 'ml' | 'fintech' | 'design';
 
-export type ProjectFormat = 'CaseProjectRequest' | 'RealProjectRequest' | 'PaidProjectRequest';
+export type ProjectFormat = 'CaseProjectRequest' | 'RealProjectRequest' | 'PaidProjectRequest' | 'StudyProjectRequest';
 
 export interface ProjectDirectionItem {
   key: ProjectDirection;
