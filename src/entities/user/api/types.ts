@@ -7,8 +7,16 @@ export interface AuthStatusResponse {
   userID: number;
 }
 
+export interface RoleTypeDto {
+  id: string;
+  name: string;
+}
+
 export interface UpdateProfileMetaRequest {
   bio?: string;
   experience?: string;
-  skillIds?: string[];
+  skills?: {
+    roleTypeId: string;
+    skillIds: string[];
+  }[];
 }

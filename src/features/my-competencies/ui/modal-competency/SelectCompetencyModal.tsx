@@ -1,7 +1,7 @@
 import { Modal } from '@/shared/ui/modal/Modal.tsx';
 import { useState } from "react";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
-import { ALL_COMPETENCIES } from "@/features/my-competencies/model/store/mock.ts";
+import { useRoleTypes } from "@/entities/user/api/queries.ts";
 import { Radio } from "@/shared/ui/radio/Radio.tsx";
 import { ModalFooter } from "@/shared/ui/modal-footer/ModalFooter.tsx";
 
@@ -14,13 +14,21 @@ export const SelectCompetencyModal = ({ isOpen, onClose }: SelectCompetencyModal
   const { addCompetency, draftData } = useSkillsStore();
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
-  const availableCompetencies = ALL_COMPETENCIES.filter(
-    competency => !draftData.some(existing => existing.roleTypeId === competency.roleTypeId)
+  const { data: roleTypes = [], isLoading } = useRoleTypes();
+
+  const availableCompetencies = roleTypes.filter(
+    competency => !draftData.some(existing => existing.roleTypeId === competency.id)
   );
 
   const handleSubmit = () => {
-    addCompetency(selectedValue!)
-    onClose();
+    if (!selectedValue) return;
+
+    const selectedRole = availableCompetencies.find(c => c.id === selectedValue);
+
+    if (selectedRole) {
+      addCompetency(selectedRole.id, selectedRole.name);
+      onClose();
+    }
   };
 
   return (
@@ -31,18 +39,21 @@ export const SelectCompetencyModal = ({ isOpen, onClose }: SelectCompetencyModal
       />
 
       <Modal.Body>
-        {availableCompetencies.length > 0 ? (
+        {isLoading ? (
+          <p style={{ color: 'var(--color-gray-500)', textAlign: 'center', padding: '20px 0' }}>
+            Загрузка компетенций...
+          </p>
+        ) : availableCompetencies.length > 0 ? (
           availableCompetencies.map(competencyRadio => (
             <Radio
-              key={competencyRadio.roleTypeId}
+              key={competencyRadio.id}
               name="competence"
-              label={competencyRadio.roleTypeName}
-              onChange={() => setSelectedValue(competencyRadio.roleTypeId)}
-              checked={selectedValue === competencyRadio.roleTypeId}
+              label={competencyRadio.name}
+              onChange={() => setSelectedValue(competencyRadio.id)}
+              checked={selectedValue === competencyRadio.id}
             />
           ))
         ) : (
-          // TODO
           <p style={{ color: 'var(--color-gray-500)', textAlign: 'center', padding: '20px 0' }}>
             Все доступные компетенции уже добавлены
           </p>

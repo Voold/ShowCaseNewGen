@@ -3,8 +3,8 @@ import Pencil from '@/shared/ui/icons/pencil.svg?react'
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import Trash from '@/shared/ui/icons/trash.svg?react'
 import Cross from '@/shared/ui/icons/cross.svg?react'
-import type {Competence, Skill} from "@/features/my-competencies/model/types.ts";
-import {MyCompetenciesModal} from "@/features/my-competencies/ui/MyCompetenciesModal.tsx";
+import type { Competence, Skill } from "@/features/my-competencies/model/types.ts";
+import { MyCompetenciesModal } from "@/features/my-competencies/ui/MyCompetenciesModal.tsx";
 
 type MyCompetenciesProps = {
   data: Competence,
@@ -21,17 +21,17 @@ type MyCompetenciesProps = {
 };
 
 export function MyCompetencies({
-                                 data,
-                                 editingId,
-                                 currentFullSkills,
-                                 removeSkill,
-                                 addSkill,
-                                 removeCompetency,
-                                 popoverOpenFor,
-                                 setPopoverOpenFor,
-                                 startEditing,
-                                 getSkillsForCompetence
-                               }: MyCompetenciesProps) {
+  data,
+  editingId,
+  currentFullSkills,
+  removeSkill,
+  addSkill,
+  removeCompetency,
+  popoverOpenFor,
+  setPopoverOpenFor,
+  startEditing,
+  getSkillsForCompetence
+}: MyCompetenciesProps) {
 
   return (
     <section className={styles.body}>
@@ -42,7 +42,7 @@ export function MyCompetencies({
         <div className={styles.competenciesContainer}>
           {
             data.skills.map((competency) => (
-              <div className={`${styles.competency} ${editingId === data.roleTypeId ? styles.editing : ''}`}>
+              <div key={competency.skillId} className={`${styles.competency} ${editingId === data.roleTypeId ? styles.editing : ''}`}>
                 {competency.skillName}
                 {editingId === data.roleTypeId &&
                   <button
@@ -63,10 +63,7 @@ export function MyCompetencies({
                     }}
             >
               <div className={styles.plusButton}>
-                <Plus
-                  className={styles.plus}
-
-                />
+                <Plus className={styles.plus}/>
               </div>
               {
                 data.skills.length === 0 &&
@@ -107,4 +104,4 @@ export function MyCompetencies({
       )}
     </section>
   );
-};
+}

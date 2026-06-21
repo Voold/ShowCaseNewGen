@@ -3,6 +3,12 @@ export type SkillDto = {
   skillName: string
 }
 
+export type CompetenceDto = {
+  roleTypeId: string
+  roleTypeName: string
+  skills: SkillDto[]
+}
+
 export type User = UserBase & {
   profilePicture: string
   group?: string
@@ -11,7 +17,7 @@ export type User = UserBase & {
     firstName: string
     lastName: string
     bio: string
-    skills: SkillDto[]
+    skills: CompetenceDto[]
     experience: string
   }
   capabilities: string[]
@@ -44,7 +50,7 @@ export type UserDto = {
     firstName: string
     lastName: string
     bio: string
-    skills: SkillDto[]
+    skills: CompetenceDto[]
     experience: string
   }
   group?: string

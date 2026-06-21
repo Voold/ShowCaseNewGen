@@ -1,4 +1,4 @@
-import type { AuthStatusResponse, OAuthExchangeParams, UpdateProfileMetaRequest } from './types'
+import type { AuthStatusResponse, OAuthExchangeParams, UpdateProfileMetaRequest, RoleTypeDto } from './types'
 import type { User, UserDto, SkillDto } from '../model/types'
 import { mapUserDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
@@ -32,5 +32,10 @@ export async function updateProfileMeta(payload: UpdateProfileMetaRequest): Prom
 
 export async function getSkills(): Promise<SkillDto[]> {
   const { data } = await api.get<SkillDto[]>('/skills')
+  return data
+}
+
+export async function getRoleTypes(): Promise<RoleTypeDto[]> {
+  const { data } = await api.get<RoleTypeDto[]>('/role-types')
   return data
 }

@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient, type UseQueryResult } from '@tanstack/react-query'
 import type { User, SkillDto } from '../model/types'
-import type { AuthStatusResponse, UpdateProfileMetaRequest } from './types'
+import type { AuthStatusResponse, UpdateProfileMetaRequest, RoleTypeDto } from './types'
 import type { AxiosError } from 'axios'
 import { queryKeys } from './queryKeys'
-import { getAuthStatus, getMe, getUserById, updateProfileMeta, getSkills } from './requests'
+import { getAuthStatus, getMe, getUserById, updateProfileMeta, getSkills, getRoleTypes } from './requests'
 import { placeholderUser } from '../config/constants'
 
 export const useAuthStatus = (enabled = true): UseQueryResult<AuthStatusResponse, AxiosError> => {
@@ -52,6 +52,15 @@ export const useSkills = (): UseQueryResult<SkillDto[], AxiosError> => {
   return useQuery({
     queryKey: ['skills'],
     queryFn: getSkills,
+    retry: false,
+    staleTime: Infinity
+  })
+}
+
+export const useRoleTypes = (): UseQueryResult<RoleTypeDto[], AxiosError> => {
+  return useQuery({
+    queryKey: ['roleTypes'],
+    queryFn: getRoleTypes,
     retry: false,
     staleTime: Infinity
   })

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { Skill, Competence } from "@/features/my-competencies/model/types.ts";
-import { ALL_COMPETENCIES } from "@/features/my-competencies/model/store/mock.ts";
+import { SKILLS_BY_COMPETENCE } from "@/features/my-competencies/model/store/mock.ts";
 
 interface SkillsStoreTypes {
   originalData: Competence[];
@@ -26,7 +26,7 @@ interface SkillsStoreTypes {
   removeSkill: (competenceId: string, skillId: string) => void;
   addSkill: (skill: Skill) => void;
   removeCompetency: (competenceId: string) => void;
-  addCompetency: (competenceId: string) => void;
+  addCompetency: (competenceId: string, roleTypeName: string) => void;
 
   setPopoverOpenFor: (competenceId: string | null) => void
 
@@ -64,7 +64,13 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     let newCurrentFullSkills = state.currentFullSkills;
     if (state.popoverOpenFor === competenceId) {
       const addedSkillIds = new Set(newDraft.find(c => c.roleTypeId === competenceId)?.skills.map(s => s.skillId) ?? []);
-      newCurrentFullSkills = state.globalSkills.filter(s => !addedSkillIds.has(s.skillId));
+      
+      const mockAllowedIds = new Set(SKILLS_BY_COMPETENCE[competenceId]?.map(s => s.skillId) ?? []);
+      const filteredGlobals = mockAllowedIds.size > 0 
+        ? state.globalSkills.filter(s => mockAllowedIds.has(s.skillId))
+        : state.globalSkills;
+
+      newCurrentFullSkills = filteredGlobals.filter(s => !addedSkillIds.has(s.skillId));
     }
     return { draftData: newDraft, currentFullSkills: newCurrentFullSkills, hasChanges: JSON.stringify(newDraft) !== JSON.stringify(state.originalData) };
   }),
@@ -81,30 +87,21 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     return { draftData: newDraft, currentFullSkills: newCurrentFullSkills, hasChanges: JSON.stringify(newDraft) !== JSON.stringify(state.originalData) };
   }),
 
-
   removeCompetency: (competenceId) => set((state) => ({
     draftData: state.draftData.filter((comp) => comp.roleTypeId !== competenceId),
     originalData: state.originalData.filter((comp) => comp.roleTypeId !== competenceId),
     editingId: ''
   })),
 
-  addCompetency: (competenceId) => set((state) => {
-    const competence = ALL_COMPETENCIES.find(c => c.roleTypeId === competenceId);
-    const roleTypeName = competence?.roleTypeName ?? competenceId;
+  addCompetency: (competenceId, roleTypeName) => set((state) => {
     const newCompetence = {
       roleTypeId: competenceId,
       roleTypeName,
       skills: []
     };
     return {
-      draftData: [
-        ...state.draftData,
-        newCompetence
-      ],
-      originalData: [
-        ...state.originalData,
-        newCompetence
-      ]
+      draftData: [...state.draftData, newCompetence],
+      originalData: [...state.originalData, newCompetence]
     };
   }),
 
@@ -114,8 +111,14 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     const addedSkillIds = new Set(
       state.draftData.find(c => c.roleTypeId === competenceId)?.skills.map(s => s.skillId) ?? []
     );
+
+    const mockAllowedIds = new Set(SKILLS_BY_COMPETENCE[competenceId]?.map(s => s.skillId) ?? []);
+    const filteredGlobals = mockAllowedIds.size > 0 
+      ? state.globalSkills.filter(s => mockAllowedIds.has(s.skillId))
+      : state.globalSkills;
+
     return {
-      currentFullSkills: state.globalSkills.filter(s => !addedSkillIds.has(s.skillId)),
+      currentFullSkills: filteredGlobals.filter(s => !addedSkillIds.has(s.skillId)),
     };
   }),
 

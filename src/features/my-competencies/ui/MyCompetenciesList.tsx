@@ -6,12 +6,10 @@ import { FooterBlockFields } from "@/shared";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
 import { useModalStore } from "@/shared/model";
 import { useUpdateProfileMeta, useSkills } from '@/entities/user/api/queries';
-import type { SkillDto } from '@/entities/user/model/types';
-import type { Competence } from '@/features/my-competencies/model/types.ts';
-import { ALL_COMPETENCIES, SKILLS_BY_COMPETENCE } from "@/features/my-competencies/model/store/mock.ts";
+import type { CompetenceDto } from '@/entities/user/model/types';
 
 type MyCompetenciesListProps = {
-  savedSkills?: SkillDto[];
+  savedSkills?: CompetenceDto[];
 };
 
 export function MyCompetenciesList({ savedSkills }: MyCompetenciesListProps) {
@@ -35,11 +33,8 @@ export function MyCompetenciesList({ savedSkills }: MyCompetenciesListProps) {
 
   const { openModal } = useModalStore();
   const { mutate: updateProfile, isPending } = useUpdateProfileMeta();
-
-  // Запрашиваем с бэкенда полный список всех доступных навыков
   const { data: globalSkillsData } = useSkills();
 
-  // Отправляем глобальные навыки в стор
   useEffect(() => {
     if (globalSkillsData) {
       setGlobalSkills(globalSkillsData);
@@ -48,38 +43,18 @@ export function MyCompetenciesList({ savedSkills }: MyCompetenciesListProps) {
 
   useEffect(() => {
     if (savedSkills && Array.isArray(savedSkills)) {
-      const competenciesMap: Record<string, Competence> = {};
-
-      savedSkills.forEach(skill => {
-        let roleTypeId = Object.keys(SKILLS_BY_COMPETENCE).find(id =>
-          SKILLS_BY_COMPETENCE[id].some(s => s.skillId === skill.skillId)
-        );
-
-        if (!roleTypeId) {
-          roleTypeId = 'general';
-        }
-
-        if (!competenciesMap[roleTypeId]) {
-          const compMeta = ALL_COMPETENCIES.find(c => c.roleTypeId === roleTypeId);
-          competenciesMap[roleTypeId] = {
-            roleTypeId,
-            roleTypeName: compMeta?.roleTypeName || (roleTypeId === 'general' ? 'Общие навыки' : roleTypeId),
-            skills: []
-          };
-        }
-        competenciesMap[roleTypeId].skills.push(skill);
-      });
-
-      setInitialData(Object.values(competenciesMap));
+      setInitialData(savedSkills);
     }
   }, [savedSkills, setInitialData]);
 
   const handleSave = () => {
-    // Собираем плоский массив skillIds из всех категорий компетенций
-    const flatSkillIds = draftData.flatMap(comp => comp.skills.map(s => s.skillId));
+    const skillsPayload = draftData.map(comp => ({
+      roleTypeId: comp.roleTypeId,
+      skillIds: comp.skills.map(s => s.skillId)
+    }));
     
     updateProfile(
-      { skillIds: flatSkillIds },
+      { skills: skillsPayload },
       {
         onSuccess: () => {
           saveChanges();
