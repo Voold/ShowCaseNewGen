@@ -12,7 +12,7 @@ export default function Filter() {
         <h3 className={styles.title}>Тип проекта</h3>
         <div className={styles.typeProjects}>
           {
-            ['Кейсовый', 'Реальный', 'Оплачиваемый'].map((project) => (
+            ['Кейсовый', 'Реальный', 'Учебный'].map((project) => (
               <div
                 key={project}
                 className={`${styles.project} ${projectTypes[project] ? styles.selected : ''}`}

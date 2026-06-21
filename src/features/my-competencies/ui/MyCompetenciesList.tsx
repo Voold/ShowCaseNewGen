@@ -3,6 +3,7 @@ import { MyCompetencies } from "@/features/my-competencies/ui/MyCompetencies.tsx
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import { FooterBlockFields } from "@/shared";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
+import {useModalStore} from "@/shared/model";
 
 export function MyCompetenciesList() {
 
@@ -22,6 +23,8 @@ export function MyCompetenciesList() {
     getSkillsForCompetence,
   } = useSkillsStore()
 
+  const { openModal } = useModalStore()
+
   const handleSave = () => {
     saveChanges()
   }
@@ -34,6 +37,7 @@ export function MyCompetenciesList() {
         </h3>
         <button
           className={styles.editButton}
+          onClick={() => openModal('COMPETENCY_CHOICE')}
         >
           <Plus />
           Добавить компетенцию

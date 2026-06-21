@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { Skill, Competence } from "@/features/my-competencies/model/types.ts";
-import { MY_COMPETENCIES, SKILLS_BY_COMPETENCE } from "@/features/my-competencies/model/store/mock.ts";
+import { MY_COMPETENCIES, SKILLS_BY_COMPETENCE, ALL_COMPETENCIES } from "@/features/my-competencies/model/store/mock.ts";
 
 interface SkillsStoreTypes {
   originalData: Competence[];
@@ -22,7 +22,7 @@ interface SkillsStoreTypes {
   removeSkill: (competenceId: string, skillId: string) => void;
   addSkill: (skill: Skill) => void;
   removeCompetency: (competenceId: string) => void;
-  // addCompetency: (competenceId: string) => void;
+  addCompetency: (competenceId: string) => void;
 
   setPopoverOpenFor: (competenceId: string | null) => void
 
@@ -77,8 +77,30 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
 
 
   removeCompetency: (competenceId) => set((state) => ({
-    draftData: state.draftData.filter((comp) => comp.roleTypeId !== competenceId)
+    draftData: state.draftData.filter((comp) => comp.roleTypeId !== competenceId),
+    originalData: state.originalData.filter((comp) => comp.roleTypeId !== competenceId),
+    editingId: ''
   })),
+
+  addCompetency: (competenceId) => set((state) => {
+    const competence = ALL_COMPETENCIES.find(c => c.roleTypeId === competenceId);
+    const roleTypeName = competence?.roleTypeName ?? competenceId;
+    const newCompetence = {
+      roleTypeId: competenceId,
+      roleTypeName,
+      skills: []
+    };
+    return {
+      draftData: [
+        ...state.draftData,
+        newCompetence
+      ],
+      originalData: [
+        ...state.originalData,
+        newCompetence
+      ]
+    };
+  }),
 
   setPopoverOpenFor: (competenceId) => set({ popoverOpenFor: competenceId }),
 

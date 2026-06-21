@@ -3,8 +3,8 @@ import Pencil from '@/shared/ui/icons/pencil.svg?react'
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import Trash from '@/shared/ui/icons/trash.svg?react'
 import Cross from '@/shared/ui/icons/cross.svg?react'
-import type { Competence, Skill } from "@/features/my-competencies/model/types.ts";
-import { MyCompetenciesModal } from "@/features/my-competencies/ui/MyCompetenciesModal.tsx";
+import type {Competence, Skill} from "@/features/my-competencies/model/types.ts";
+import {MyCompetenciesModal} from "@/features/my-competencies/ui/MyCompetenciesModal.tsx";
 
 type MyCompetenciesProps = {
   data: Competence,
@@ -20,7 +20,18 @@ type MyCompetenciesProps = {
 
 };
 
-export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill, addSkill, removeCompetency, popoverOpenFor, setPopoverOpenFor, startEditing, getSkillsForCompetence }: MyCompetenciesProps) {
+export function MyCompetencies({
+                                 data,
+                                 editingId,
+                                 currentFullSkills,
+                                 removeSkill,
+                                 addSkill,
+                                 removeCompetency,
+                                 popoverOpenFor,
+                                 setPopoverOpenFor,
+                                 startEditing,
+                                 getSkillsForCompetence
+                               }: MyCompetenciesProps) {
 
   return (
     <section className={styles.body}>
@@ -37,44 +48,63 @@ export function MyCompetencies({ data, editingId, currentFullSkills, removeSkill
                   <button
                     onClick={() => removeSkill(data.roleTypeId, competency.skillId)}
                   >
-                    <Cross className={styles.crossIcon} />
+                    <Cross className={styles.crossIcon}/>
                   </button>
                 }
               </div>
             ))
           }
           {
-            editingId === data.roleTypeId &&
-            <button className={styles.plusButton} onClick={() => {
-              getSkillsForCompetence(data.roleTypeId);
-              setPopoverOpenFor(data.roleTypeId);
-            }}>
-              <Plus
-                className={styles.plus}
+            (editingId === data.roleTypeId && !popoverOpenFor) &&
+            <button className={styles.addButton}
+                    onClick={() => {
+              getSkillsForCompetence(data.roleTypeId)
+              setPopoverOpenFor(data.roleTypeId)
+                    }}
+            >
+              <div className={styles.plusButton}>
+                <Plus
+                  className={styles.plus}
 
-              />
+                />
+              </div>
+              {
+                data.skills.length === 0 &&
+                <p className={styles.addLabel}>
+                  Добавить навыки
+                </p>
+              }
             </button>
+          }
+          {
+            (data.skills.length === 0 && !(editingId === data.roleTypeId))&&
+            <p className={styles.addLabel}>
+              Еще нет добавленных навыков
+            </p>
           }
         </div>
       </div>
       {
         !(editingId === data.roleTypeId) &&
         <button className={styles.editButton} onClick={() => startEditing(data.roleTypeId)}>
-          <Pencil className={styles.pencilIcon} />
+          <Pencil className={styles.pencilIcon}/>
         </button>
       }
       {
         editingId === data.roleTypeId &&
         <button className={styles.editButton} onClick={() => removeCompetency(data.roleTypeId)}>
-          <Trash className={styles.pencilIcon} />
+          <Trash className={styles.pencilIcon}/>
         </button>
       }
-      {popoverOpenFor == data.roleTypeId &&
-        <MyCompetenciesModal
-          currentFullSkills={currentFullSkills}
-          addSkill={addSkill}
-        />
-      }
+      {popoverOpenFor === data.roleTypeId && (
+        <>
+          <div className={styles.backdrop} onClick={() => setPopoverOpenFor(null)} />
+          <MyCompetenciesModal
+            currentFullSkills={currentFullSkills}
+            addSkill={addSkill}
+          />
+        </>
+      )}
     </section>
   );
 };
