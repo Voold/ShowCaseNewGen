@@ -10,7 +10,7 @@ export const MyCompetenciesModal = ({ currentFullSkills, addSkill }: MyCompetenc
   return (
     <div className={styles.modalBody}>
       {currentFullSkills.map((skill) => (
-        <button className={styles.skill} onClick={() => addSkill(skill)}>
+        <button key={skill.skillId} className={styles.skill} onClick={() => addSkill(skill)}>
           {skill.skillName}
         </button>
       ))}

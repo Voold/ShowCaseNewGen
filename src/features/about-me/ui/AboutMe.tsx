@@ -1,7 +1,8 @@
 import styles from './AboutMe.module.css';
 import Pencil from '@/shared/ui/icons/pencil.svg?react'
-import {type ChangeEvent, useState} from "react";
-import {FooterBlockFields, TextArea} from "@/shared";
+import { type ChangeEvent, useState, useEffect } from "react";
+import { FooterBlockFields, TextArea } from "@/shared";
+import { useUpdateProfileMeta } from '@/entities/user/api/queries';
 
 type AboutMeProps = {
   bio: string,
@@ -11,34 +12,46 @@ type AboutMeProps = {
 export function AboutMe({ bio, className }: AboutMeProps) {
   const MAX_LENGTH = 500
   const MIN_LENGTH = 100
-  // Вроде не приходит с сервера, поэтому так
+  
   const [value, setValue] = useState<string>(bio || '')
-  const [prevValue, setPrevValue] = useState<string>('')
-  const [isEditing, setIsEditing] = useState<boolean>(true)
+  const [prevValue, setPrevValue] = useState<string>(bio || '')
+  const [isEditing, setIsEditing] = useState<boolean>(false)
 
+  const { mutate: updateProfileMeta, isPending } = useUpdateProfileMeta()
 
-  // Валидация для количества символов
+  useEffect(() => {
+    setValue(bio || '');
+    setPrevValue(bio || '');
+  }, [bio]);
+
   const isValidSymbol = value.length >= MIN_LENGTH && value.length <= MAX_LENGTH
   const isValidAnother = true
   const isValid = isValidSymbol && isValidAnother
 
   const hasUpdate = value.trim() !== bio.trim()
-
-  const disabled = !hasUpdate || !isValid
+  const disabled = !hasUpdate || !isValid || isPending
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
-    const text = e.target.value
-    setValue(text)
+    setValue(e.target.value)
   }
 
   const handleCancel = () => {
-    setIsEditing(!isEditing)
+    setIsEditing(false)
     setValue(prevValue)
   }
 
   const handleSubmit = () => {
-    setIsEditing(!isEditing)
-    // TODO
+    if (disabled) return;
+
+    updateProfileMeta(
+      { bio: value },
+      {
+        onSuccess: () => {
+          setIsEditing(false);
+          setPrevValue(value);
+        }
+      }
+    )
   }
 
   return (
@@ -51,10 +64,10 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           <button
             className={styles.editButton}
             onClick={() => {
-              setIsEditing(!isEditing)
+              setIsEditing(true)
               setPrevValue(value)
-            }
-          }
+            }}
+            disabled={isPending}
           >
             <Pencil />
             Редактировать
@@ -64,12 +77,12 @@ export function AboutMe({ bio, className }: AboutMeProps) {
           value={value}
           maxLength={MAX_LENGTH}
           handleChange={handleChange}
-          isDisable={isEditing}
+          isDisable={!isEditing || isPending}
           isValid={isValidSymbol}
           isEditing={isEditing}
         />
         {
-          !isEditing && (
+          isEditing && (
             <FooterBlockFields
               MIN_LENGTH={MIN_LENGTH}
               valueLength={value.length}

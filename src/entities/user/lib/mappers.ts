@@ -17,12 +17,18 @@ export const mapUserDto = (dto: UserDto): User => {
     id: String(dto.userId),
     email: dto.email,
     profilePicture: dto.profilePicture || '',
+    group: dto.group,
+    grade: dto.grade,
     meta: {
-      name: `${dto.meta.lastName} ${dto.meta.firstName}`,
-      ...dto.meta
+      name: `${dto.meta.firstName} ${dto.meta.lastName}`,
+      firstName: dto.meta.firstName,
+      lastName: dto.meta.lastName,
+      bio: dto.meta.bio,
+      skills: dto.meta.skills || [],
+      experience: dto.meta.experience
     },
     roles: mapRoles(dto.roles),
-    capabilities: dto.capabilities || [] // по хорошему заменить на юнион
+    capabilities: dto.capabilities || []
   }
 }
 
@@ -38,7 +44,7 @@ export const mapUserBaseDto = (dto: UserBaseDto): UserBase => {
       } as UserRole
     }),
     meta: {
-      name: `${dto.meta.lastName} ${dto.meta.firstName}`
+      name: `${dto.meta.firstName} ${dto.meta.lastName}`
     }
   }
 }
