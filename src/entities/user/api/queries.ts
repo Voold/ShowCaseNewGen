@@ -1,11 +1,10 @@
-import { useQuery, type UseQueryResult } from '@tanstack/react-query'
-import type { User } from '../model/types'
-import type { AuthStatusResponse } from './types'
+import { useQuery, useMutation, useQueryClient, type UseQueryResult } from '@tanstack/react-query'
+import type { User, SkillDto } from '../model/types'
+import type { AuthStatusResponse, UpdateProfileMetaRequest } from './types'
 import type { AxiosError } from 'axios'
 import { queryKeys } from './queryKeys'
-import { getAuthStatus, getMe } from './requests'
+import { getAuthStatus, getMe, getUserById, updateProfileMeta, getSkills } from './requests'
 import { placeholderUser } from '../config/constants'
-import { getUserById } from './requests'
 
 export const useAuthStatus = (enabled = true): UseQueryResult<AuthStatusResponse, AxiosError> => {
   return useQuery({
@@ -34,6 +33,26 @@ export const useUserById = (uid: string) => {
     queryFn: () => getUserById(uid),
     retry: false,
     enabled: !!uid,
+    staleTime: Infinity
+  })
+}
+
+export const useUpdateProfileMeta = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, AxiosError, UpdateProfileMetaRequest>({
+    mutationFn: updateProfileMeta,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.me() })
+    }
+  })
+}
+
+export const useSkills = (): UseQueryResult<SkillDto[], AxiosError> => {
+  return useQuery({
+    queryKey: ['skills'],
+    queryFn: getSkills,
+    retry: false,
     staleTime: Infinity
   })
 }

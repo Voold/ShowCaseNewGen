@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { Skill, Competence } from "@/features/my-competencies/model/types.ts";
-import { MY_COMPETENCIES, SKILLS_BY_COMPETENCE, ALL_COMPETENCIES } from "@/features/my-competencies/model/store/mock.ts";
+import { ALL_COMPETENCIES } from "@/features/my-competencies/model/store/mock.ts";
 
 interface SkillsStoreTypes {
   originalData: Competence[];
@@ -11,6 +11,10 @@ interface SkillsStoreTypes {
   editingId: string | null;
   popoverOpenFor: string | null;
 
+  globalSkills: Skill[];
+  setGlobalSkills: (skills: Skill[]) => void;
+
+  setInitialData: (data: Competence[]) => void;
   setOriginalData: (draftData: Competence[]) => void;
   startEditing: (competenceId: string) => void;
   cancelEditing: () => void;
@@ -26,14 +30,12 @@ interface SkillsStoreTypes {
 
   setPopoverOpenFor: (competenceId: string | null) => void
 
-  // TODO API
   getSkillsForCompetence: (competenceId: string) => void;
 }
 
-
 export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
-  originalData: MY_COMPETENCIES,
-  draftData: MY_COMPETENCIES,
+  originalData: [],
+  draftData: [],
   hasChanges: false,
 
   currentFullSkills: [],
@@ -41,10 +43,18 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
   editingId: '',
   popoverOpenFor: null,
 
+  globalSkills: [],
+  setGlobalSkills: (skills) => set({ globalSkills: skills }),
+
+  setInitialData: (data) => set({ originalData: data, draftData: data, hasChanges: false }),
   setOriginalData: (data) => set({ originalData: data }),
+  
   startEditing: (competenceId) => { set({ editingId: competenceId, popoverOpenFor: null }) },
+  
   cancelEditing: () => { set((state) => ({ editingId: '', draftData: [...state.originalData], hasChanges: false, popoverOpenFor: null })) },
+  
   saveChanges: () => set((state) => ({ originalData: state.draftData, hasChanges: false, editingId: '', popoverOpenFor: null })),
+  
   resetHasChanges: () => set({ hasChanges: false }),
 
   removeSkill: (competenceId, skillId) => set((state) => {
@@ -53,12 +63,8 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     );
     let newCurrentFullSkills = state.currentFullSkills;
     if (state.popoverOpenFor === competenceId) {
-      const allForCompetence = SKILLS_BY_COMPETENCE[competenceId] ?? [];
-      const removedSkill = allForCompetence.find(s => s.skillId === skillId);
-      if (removedSkill) {
-        const merged = [...state.currentFullSkills, removedSkill];
-        newCurrentFullSkills = allForCompetence.filter(s => merged.some(m => m.skillId === s.skillId));
-      }
+      const addedSkillIds = new Set(newDraft.find(c => c.roleTypeId === competenceId)?.skills.map(s => s.skillId) ?? []);
+      newCurrentFullSkills = state.globalSkills.filter(s => !addedSkillIds.has(s.skillId));
     }
     return { draftData: newDraft, currentFullSkills: newCurrentFullSkills, hasChanges: JSON.stringify(newDraft) !== JSON.stringify(state.originalData) };
   }),
@@ -104,14 +110,12 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
 
   setPopoverOpenFor: (competenceId) => set({ popoverOpenFor: competenceId }),
 
-  // TODO API
   getSkillsForCompetence: (competenceId) => set((state) => {
-    const allForCompetence = SKILLS_BY_COMPETENCE[competenceId] ?? [];
     const addedSkillIds = new Set(
       state.draftData.find(c => c.roleTypeId === competenceId)?.skills.map(s => s.skillId) ?? []
     );
     return {
-      currentFullSkills: allForCompetence.filter(s => !addedSkillIds.has(s.skillId)),
+      currentFullSkills: state.globalSkills.filter(s => !addedSkillIds.has(s.skillId)),
     };
   }),
 

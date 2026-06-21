@@ -12,6 +12,6 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   status: 'idle',
   setStatus: (status) => set({ status }),
-  isLoggedOut: false, // Если true — даже не пытаемся вызвать useMe
+  isLoggedOut: false,
   setLoggedOut: (val) => set({ isLoggedOut: val }),
 }));

@@ -23,13 +23,15 @@ export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
 }
 
 export const placeholderUser: User = {
-	id: 'loading...',
+  id: 'loading...',
   email: `loading@example.com`,
   profilePicture: '',
   meta: {
     name: `Загрузка...`,
+    firstName: `Загрузка...`,
+    lastName: '',
     bio: '',
-    skills: '',
+    skills: [],
     experience: ''
   },
   roles: [{ type: 'Default', weight: ROLE_WEIGHTS.Default }],

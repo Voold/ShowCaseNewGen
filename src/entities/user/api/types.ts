@@ -6,3 +6,9 @@ export interface OAuthExchangeParams {
 export interface AuthStatusResponse {
   userID: number;
 }
+
+export interface UpdateProfileMetaRequest {
+  bio?: string;
+  experience?: string;
+  skillIds?: string[];
+}

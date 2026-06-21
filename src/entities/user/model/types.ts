@@ -1,12 +1,20 @@
-// TODO - Обновить тип юзера
+export type SkillDto = {
+  skillId: string
+  skillName: string
+}
+
 export type User = UserBase & {
   profilePicture: string
+  group?: string
+  grade?: string
   meta: {
+    firstName: string
+    lastName: string
     bio: string
-    skills: string
+    skills: SkillDto[]
     experience: string
   }
-  capabilities: string[] // по хорошему заменить на юнион
+  capabilities: string[]
 }
 
 export type UserBase = {
@@ -16,7 +24,7 @@ export type UserBase = {
   meta: {
     name: string
   }
-} // TODO добавить фото профиля 
+}
 
 export type UserBaseDto = {
   userId: number
@@ -36,16 +44,12 @@ export type UserDto = {
     firstName: string
     lastName: string
     bio: string
-    skills: string
+    skills: SkillDto[]
     experience: string
   }
-
-  // TODO ДОБАВИТЬ
-  group?: string,
-  grade?: string,
-
+  group?: string
+  grade?: string
   roles: {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Default?: {}
     Student?: {
       course: string
@@ -53,25 +57,19 @@ export type UserDto = {
       meta: {
         group: string
       }
-    },
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Admin?: {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Curator?: {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Mentor?: {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Moderator?: {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    ROOP?: {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Teacher?: {},
+    }
+    Admin?: {}
+    Curator?: {}
+    Mentor?: {}
+    Moderator?: {}
+    ROOP?: {}
+    Teacher?: {}
   }
   capabilities: string[] | null
 }
 
 type Role<T> = {
   [K in keyof Required<T>]: { type: K, weight: number } & T[K]
-}[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
+}[keyof Required<T>]
 
 export type UserRole = Role<UserDto['roles']>

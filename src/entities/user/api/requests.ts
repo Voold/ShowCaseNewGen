@@ -1,6 +1,6 @@
-import type { AuthStatusResponse, OAuthExchangeParams } from './types'
-import type { User, UserDto } from '../model/types'
-import {  mapUserDto } from '../lib/mappers'
+import type { AuthStatusResponse, OAuthExchangeParams, UpdateProfileMetaRequest } from './types'
+import type { User, UserDto, SkillDto } from '../model/types'
+import { mapUserDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
 
 export async function login(params: OAuthExchangeParams): Promise<void> {
@@ -24,4 +24,13 @@ export async function logout(): Promise<void> {
 export async function getUserById(uid: string): Promise<User> {
   const { data } = await api.get<UserDto>(`${ENDPOINTS.USER_BY_ID}/${uid}`)
   return mapUserDto(data)
+}
+
+export async function updateProfileMeta(payload: UpdateProfileMetaRequest): Promise<void> {
+  await api.patch(ENDPOINTS.ME, payload)
+}
+
+export async function getSkills(): Promise<SkillDto[]> {
+  const { data } = await api.get<SkillDto[]>('/skills')
+  return data
 }
