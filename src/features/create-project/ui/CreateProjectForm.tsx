@@ -68,14 +68,45 @@ export default function CreateProjectForm({ onSuccess }: CreateProjectFormProps)
           keyFunctionality: keyFunctionality.split(',').map(item => item.trim())
         }
       };
+    } else if (type === 'Case') {
+      finalPayload = {
+        ...basePayload,
+        type: 'Case',
+        prdMeta: {
+          prerequisites: "Интеграция с существующей системой и анализ требований рынка.",
+          audience: [
+            {
+              title: "Студенты вузов",
+              minAge: 18,
+              maxAge: 25,
+              description: "Студенты профильных ИТ-специальностей, желающие попрактиковаться."
+            }
+          ],
+          projectGoal: "Разработать прототип мобильного приложения для прохождения курсов.",
+          functional: ["Просмотр лекций", "Выполнение тестов", "Чат с ментором"],
+          problemStatement: "Существующие образовательные платформы не имеют удобного мобильного приложения."
+        }
+      };
     } else {
       finalPayload = {
         ...basePayload,
-        type,
+        type: 'Real',
         prdMeta: {
-          prerequisites: "...",
-          projectGoal: "...",
-          keyFunctionality: []
+          productVision: "Создание глобальной платформы для совместной работы распределенных команд.",
+          audience: [
+            {
+              title: "Ит-компании",
+              minAge: 20,
+              maxAge: 60,
+              description: "Разработчики, дизайнеры и менеджеры продуктов."
+            }
+          ],
+          projectGoal: "Создать масштабируемый сервис для управления задачами.",
+          businessGoal: "Привлечь 10 000 активных пользователей в течение первого года.",
+          functional: ["Канбан-доска", "Интеграция с GitHub", "Система уведомлений"],
+          nonFunctional: ["Доступность 99.9%", "Шифрование пользовательских данных"],
+          businessMetrics: ["Удержание пользователей первого месяца > 40%"],
+          projectPlan: ["Исследование пользователей", "UX/UI Дизайн", "Разработка MVP", "Релиз"]
         }
       };
     }

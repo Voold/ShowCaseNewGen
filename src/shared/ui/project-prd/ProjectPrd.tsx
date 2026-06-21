@@ -1,27 +1,6 @@
 import { CheckIcon } from '../icons/CheckIcon';
 import styles from './ProjectPrd.module.css'
 import type {PrdMeta} from "@/entities/project";
-//
-// type ProjectPrdProps = {
-//   prerequisites: string,
-//   productVision: string,
-//   audience: {
-//     title: string,
-//     description: string,
-//     minAge: number,
-//     maxAge: number,
-//   }[],
-//   goalsProjects: string,
-//   goalsBusiness: string,
-//   requirements: {
-//     keyFunctionality: string[],
-//     functional: string[],
-//     nonFunctional: string[]
-//   },
-//   problemStatement: string,
-//   businessMetrics: string[],
-//   projectPlan: string[]
-// };
 
 type ProjectPrdProps = {
   PRD: PrdMeta;

@@ -171,12 +171,27 @@ export interface CreateStudyProjectDto extends BaseCreateProjectDto {
 
 export interface CreateCaseProjectDto extends BaseCreateProjectDto {
   type: 'Case';
-  prdMeta: Record<string, any>;
+  prdMeta: {
+    prerequisites: string,
+    audience: AudienceSegment[],
+    projectGoal: string,
+    functional: string[],
+    problemStatement: string
+  };
 }
 
 export interface CreateRealProjectDto extends BaseCreateProjectDto {
   type: 'Real';
-  prdMeta: Record<string, any>;
+  prdMeta: {
+    productVision: string,
+    audience: AudienceSegment[],
+    projectGoal: string,
+    businessGoal: string,
+    functional: string[],
+    nonFunctional: string[],
+    businessMetrics: string[],
+    projectPlan: string[]
+  };
 }
 
 export type CreateProjectDto = CreateCaseProjectDto | CreateRealProjectDto | CreateStudyProjectDto;
