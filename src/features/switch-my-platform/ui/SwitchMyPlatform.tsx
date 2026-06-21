@@ -5,6 +5,7 @@ const MY_PLATFORMS_TABS: TabItem[] = [
     // { label: 'Научная деятельность', to: '/my-platform/scientific-activities' },
     // { label: 'Аналитика', to: '/my-platform/analytics' },
     { label: 'Управление проектами', to: '/my-platform/project-management' },
+    { label: 'Создание проекта', to: '/my-platform/create' },
     // { label: 'Управление рекламой', to: '/my-platform/ad-management' },
     { label: 'Мой профиль', to: '/profile' },
     // { label: 'Создание проекта', to: '/my-platform/profile' },

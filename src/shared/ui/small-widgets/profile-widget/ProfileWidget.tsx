@@ -25,7 +25,6 @@ export const ProfileWidget = ({ name, role, avatarSrc }: ProfileWidgetProps) => 
         text="Менеджер проекта"
         className={styles.questionIcon}
       />
-
     </div>
   )
 }

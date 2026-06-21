@@ -9,33 +9,6 @@ export interface ProjectDirectionItem {
   key: ProjectDirection;
   label: string;
 }
-
-export interface PrdMeta {
-  prerequisites?: string,
-  productVision?: string,
-  audience?: {
-    title: string,
-    description: string,
-    minAge: number,
-    maxAge: number,
-  }[],
-  goalsProjects?: string,
-  goalsBusiness?: string,
-  requirements?: {
-    keyFunctionality?: string[],
-    functional?: string[],
-    nonFunctional?: string[]
-  },
-  problemStatement?: string,
-  businessMetrics?: string[],
-  projectPlan?: string[],
-  projectGoal?: string,
-  businessGoal?: string,
-  functional?: string[],
-  nonFunctional?: string[],
-  keyFunctionality?: string[]
-}
-
 export interface ProjectCardData {
   id: string;
   type: ProjectFormat;
@@ -71,18 +44,18 @@ export interface ProjectCardData {
   brandColor?: string;
 }
 
-export interface BackendCheckpointItem {
+export interface ProjectCheckpoint {
   title: string;
   deadline: string;
 }
 
-export interface BackendCheckpoints {
+export interface ProjectCheckpoints {
   id: string;
   name: string;
-  checkpoints: BackendCheckpointItem[];
+  checkpoints: ProjectCheckpoint[];
 }
 
-export interface BackendRole {
+export interface ProjectRole {
   roleId: string;
   roleType: {
     id: string;
@@ -100,42 +73,30 @@ export interface BackendRole {
   };
 }
 
-export interface BackendTag {
+export interface ProjectTag {
   tagId: string;
   tagName: string;
 }
 
-export interface BackendPrdAudience {
+export interface AudienceSegment {
   title: string;
   minAge: number;
   maxAge: number;
   description: string;
 }
 
-export interface BackendPrdMeta {
+export interface PrdMeta {
   prerequisites?: string,
   productVision?: string,
-  audience?: {
-    title: string,
-    description: string,
-    minAge: number,
-    maxAge: number,
-  }[],
-  goalsProjects?: string,
-  goalsBusiness?: string,
-  requirements?: {
-    keyFunctionality?: string[],
-    functional?: string[],
-    nonFunctional?: string[]
-  },
-  problemStatement?: string,
-  businessMetrics?: string[],
-  projectPlan?: string[],
+  audience?: AudienceSegment[],
   projectGoal?: string,
   businessGoal?: string,
+  problemStatement?: string,
   functional?: string[],
   nonFunctional?: string[],
-  keyFunctionality?: string[]
+  keyFunctionality?: string[],
+  businessMetrics?: string[],
+  projectPlan?: string[]
 }
 
 export interface ProjectDto {
@@ -150,10 +111,10 @@ export interface ProjectDto {
     title: string;
     description: string;
   };
-  checkpoints: BackendCheckpoints;
-  roles: BackendRole[];
-  tags: BackendTag[];
-  prdMeta: BackendPrdMeta;
+  checkpoints: ProjectCheckpoints;
+  roles: ProjectRole[];
+  tags: ProjectTag[];
+  prdMeta: PrdMeta;
   type?: ProjectFormat;
 }
 

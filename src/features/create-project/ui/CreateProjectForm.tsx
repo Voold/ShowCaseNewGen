@@ -189,7 +189,7 @@ export default function CreateProjectForm({ onSuccess }: CreateProjectFormProps)
       {error && (
         <div style={{ color: 'red', fontSize: '14px', marginTop: '10px' }}>
           <b>Ошибка:</b> {error.message}
-          {/* @ts-ignore */}
+          {/* @ts-expect-error */}
           {error.response?.data?.msg && <p style={{ margin: '4px 0 0' }}>{error.response.data.msg}</p>}
         </div>
       )}

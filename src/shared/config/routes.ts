@@ -12,6 +12,7 @@ export const ROUTES = {
   // Роуты платформы
   MY_PLATFORM: '/my-platform',
   MY_PLATFORM_ACTIVITIES: 'project-activities',
+  MY_PLATFORM_CREATE: 'create',
 
   // Роуты пользователя
   MY_PROFILE: 'profile'

@@ -28,23 +28,21 @@ type ProjectPrdProps = {
 }
 
 export const ProjectPrd = ({ PRD }: ProjectPrdProps) => {
-  const prerequisites = PRD?.prerequisites;
-  const productVision = PRD?.productVision;
-  const audience = PRD?.audience;
-  
-  // Поддержка полей из DTO бэкенда (projectGoal -> goalsProjects, businessGoal -> goalsBusiness)
-  const goalsProjects = PRD?.goalsProjects || PRD?.projectGoal;
-  const goalsBusiness = PRD?.goalsBusiness || PRD?.businessGoal;
-  
-  // Поддержка плоской структуры функционала/требований
-  const keyFunctionality = PRD?.requirements?.keyFunctionality || PRD?.keyFunctionality;
-  const functional = PRD?.requirements?.functional || PRD?.functional;
-  const nonFunctional = PRD?.requirements?.nonFunctional || PRD?.nonFunctional;
-  const hasRequirements = !!(keyFunctionality || functional || nonFunctional);
+  const {
+    prerequisites,
+    productVision,
+    audience,
+    projectGoal,
+    businessGoal,
+    keyFunctionality,
+    functional,
+    nonFunctional,
+    problemStatement,
+    businessMetrics,
+    projectPlan,
+  } = PRD || {};
 
-  const problemStatement = PRD?.problemStatement;
-  const businessMetrics = PRD?.businessMetrics;
-  const projectPlan = PRD?.projectPlan;
+  const hasRequirements = !!(keyFunctionality || functional || nonFunctional);
 
   return (
     <section className={styles.container}>
@@ -91,26 +89,26 @@ export const ProjectPrd = ({ PRD }: ProjectPrdProps) => {
         </div>
       </article>}
 
-      {(goalsProjects || goalsBusiness) && <article className={styles.block}>
+      {(projectGoal || businessGoal) && <article className={styles.block}>
         <h3 className={styles.title}>
           Цели
         </h3>
 
-        {goalsProjects && <div className={styles.miniBlock}>
+        {projectGoal && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Цель проекта:
           </h4>
           <p className={styles.bodyText}>
-            {goalsProjects}
+            {projectGoal}
           </p>
         </div>}
 
-        {goalsBusiness && <div className={styles.miniBlock}>
+        {businessGoal && <div className={styles.miniBlock}>
           <h4 className={styles.subtitle}>
             Цель бизнеса:
           </h4>
           <p className={styles.bodyText}>
-            {goalsBusiness}
+            {businessGoal}
           </p>
         </div>}
 

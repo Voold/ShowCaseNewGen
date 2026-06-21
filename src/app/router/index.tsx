@@ -20,11 +20,6 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        /*create project \\ temp*/
-        path: '/projects/create',
-        element: <CreateProjectPage/>
-      },
-      {
         path: ROUTES.MAIN,
         element: <MainLayout />,
         children: [
@@ -81,6 +76,10 @@ export const router = createBrowserRouter([
                   {
                     path: ROUTES.MY_PLATFORM_ACTIVITIES,
                     element: <ProjectActivities />,
+                  },
+                  {
+                    path: ROUTES.MY_PLATFORM_CREATE,
+                    element: <CreateProjectPage/>
                   },
                 ],
               },
