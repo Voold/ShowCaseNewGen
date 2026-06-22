@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './MagicToggle.module.css';
+import { useFilterStore } from '@/features/filter/model/useFilterStore';
 
 interface MagicToggleProps {
   initialChecked?: boolean;
@@ -12,10 +13,13 @@ export const MagicToggle = ({
 } : MagicToggleProps) => {
   const [isChecked, setIsChecked] = useState(initialChecked);
 
+  const { toggleIsRelevanceSort } = useFilterStore()
+
   const handleToggle = () => {
     const newValue = !isChecked;
     setIsChecked(newValue);
     onChange?.(newValue);
+    toggleIsRelevanceSort(newValue)
   };
 
   return (
