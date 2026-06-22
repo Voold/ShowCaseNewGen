@@ -51,11 +51,11 @@ export function ProjectInfoStep({ form, stepErrors, isPending, onSubmit, onDelet
       </nav>
 
       {/* Содержимое таба */}
-      <div>
-        {activeTab === 'main' && <MainInfoTab form={form} stepErrors={stepErrors} />}
-        {activeTab === 'prd' && <PrdTab form={form} stepErrors={stepErrors} />}
-        {activeTab === 'roles' && <RolesTab form={form} stepErrors={stepErrors} />}
-      </div>
+      {/*<div>*/}
+      {/*  {activeTab === 'main' && <MainInfoTab form={form} stepErrors={stepErrors} />}*/}
+      {/*  {activeTab === 'prd' && <PrdTab form={form} stepErrors={stepErrors} />}*/}
+      {/*  {activeTab === 'roles' && <RolesTab form={form} stepErrors={stepErrors} />}*/}
+      {/*</div>*/}
 
       {/* Нижние кнопки */}
       <div>
