@@ -27,7 +27,7 @@ const getColorFromTag = (tag: string) => {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const { id, type, tags, partnerId, meta, roles } = project;
+  const { id, type, primaryTag, tags, partnerId, meta, roles } = project;
   const navigate = useNavigate()
   const [isLiked, setIsLiked] = useState(false);
 
@@ -35,15 +35,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     return setIsLiked(!isLiked)
   }
 
-  const visibleDirections = tags.slice(0, 1);
   const remainCount = tags.length - 1;
+
+  console.log(project)
 
   // Собираем названия компетенций из массива ролей
   const competencies = roles.map(role => role.meta.name);
   // Если есть описание — считаем карточку расширенной
 
   return (
-    <div className={`${styles.cardBody}`} data-bg={tags[0]?.label}
+    <div className={`${styles.cardBody}`} data-bg={primaryTag.tagName}
       onClick={() => navigate(`/catalog/projects/${id}`)}
     >
 
@@ -53,8 +54,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className={`${styles.like} ${isLiked ? styles.liked : ''}`}
       />
 
-      <div className={`${styles.header} ${getColorFromTag(tags[0].label)}`} data-bg={tags[0]?.label}>
-        <div className={styles.directionTag}>{visibleDirections[0]?.label}</div>
+      <div className={`${styles.header} ${getColorFromTag(primaryTag.tagName)}`} data-bg={primaryTag.tagName}>
+        <div className={styles.directionTag}>{primaryTag.tagName}</div>
         {remainCount > 0 && (
           <div className={styles.tags}>
             <div className={styles.tag}>Ещё +{remainCount}</div>

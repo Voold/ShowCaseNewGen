@@ -1,4 +1,4 @@
-import type { ProjectDto, ProjectCardData, ProjectDirection } from '../model/types';
+import type {ProjectDto, ProjectCardData} from '../model/types';
 
 export const mapProjectDtoToEntity = (dto: ProjectDto): ProjectCardData => {
   const checkpointsSummary = dto.checkpoints?.checkpoints
@@ -7,12 +7,15 @@ export const mapProjectDtoToEntity = (dto: ProjectDto): ProjectCardData => {
 
   return {
     id: dto.id,
-    type: dto.type || 'Case', 
+    type: dto.type || 'Case',
+
+    tags: dto.tags ?? [],
+    primaryTag: dto.primaryTag,
     
-    tags: (dto.tags || []).map((t) => ({
-      key: t.tagId as ProjectDirection,
-      label: t.tagName,
-    })),
+    // tags: (dto.tags || []).map((t) => ({
+    //   key: t.tagId as ProjectDirection,
+    //   label: t.tagName,
+    // })),
     
     ownerId: dto.ownerId,
     partnerId: {

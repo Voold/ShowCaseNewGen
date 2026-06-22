@@ -12,10 +12,13 @@ export const ProjectInfo = ({ data }: ProjectInfoProps) => {
       <div className={styles.topLabel}>
         <div className={styles.mainInfo}>
           <div className={styles.tags}>
+            <div className={styles.tag}>
+              {data.primaryTag.tagName}
+            </div>
             {
               data.tags.map(direction => (
-                <div key={direction.key} className={styles.tag}>
-                  {direction.label}
+                <div key={direction.tagId} className={styles.tag}>
+                  {direction.tagName}
                 </div>
               ))
             }

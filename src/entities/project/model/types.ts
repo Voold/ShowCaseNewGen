@@ -9,10 +9,18 @@ export interface ProjectDirectionItem {
   key: ProjectDirection;
   label: string;
 }
+
+export interface TagItem {
+  tagId: string;
+  tagName: string;
+  groupId: string;
+}
+
 export interface ProjectCardData {
   id: string;
   type: ProjectFormat;
-  tags: ProjectDirectionItem[];
+  tags: TagItem[];
+  primaryTag: TagItem;
   ownerId: number;
   partnerId: {
     value: string;
@@ -102,6 +110,8 @@ export interface PrdMeta {
 export interface ProjectDto {
   id: string;
   ownerId: number;
+  tags: TagItem[];
+  primaryTag: TagItem;
   partnerId: {
     value: string;
     verbose: string;
@@ -113,7 +123,6 @@ export interface ProjectDto {
   };
   checkpoints: ProjectCheckpoints;
   roles: ProjectRole[];
-  tags: ProjectTag[];
   prdMeta: PrdMeta;
   type?: ProjectFormat;
 }
