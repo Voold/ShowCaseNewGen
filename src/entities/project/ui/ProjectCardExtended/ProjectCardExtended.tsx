@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ProjectCardExtended({ project }: Props) {
-  const { id, type, tags, partnerId, meta, roles, brandColor } = project;
+  const { id, type, tags, primaryTag, partnerId, meta, roles, brandColor } = project;
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -35,10 +35,10 @@ export default function ProjectCardExtended({ project }: Props) {
 
         <img className={styles.pattern} src={Pattern} alt='Узор' />
 
-        <div className={`${styles.header} ${styles[tags[0]?.key]}`}>
+        <div className={`${styles.header} ${styles[primaryTag.tagId]}`}>
           <div className={styles.tags}>
             {visibleDirections.map((d) => (
-              <div key={d.key} className={styles.tag}>{d.label}</div>
+              <div key={d.tagId} className={styles.tag}>{primaryTag.tagName}</div>
             ))}
             {remainCount > 0 && (
               <div className={styles.tagCount}>Ещё +{remainCount}</div>
