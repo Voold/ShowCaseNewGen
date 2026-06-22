@@ -109,10 +109,6 @@ const STEP_SCHEMAS: Record<number, z.ZodTypeAny> = {
 
 const TOTAL_STEPS = 4;
 
-// ---------------------------------------------------------------------------
-// Типы
-// ---------------------------------------------------------------------------
-
 /** Плоский словарь ошибок: путь поля -> список сообщений */
 export type StepErrors = Record<string, string[]>;
 
@@ -161,7 +157,6 @@ export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardPr
       return true;
     }
 
-    // Превращаем ошибки в плоский словарь { 'meta.title': ['...'] }
     const errors: StepErrors = {};
     for (const issue of result.error.issues) {
       const key = issue.path.join('.');

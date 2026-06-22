@@ -2,7 +2,7 @@ import { Modal } from '@/shared/ui/modal/Modal.tsx';
 import { useState } from "react";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
 import { useRoleTypes } from "@/entities/user/api/queries.ts";
-import { Radio } from "@/shared/ui/radio/Radio.tsx";
+import { Radio } from "@/shared/ui/fields/radio/Radio.tsx";
 import { ModalFooter } from "@/shared/ui/modal-footer/ModalFooter.tsx";
 
 interface SelectCompetencyModalProps {

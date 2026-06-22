@@ -12,7 +12,7 @@ type AboutMeProps = {
 export function AboutMe({ bio, className }: AboutMeProps) {
   const MAX_LENGTH = 500
   const MIN_LENGTH = 100
-  
+
   const [value, setValue] = useState<string>(bio || '')
   const [prevValue, setPrevValue] = useState<string>(bio || '')
   const [isEditing, setIsEditing] = useState<boolean>(false)
@@ -28,10 +28,10 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   const isValidAnother = true
   const isValid = isValidSymbol && isValidAnother
 
-  const hasUpdate = value.trim() !== bio.trim()
+  const hasUpdate = value.trim() !== (bio || '').trim()
   const disabled = !hasUpdate || !isValid || isPending
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>)=> {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
   }
 

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FeedBackIcon } from '../icons/FeedBackIcon';
 import { FolderIcon } from '../icons/FolderIcon';
 import { LikeIcon } from '../icons/LikeIcon';
@@ -24,11 +25,11 @@ const getName = (type: string) => {
 const getIcon = (type: string) => {
   switch (type) {
     case 'projects':
-      return <FolderIcon size={18} color={'var(--color-gray-600)'}/>;
+      return <FolderIcon size={18} color={'var(--color-gray-600)'} />;
     case 'feedback':
-      return <FeedBackIcon size={18} color={'var(--color-gray-600)'}/>;
+      return <FeedBackIcon size={18} color={'var(--color-gray-600)'} />;
     case 'likes':
-      return <LikeIcon size={18} color={'var(--color-gray-600)'}/>;
+      return <LikeIcon size={18} color={'var(--color-gray-600)'} />;
     default:
       return null;
   }
@@ -36,6 +37,8 @@ const getIcon = (type: string) => {
 
 
 export const StagesWidget = () => {
+
+  const navigate = useNavigate();
 
   const stagesData: StagesData[] = [
     {
@@ -59,7 +62,7 @@ export const StagesWidget = () => {
     <div className={styles.mainContainer}>
       {
         stagesData.map((card) => (
-          <div key={card.type} className={styles.cardBody}>
+          <div key={card.type} className={styles.cardBody} onClick={() => navigate('/my-platform/create')}>
             <header className={styles.cardHeader}>
               <span className={styles.count}>
                 {card.count}
@@ -77,7 +80,7 @@ export const StagesWidget = () => {
           </div>
         ))
       }
-      
+
     </div>
   );
 };
