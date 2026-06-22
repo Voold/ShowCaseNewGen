@@ -8,5 +8,7 @@ export const getProjectFormatTranslation = (format: ProjectFormat) => {
       return 'Учебный'
     case 'Real':
       return 'Реальный'
+    case 'Paid':
+      return 'Оплачиваемый'
   }
 }

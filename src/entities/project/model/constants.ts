@@ -1,1 +1,1 @@
-export const PROJECT_FORMATS = ['Case', 'Real', 'Study'] as const
+export const PROJECT_FORMATS = ['Case', 'Real', 'Study', 'Paid'] as const
