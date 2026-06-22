@@ -14,9 +14,9 @@ import type { CreateProjectRequestType } from '@/entities/project/model/types';
 // TODO: заменить на useQuery когда появится API партнёров
 const MOCK_PARTNERS: { value: string; verbose: string }[] = [
   { value: 'I3f8uNbO', verbose: 'ТПУ, публикационная активность' },
-  { value: 'I3f87NbO', verbose: 'Т-банк, банкинг и финансы' },
-  { value: 'I3f845NbO', verbose: 'Яндекс' },
-  { value: 'I3f846NbO', verbose: 'Сбербанк' },
+  // { value: 'I3f87NbO', verbose: 'Т-банк, банкинг и финансы' },
+  // { value: 'I3f845NbO', verbose: 'Яндекс' },
+  // { value: 'I3f846NbO', verbose: 'Сбербанк' },
 ];
 
 type PageStep = 'type-select' | 'fill';

@@ -8,18 +8,15 @@ import styles from '../ProjectInfoStep.module.css';
 
 // Константы тегов
 const PRIMARY_TAGS = [
-  { label: 'Мобильное приложение', value: 'Мобильное приложение' },
-  { label: 'Web', value: 'Web' },
-  { label: 'GameDev', value: 'GameDev' },
-  { label: 'Аналитика', value: 'Аналитика' },
+  { label: 'Инженерия', value: 'SnJ8BpqPnxvMbtjT' },
+  { label: 'Веб-Разработка', value: 'pv6nwbvtn83FuBJC' },
+  { label: 'E-commerce', value: 'WHGfS5KwgUp_CXNb' },
 ];
 
 const EXTRA_TAGS = [
-  { label: 'Mobile', value: 'Mobile' },
-  { label: 'Python', value: 'Python' },
-  { label: 'Go', value: 'Go' },
-  { label: 'Backend', value: 'Backend' },
-  { label: 'ML', value: 'ML' },
+  { label: 'Инженерия', value: 'SnJ8BpqPnxvMbtjT' },
+  { label: 'Веб-Разработка', value: 'pv6nwbvtn83FuBJC' },
+  { label: 'E-commerce', value: 'WHGfS5KwgUp_CXNb' },
 ];
 
 interface TabProps {
@@ -57,7 +54,7 @@ export function MainInfoTab({ form, stepErrors, partners }: TabProps) {
             value={field.state.value}
             onChange={(e) => field.handleChange(e.target.value)}
             placeholder={"Например: FinTrack — учёт финансов"}
-            maxLength={500}
+            maxLength={100}
             validError={getErrorMessage(field.state.meta.errors[0]) || stepErrors['meta.title']?.[0]}
           />
         )}

@@ -49,7 +49,7 @@ function StudyPrdFields({ form, stepErrors }: PrdFieldProps) {
             placeholder="Опишите основные причины..."
             value={field.state.value as string}
             onChange={(e) => field.handleChange(e.target.value)}
-            maxLength={1500}
+            maxLength={600}
             validError={getErrorMessage(field.state.meta.errors[0]) || stepErrors['prdMeta.prerequisites']?.[0]}
           />
         )}

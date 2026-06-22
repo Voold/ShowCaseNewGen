@@ -67,7 +67,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div className={styles.id}>№ {id}</div>
         </div>
         <div className={styles.title}>{meta.title}</div>
-        {meta.description && <p className={styles.description}>{meta.description}</p>}
+        {/*{meta.description && <p className={styles.description}>{meta.description}</p>}*/}
         <div className={styles.competenciesLabel}>{competencies.length} компетенций:</div>
         <div className={styles.competenciesWrapper}>
           <div className={styles.competencies}>

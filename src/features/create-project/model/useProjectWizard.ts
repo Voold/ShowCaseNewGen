@@ -5,11 +5,11 @@ import type { CreateProjectDto } from '@/entities/project/model/types';
 import { useState } from 'react';
 
 export const createProjectRoleSchema = z.object({
-  roleTypeId: z.string().min(1, 'Выберите роль'),
+  roleTypeId: z.string(),
   placesCount: z.number().min(1, 'Минимум мест должен быть не менее 1'),
   minPlacesCount: z.number().min(1, 'Минимум мест должен быть не менее 1'),
   meta: z.object({
-    name: z.string().min(2, 'Минимум 2 символа'),
+    name: z.string(),
     description: z.string(),
   }),
   skills: z.array(z.any()),
@@ -21,12 +21,12 @@ export const createProjectRoleSchema = z.object({
 export const baseProjectSchema = z.object({
   ownerId: z.number().min(1, 'ID владельца обязателен'),
   partnerId: z.string().min(1, 'Выберите партнера'),
-  checkpoints: z.string().min(1, 'Выберите чекпоинты'),
+  checkpoints: z.string(),
   meta: z.object({
-    title: z.string().min(5, 'Минимум 5 символов'),
+    title: z.string().min(35, 'Минимум 35 символов').max(100, 'Максимум 100 символов'),
     description: z.string().min(100, 'Минимум 100 символов').max(500, 'Максимум 500 символов'),
   }),
-  roles: z.array(createProjectRoleSchema).min(1, 'Добавьте хотя бы одну роль'),
+  roles: z.array(createProjectRoleSchema),
   primaryTag: z.string().min(1, 'Выберите основной тег'),
   tags: z.array(z.string()).min(1, 'Выберите хотя бы один тег'),
 });
@@ -39,8 +39,8 @@ const audienceSegmentSchema = z.object({
 });
 
 const studyPrdSchema = z.object({
-  prerequisites: z.string().min(1, 'Укажите актуальность'),
-  projectGoal: z.string().min(1, 'Цель проекта обязательна'),
+  prerequisites: z.string().min(200, 'Минимум 200 символов'),
+  projectGoal: z.string().min(100, 'Минимум 100 символов'),
   keyFunctionality: z
     .array(z.string().min(30, 'Минимум 30 символов').max(300, 'Максимум 300 символов'))
     .min(1, 'Добавьте минимум одну функцию'),
@@ -162,7 +162,38 @@ export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardPr
     } as CreateProjectFormValues,
 
     onSubmit: async ({ value }) => {
-      await onSubmit(value as unknown as CreateProjectDto);
+      // Подставляем дефолтные значения, если данные о таймингах и ролях не заполнены
+      const mappedRoles = value.roles?.length && value.roles[0]?.roleTypeId !== '' ? value.roles : [
+        {
+          roleTypeId: 'v-Y51E1S1Oyux8gX',
+          placesCount: 2,
+          minPlacesCount: 1,
+          meta: {
+            description: 'Роль'
+          },
+          skills: [],
+        }
+      ];
+
+      const payload = {
+        type: value.type,
+        partnerId: value.partnerId || 'wn8s6ctv',
+        checkpoints: value.checkpoints || 'QPpvJg9aMyU5o2-q',
+        meta: value.meta,
+        primaryTagId: value.primaryTag || 'SnJ8BpqPnxvMbtjT',
+        tagIds: value.tags?.length ? value.tags : [],
+        prdMeta: value.prdMeta,
+        roles: mappedRoles.map(role => ({
+          roleTypeId: role.roleTypeId || 'v-Y51E1S1Oyux8gX',
+          placesCount: role.placesCount,
+          minPlacesCount: role.minPlacesCount,
+          meta: { description: role.meta.description },
+          skillIds: role.skills?.map((s: any) => s?.skillId || s?.id || s) || [],
+        })),
+      } as unknown as CreateProjectDto;
+
+      console.log('🚀 ~ useProjectWizard ~ payload:', payload)
+      await onSubmit(payload);
     },
   });
 
