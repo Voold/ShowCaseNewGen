@@ -1,4 +1,5 @@
 import styles from './ProjectProfile.module.css'
+import ava from "@/shared/assets/ava.webp";
 
 type ProjectProfileProps = {
   name?: string;
@@ -6,17 +7,20 @@ type ProjectProfileProps = {
   avatarSrc?: string;
 };
 
-export const ProjectProfile = ({ name, role, avatarSrc }: ProjectProfileProps) => {
+export const ProjectProfile = ({ name, role}: ProjectProfileProps) => {
+
   return (
     <div className={styles.container}>
       {
-        avatarSrc ? (
-          <img src={avatarSrc} alt={`${name}'s avatar`} className={styles.avatar} />
-        ) : (
-          <div className={styles.avatarPlaceholder}>
-            <span>{name?.charAt(0)}</span>
-          </div>
-        )
+        // TODO
+        // avatarSrc ? (
+        //   <img src={avatarSrc} alt={`${name}'s avatar`} className={styles.avatar} />
+        // ) : (
+        //   <div className={styles.avatarPlaceholder}>
+        //     <span>{name?.charAt(0)}</span>
+        //   </div>
+        // )
+        <img src={ava} alt="avatar" className={styles.avatar} />
       }
       <div className={styles.info}>
         <h2 className={styles.name}>{name}</h2>

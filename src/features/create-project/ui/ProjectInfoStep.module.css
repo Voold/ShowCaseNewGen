@@ -1,0 +1,167 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  height: 100%;
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px
+}
+
+.mainInfo h5 {
+  font: var(--section-title-interface);
+  color: var(--color-brand-black)
+}
+
+.mainInfo p {
+  font: var(--subhead-interface);
+  color: var(--color-gray-600)
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+.nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navItem {
+  font: var(--ALS-16-400);
+  color: var(--color-gray-400);
+  padding: 0 0 12px 0;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.navItemError {
+  color: var(--color-error, #e53e3e);
+}
+
+.errorDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-error, #e53e3e);
+  border-radius: 50%;
+}
+
+
+.active {
+  color: var(--color-brand-green);
+  border-bottom: 2px solid var(--color-brand-green);
+}
+
+.mainFieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  &::-webkit-scrollbar{
+    width: 0;
+  }
+}
+
+.buttonBlock {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.buttonBlock button {
+  font: var(--inter-13-600);
+}
+
+.cancelButton {
+  color: var(--color-gray-500)
+}
+
+.saveButton {
+  padding: 14px 24px 15px 24px;
+  border-radius: 50px;
+  background-color: var(--color-brand-green);
+  color: white;
+}
+
+.disable {
+  opacity: 0.25;
+}
+
+.tagGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tagGroupLabel {
+  font: var(--ALS-16-400);
+  color: var(--color-brand-black);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagBadgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagBadge {
+  padding: 6px 14px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--color-gray-350);
+  font: var(--OS-14-500);
+  color: var(--color-brand-black);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.tagBadge:hover {
+  border-color: var(--color-brand-violet);
+  color: var(--color-brand-violet);
+}
+
+.tagBadgeActive {
+  background-color: var(--color-brand-violet);
+  border-color: var(--color-brand-violet);
+  color: white;
+}
+
+.tagBadgeActive:hover {
+  background-color: var(--color-brand-violet);
+  color: white;
+}
+
+/* Ошибки */
+.errorText {
+  font: var(--OS-14-500);
+  color: var(--color-error, #e53e3e);
+}

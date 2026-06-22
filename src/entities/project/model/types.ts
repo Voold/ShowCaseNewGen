@@ -154,7 +154,8 @@ export interface CreateProjectRolePayload {
     name: string;
     description: string;
   };
-  skills: any[];
+  tags: TagItem[];
+  primaryTag: TagItem;
 }
 
 export interface BaseCreateProjectDto {
@@ -166,7 +167,8 @@ export interface BaseCreateProjectDto {
     description: string;
   };
   roles: CreateProjectRolePayload[];
-  tagIds: string[];
+  tags: TagItem[];
+  primaryTag: TagItem;
 }
 
 export interface CreateStudyProjectDto extends BaseCreateProjectDto {

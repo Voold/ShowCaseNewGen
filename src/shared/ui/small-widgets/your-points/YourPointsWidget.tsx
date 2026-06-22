@@ -1,6 +1,6 @@
-import { GoIcon } from '../../icons/GoIcon';
-import { TpuPoint } from '../../icons/TpuPoint';
-import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
+import { GoIcon } from '@/shared';
+import { TpuPoint } from '@/shared';
+import { InfoTooltip } from '@/shared';
 import type { ClosingDiscipline } from './model/types';
 import styles from './YourPointsWidget.module.css'
 

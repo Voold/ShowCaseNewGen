@@ -12,7 +12,7 @@ type TextAreaProps = {
 
 export function TextArea({ value, maxLength, handleChange, isDisable, isValid, isEditing = true }: TextAreaProps) {
   return (
-    <div className={`${styles.textContainer} ${isValid ? (!isEditing ? styles.edit : styles.validOutline) : styles.errorOutline} `}>
+    <div className={`${styles.textContainer} ${isValid ? (isEditing ? styles.edit : styles.validOutline) : styles.errorOutline} `}>
       <textarea
         value={value}
         onChange={handleChange}

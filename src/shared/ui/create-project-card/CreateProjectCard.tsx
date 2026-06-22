@@ -62,7 +62,7 @@ export function CreateProjectCard({type, onClick}: CreateProjectCardProps) {
               </p>
               <div className={styles.custList}>
                 {card?.customers.map((cust) => (
-                    <p className={styles.item}>
+                    <p key={cust} className={styles.item}>
                       {cust}
                     </p>
                 ))}

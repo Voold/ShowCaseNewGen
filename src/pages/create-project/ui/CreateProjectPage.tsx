@@ -1,122 +1,124 @@
-// import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './CreateProjectPage.module.css';
-// import BackIcon from '@/shared/ui/icons/back.svg?react';
-// import { CreateProjectCard } from '@/shared/ui/create-project-card/CreateProjectCard.tsx';
-// import { ProjectInfoStep } from '@/features/create-project/ui/ProjectInfoStep';
-// import {
-//   useProjectWizard,
-//   type CreateProjectFormValues,
-// } from '@/features/create-project/model/useProjectWizard';
-// import { useCreateProject } from '@/entities/project/api/queries';
-// import type { CreateProjectRequestType } from '@/entities/project/model/types';
+import BackIcon from '@/shared/ui/icons/back.svg?react';
+import { CreateProjectCard } from '@/shared/ui/create-project-card/CreateProjectCard.tsx';
+import { ProjectInfoStep } from '@/features/create-project/ui/ProjectInfoStep';
+import {
+  useProjectWizard,
+  type CreateProjectFormValues,
+} from '@/features/create-project/model/useProjectWizard';
+import { useCreateProject } from '@/entities/project/api/queries';
+import type { CreateProjectRequestType } from '@/entities/project/model/types';
 
-/** Шаг 0 — выбор типа, Шаг 1 — заполнение формы */
-// type PageStep = 'type-select' | 'fill';
+// TODO: заменить на useQuery когда появится API партнёров
+const MOCK_PARTNERS: { value: string; verbose: string }[] = [
+  { value: 'I3f8uNbO', verbose: 'ТПУ, публикационная активность' },
+  { value: 'I3f87NbO', verbose: 'Т-банк, банкинг и финансы' },
+  { value: 'I3f845NbO', verbose: 'Яндекс' },
+  { value: 'I3f846NbO', verbose: 'Сбербанк' },
+];
+
+type PageStep = 'type-select' | 'fill';
 
 export default function CreateProjectPage() {
-  // const navigate = useNavigate();
-  // const [pageStep, setPageStep] = useState<PageStep>('type-select');
-  // const [selectedType, setSelectedType] = useState<CreateProjectRequestType>('Study');
-  //
-  // const { mutate: createProject, isPending } = useCreateProject();
-  //
-  // const { form, stepErrors } = useProjectWizard({
-  //   defaultValues: { type: selectedType } as Partial<CreateProjectFormValues>,
-  //   onSubmit: (values) => {
-  //     createProject(values, {
-  //       onSuccess: () => {
-  //         alert('Проект успешно создан!');
-  //         navigate(-1);
-  //       },
-  //     });
-  //   },
-  // });
-  //
-  // // Выбор типа и переход к форме
-  // const handleTypeSelect = (type: CreateProjectRequestType) => {
-  //   setSelectedType(type);
-  //   form.setFieldValue('type', type);
-  //   // Сбрасываем prdMeta под новый тип
-  //   if (type === 'Study') {
-  //     form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', keyFunctionality: [] });
-  //   } else if (type === 'Case') {
-  //     form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', audience: [], functional: [], problemStatement: '' });
-  //   } else {
-  //     form.setFieldValue('prdMeta', { productVision: '', projectGoal: '', businessGoal: '', audience: [], functional: [], nonFunctional: [], businessMetrics: [], projectPlan: [] });
-  //   }
-  //   setPageStep('fill');
-  // };
-  //
-  // // const handleDeleteDraft = () => {
-  // //   if (confirm('Удалить черновик? Все введённые данные будут потеряны.')) {
-  // //     navigate(-1);
-  // //   }
-  // // };
-  // //
-  // // const handleSubmit = () => {
-  // //   form.handleSubmit();
-  // // };
-  //
-  // // ─────────────────────────────────────────────────
-  // // Шаг 0: выбор типа проекта
-  // // ─────────────────────────────────────────────────
-  // if (pageStep === 'type-select') {
-  //   return (
-  //     <main className={styles.mainContent}>
-  //       <div className={styles.headerLeft} onClick={() => navigate(-1)}>
-  //         <BackIcon />
-  //         <p>Назад к списку проектов</p>
-  //       </div>
-  //
-  //       <h1 className={styles.title}>Новый проект</h1>
-  //
-  //       <section className={styles.body}>
-  //         <div className={styles.description}>
-  //           <p>Выберите тип проекта</p>
-  //           <p>
-  //             От выбранного типа зависит состав полей и PRD. В дальнейшем тип проекта можно будет
-  //             изменить при необходимости
-  //           </p>
-  //         </div>
-  //
-  //         <div className={styles.projectList}>
-  //           <CreateProjectCard type="Study" onClick={() => handleTypeSelect('Study')} />
-  //           <CreateProjectCard type="Case" onClick={() => handleTypeSelect('Case')} />
-  //           <CreateProjectCard type="Real" onClick={() => handleTypeSelect('Real')} />
-  //         </div>
-  //       </section>
-  //     </main>
-  //   );
-  // }
-  //
-  // // ─────────────────────────────────────────────────
-  // // Шаг 1: заполнение формы с 3 табами
-  // // ─────────────────────────────────────────────────
-  // const typeLabel = selectedType === 'Study' ? 'Учебный' : selectedType === 'Case' ? 'Кейс' : 'Реальный';
+  const navigate = useNavigate();
+  const [pageStep, setPageStep] = useState<PageStep>('type-select');
+  const [selectedType, setSelectedType] = useState<CreateProjectRequestType>('Study');
+
+  const { mutate: createProject, isPending } = useCreateProject();
+
+  const { form, stepErrors } = useProjectWizard({
+    defaultValues: { type: selectedType } as Partial<CreateProjectFormValues>,
+    onSubmit: (values) => {
+      createProject(values, {
+        onSuccess: () => {
+          alert('Проект успешно создан!');
+          navigate(-1);
+        },
+      });
+    },
+  });
+
+  // Выбор типа и переход к форме
+  const handleTypeSelect = (type: CreateProjectRequestType) => {
+    setSelectedType(type);
+    form.setFieldValue('type', type);
+    // Сбрасываем prdMeta под новый тип
+    if (type === 'Study') {
+      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', keyFunctionality: [] });
+    } else if (type === 'Case') {
+      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', audience: [], functional: [], problemStatement: '' });
+    } else {
+      form.setFieldValue('prdMeta', { productVision: '', projectGoal: '', businessGoal: '', audience: [], functional: [], nonFunctional: [], businessMetrics: [], projectPlan: [] });
+    }
+    setPageStep('fill');
+  };
+
+  const handleDeleteDraft = () => {
+    if (confirm('Удалить черновик? Все введённые данные будут потеряны.')) {
+      navigate(-1);
+    }
+  };
+
+  const handleSubmit = () => {
+    form.handleSubmit();
+    // console.log('Form validation errors (if any):', form.state.errors, form.state.fieldMeta);
+  };
+
+  if (pageStep === 'type-select') {
+    return (
+      <main className={styles.mainContent}>
+        <div className={styles.headerLeft} onClick={() => navigate(-1)}>
+          <BackIcon />
+          <p>Назад к списку проектов</p>
+        </div>
+
+        <h1 className={styles.title}>Новый проект</h1>
+
+        <section className={styles.body}>
+          <div className={styles.description}>
+            <p>Выберите тип проекта</p>
+            <p>
+              От выбранного типа зависит состав полей и PRD. В дальнейшем тип проекта можно будет
+              изменить при необходимости
+            </p>
+          </div>
+
+          <div className={styles.projectList}>
+            <CreateProjectCard type="Study" onClick={() => handleTypeSelect('Study')} />
+            <CreateProjectCard type="Case" onClick={() => handleTypeSelect('Case')} />
+            <CreateProjectCard type="Real" onClick={() => handleTypeSelect('Real')} />
+          </div>
+        </section>
+      </main>
+    );
+  }
+  const typeLabel = selectedType === 'Study' ? 'Учебный' : selectedType === 'Case' ? 'Кейс' : 'Реальный';
 
   return (
     <main className={styles.mainContent}>
-      {/*<div*/}
-      {/*  className={styles.headerLeft}*/}
-      {/*  onClick={() => setPageStep('type-select')}*/}
-      {/*  style={{ cursor: 'pointer' }}*/}
-      {/*>*/}
-      {/*  <BackIcon />*/}
-      {/*  <p>Назад к выбору типа проекта</p>*/}
-      {/*</div>*/}
+      <div
+        className={styles.headerLeft}
+        onClick={() => setPageStep('type-select')}
+        style={{ cursor: 'pointer' }}
+      >
+        <BackIcon />
+        <p>Назад к выбору типа проекта</p>
+      </div>
 
-      {/*<h1 className={styles.title}>Новый проект — «{typeLabel}»</h1>*/}
+      <h1 className={styles.title}>Новый проект — «{typeLabel}»</h1>
 
-      {/*<section className={styles.body}>*/}
-      {/*  <ProjectInfoStep*/}
-      {/*    form={form}*/}
-      {/*    stepErrors={stepErrors}*/}
-      {/*    isPending={isPending}*/}
-      {/*    onSubmit={handleSubmit}*/}
-      {/*    onDeleteDraft={handleDeleteDraft}*/}
-      {/*  />*/}
-      {/*</section>*/}
+      <section className={styles.body}>
+        <ProjectInfoStep
+          form={form}
+          stepErrors={stepErrors}
+          isPending={isPending}
+          onSubmit={handleSubmit}
+          onDeleteDraft={handleDeleteDraft}
+          partners={MOCK_PARTNERS}
+        />
+      </section>
     </main>
   );
 }

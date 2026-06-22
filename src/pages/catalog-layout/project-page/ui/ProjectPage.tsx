@@ -54,8 +54,6 @@ export function ProjectPage() {
     { title: 'Постерная сессия', deadline: '29-05-2026', status: false }
   ];
 
-  console.log(project)
-
   // const PRDdata = {
   //   prerequisites: project.prdMeta.context || 'Нет информации',
   //   productVision: '',

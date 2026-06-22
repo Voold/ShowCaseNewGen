@@ -1,4 +1,4 @@
-import LogoTPU from "@/shared/assets/svg/LogoTPU.svg";
+import LogoTPU from "@/shared/assets/svg/newLogo.svg";
 import { SwitchWorkSpace } from "@/features/switch-workspace";
 import styles from "./Header.module.css";
 

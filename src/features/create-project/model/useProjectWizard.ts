@@ -1,4 +1,5 @@
 import { useForm } from '@tanstack/react-form';
+// import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 import type { CreateProjectDto } from '@/entities/project/model/types';
 import { useState } from 'react';
@@ -26,7 +27,8 @@ export const baseProjectSchema = z.object({
     description: z.string().min(100, 'Минимум 100 символов').max(500, 'Максимум 500 символов'),
   }),
   roles: z.array(createProjectRoleSchema).min(1, 'Добавьте хотя бы одну роль'),
-  tagIds: z.array(z.string()).min(1, 'Выберите хотя бы один тег'),
+  primaryTag: z.string().min(1, 'Выберите основной тег'),
+  tags: z.array(z.string()).min(1, 'Выберите хотя бы один тег'),
 });
 
 const audienceSegmentSchema = z.object({
@@ -86,7 +88,8 @@ export type CreateProjectFormValues = z.infer<typeof createProjectSchema>;
 // Шаг 1: основная инфо (название, описание, теги, партнёр)
 const step1Schema = z.object({
   meta: baseProjectSchema.shape.meta,
-  tagIds: baseProjectSchema.shape.tagIds,
+  primaryTag: baseProjectSchema.shape.primaryTag,
+  tags: baseProjectSchema.shape.tags,
   partnerId: baseProjectSchema.shape.partnerId,
 });
 
@@ -119,12 +122,24 @@ interface UseProjectWizardProps {
 
 const STUDY_DEFAULTS: CreateProjectFormValues = {
   type: 'Study',
-  ownerId: 0,
+  ownerId: 1,
   partnerId: '',
   checkpoints: '',
   meta: { title: '', description: '' },
-  roles: [],
-  tagIds: [],
+  roles: [
+    {
+      roleTypeId: '',
+      placesCount: 1,
+      minPlacesCount: 1,
+      meta: {
+        name: '',
+        description: '',
+      },
+      skills: [],
+    },
+  ],
+  primaryTag: '',
+  tags: [],
   prdMeta: { prerequisites: '', projectGoal: '', keyFunctionality: [] },
 };
 
@@ -133,6 +148,7 @@ export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardPr
   const [stepErrors, setStepErrors] = useState<StepErrors>({});
 
   const form = useForm({
+    // validatorAdapter: zodValidator(),
     validators: {
       onSubmit: createProjectSchema,
     },
@@ -142,7 +158,7 @@ export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardPr
     } as CreateProjectFormValues,
 
     onSubmit: async ({ value }) => {
-      await onSubmit(value as CreateProjectDto);
+      await onSubmit(value as unknown as CreateProjectDto);
     },
   });
 

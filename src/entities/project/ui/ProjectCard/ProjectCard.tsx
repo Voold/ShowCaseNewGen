@@ -37,8 +37,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   const remainCount = tags.length - 1;
 
-  console.log(project)
-
   // Собираем названия компетенций из массива ролей
   const competencies = roles.map(role => role.meta.name);
   // Если есть описание — считаем карточку расширенной

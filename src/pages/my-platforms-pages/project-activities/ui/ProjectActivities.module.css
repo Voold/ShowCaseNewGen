@@ -115,14 +115,14 @@
 
 @media (max-width: 1600px) {
   .mainContent {
-    padding: 54px 40px;
+    padding: 54px 40px 0;
   }
 
 }
 
 @media (max-width: 1280px) {
   .mainContent {
-    padding: 54px 24px;
+    padding: 54px 24px 0;
   }
 }
 

@@ -7,8 +7,11 @@ import type { ClosingDiscipline } from '@/shared/ui';
 import { ProjectsGrid } from '@/widgets/projects-grid';
 import banner from '../../assets/banner.png'
 import { useRef } from 'react';
+import {useMe} from "@/entities/user";
 
 export const ProjectActivities = () => {
+
+    const { data: user } = useMe();
 
     const data: {
         name?: string;
@@ -22,30 +25,6 @@ export const ProjectActivities = () => {
         avatarSrc: '',
 
         activities: [
-            {
-                type: 'keyPoint',
-                title: 'Постерная сессия 1',
-                deadline: '29-05-2026',
-                status: 'completed',
-                number: 1,
-                extra: 'tooltip'
-            },
-            {
-                type: 'keyPoint',
-                title: 'Постерная сессия 1',
-                deadline: '2-06-2026',
-                status: 'completed',
-                number: 67,
-                extra: 'tooltip'
-            },
-            {
-                type: 'currentStage',
-                title: 'Подготовка презентации',
-                deadline: '5-06-2026',
-                progressSteps: 5,
-                progressCurrentStep: 2,
-                unitType: 'points'
-            },
             {
                 type: 'currentStage',
                 title: 'Подготовка презентации',
@@ -63,11 +42,13 @@ export const ProjectActivities = () => {
             },
             {
                 type: 'keyPoint',
-                title: 'Финальный отчёт',
-                deadline: '30-06-2026',
-                number: 2,
-                extra: 'all'
+                title: 'Постерная сессия 1',
+                deadline: '29-05-2026',
+                status: 'completed',
+                number: 1,
+                extra: 'tooltip'
             }
+
         ],
         closingDisciplines: [
             {
@@ -102,7 +83,7 @@ export const ProjectActivities = () => {
     return (
         <main className={styles.mainContent}>
             <aside className={styles.profile}>
-                <ProjectProfile name={data.name} role={data.role} avatarSrc={data.avatarSrc} />
+                <ProjectProfile name={user?.meta.name} role={data.role} avatarSrc={user?.profilePicture} />
             </aside>
             <h1 className={styles.welcomeMessage}>C возвращением, {data.name}!</h1>
             <aside className={styles.activities} ref={widgetRef} onScroll={handleScroll}>

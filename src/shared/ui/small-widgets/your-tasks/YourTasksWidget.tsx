@@ -38,7 +38,6 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
             const showCountdown = dayUntilDeadline !== null && dayUntilDeadline > 0 && dayUntilDeadline <= 7 && activity.type !== 'completedStage'
 
             const completedStage = activity.type === 'currentStage' && activity.progressCurrentStep === activity.progressSteps
-            console.log(completedStage)
 
             const isStage = activity.type === 'currentStage' || activity.type === 'upcomingStage' || activity.type === 'completedStage';
             const showFooterDeadlineInfo = isStage && Boolean(activity.deadline);
