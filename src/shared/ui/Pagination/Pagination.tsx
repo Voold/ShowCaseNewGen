@@ -1,13 +1,40 @@
-import styles from './Pagination.module.css';
+import { getPaginationRange, type PaginationRange } from './getPaginationRange'
+import styles from './Pagination.module.css'
 
-export default function Pagination() {
+interface PaginationProps {
+  totalPages?: number
+  currentPage?: number
+  onPageSelect?: (page: number) => void
+}
+
+export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () => {} }: PaginationProps) {
+  const pages: PaginationRange = getPaginationRange(currentPage, totalPages)
+
+  const handleSelectPage = (page: number) => {
+    if (page !== currentPage) {
+      onPageSelect(page)
+    }
+  }
+
   return (
-    <ul className={styles.body}>
-      <li className={styles.selected}>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li className={styles.dotted}>...</li>
-      <li>12</li>
-    </ul>
-  );
+    <nav className={styles.pagination}>
+      <ul className={styles.pagesList}>
+        {pages.map((page, i) =>
+          page === '...' ? (
+            <span key={i} className={styles.dots}>
+              ...
+            </span>
+          ) : (
+            <li
+              key={i}
+              className={`${styles.page} ${currentPage == page && styles.active}`}
+              onClick={() => handleSelectPage(page)}
+            >
+              {page}
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
+  )
 }

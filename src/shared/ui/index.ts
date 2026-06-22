@@ -1,4 +1,4 @@
-export { default as Pagination } from './Pagination/Pagination';
+export { Pagination } from './Pagination/Pagination';
 export { default as SearchField } from './SearchField/SearchField';
 export { LikeButton } from './like-button/LikeButton.tsx'
 export { InfoTooltip } from './info-tooltip/InfoTooltip.tsx'
