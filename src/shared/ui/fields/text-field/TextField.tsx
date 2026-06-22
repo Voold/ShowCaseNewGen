@@ -47,13 +47,16 @@ interface TextFieldFormProps {
 export const TextFieldForm  = ({value, placeholder, maxLength, validError, title, onChange, subtitle} : TextFieldFormProps) => {
   return (
     <div className={styles.body}>
-      <h5 className={styles.title}>
-        {title || ''}
-      </h5>
+      {
+        title && <h5 className={styles.title}>
+          {title || ''}
+        </h5>
+      }
+
       <TextField value={value} placeholder={placeholder} maxLength={maxLength} onChange={onChange} subtitle={subtitle} validError={validError}/>
-      <p className={styles.error}>
+      {validError && <p className={styles.error}>
         {validError || ''}
-      </p>
+      </p>}
     </div>
   )
 }

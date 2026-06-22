@@ -46,11 +46,11 @@ export default function CreateProjectPage() {
     form.setFieldValue('type', type);
     // Сбрасываем prdMeta под новый тип
     if (type === 'Study') {
-      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', keyFunctionality: [] });
+      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', keyFunctionality: ['', '', ''] });
     } else if (type === 'Case') {
-      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', audience: [], functional: [], problemStatement: '' });
+      form.setFieldValue('prdMeta', { prerequisites: '', projectGoal: '', audience: [{title: '', description: '', minAge: 18, maxAge: 35}], functional: ['', '', ''], problemStatement: '' });
     } else {
-      form.setFieldValue('prdMeta', { productVision: '', projectGoal: '', businessGoal: '', audience: [], functional: [], nonFunctional: [], businessMetrics: [], projectPlan: [] });
+      form.setFieldValue('prdMeta', { productVision: '', projectGoal: '', businessGoal: '', audience: [{title: '', description: '', minAge: 18, maxAge: 35}], functional: ['', '', ''], nonFunctional: ['', '', ''], businessMetrics: [''], projectPlan: [''] });
     }
     setPageStep('fill');
   };

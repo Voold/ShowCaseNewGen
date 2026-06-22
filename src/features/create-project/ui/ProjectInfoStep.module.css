@@ -55,13 +55,13 @@
 }
 
 .navItemError {
-  color: var(--color-error, #e53e3e);
+  color: var(--color-red, #e53e3e);
 }
 
 .errorDot {
   width: 6px;
   height: 6px;
-  background-color: var(--color-error, #e53e3e);
+  background-color: var(--color-red, #e53e3e);
   border-radius: 50%;
 }
 
@@ -163,5 +163,5 @@
 /* Ошибки */
 .errorText {
   font: var(--OS-14-500);
-  color: var(--color-error, #e53e3e);
+  color: var(--color-red, #e53e3e);
 }

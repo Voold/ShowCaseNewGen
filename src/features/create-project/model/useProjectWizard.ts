@@ -81,6 +81,10 @@ export const createProjectSchema = z.discriminatedUnion('type', [
 
 export type CreateProjectFormValues = z.infer<typeof createProjectSchema>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CreateProjectForm = import('@tanstack/react-form').ReactFormExtendedApi<CreateProjectFormValues, any, any, any, any, any, any, any, any, any, any, any>;
+
+
 // ---------------------------------------------------------------------------
 // Схемы валидации по шагам — только поля текущего шага
 // ---------------------------------------------------------------------------
@@ -140,7 +144,7 @@ const STUDY_DEFAULTS: CreateProjectFormValues = {
   ],
   primaryTag: '',
   tags: [],
-  prdMeta: { prerequisites: '', projectGoal: '', keyFunctionality: [] },
+  prdMeta: { prerequisites: '', projectGoal: '', keyFunctionality: ['', '', ''] },
 };
 
 export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardProps) => {

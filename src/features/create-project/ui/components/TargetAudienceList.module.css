@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-left: 1px solid var(--color-brand-green);
+  border-radius: 12px;
+}
+
+.ageRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ageLabel {
+  font: var(--OS-14-500);
+  color: var(--color-gray-600);
+}
+
+.ageInput {
+  width: 60px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  font: var(--OS-14-400);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ageInput:focus {
+  border-color: var(--color-brand-violet);
+}
+
+.ageError {
+  border-color: var(--color-error);
+}
+
+.errorText {
+  font: var(--OS-14-500);
+  color: var(--color-error, #e53e3e);
+  margin-top: 4px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: var(--color-error, #e53e3e);
+  cursor: pointer;
+  font: var(--OS-14-500);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.removeButton:hover {
+  background-color: rgba(229, 62, 62, 0.1);
+}
+
+.addButton {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: var(--color-brand-green);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font: var(--inter-13-600);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.addButton:hover {
+  opacity: 0.9;
+}

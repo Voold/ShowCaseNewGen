@@ -1,0 +1,168 @@
+import type { CreateProjectForm, StepErrors } from '../../model/useProjectWizard';
+import { TextFieldForm } from '@/shared/ui/fields/text-field/TextField.tsx';
+import { DropDownList } from '@/shared/ui/fields/dropdown-list/DropDownList';
+import { RadioChip } from '@/shared/ui/fields/radio-chip/RadioChip';
+import Cross from '@/shared/ui/icons/cross.svg?react';
+import clsx from 'clsx';
+import styles from '../ProjectInfoStep.module.css';
+
+// Константы тегов
+const PRIMARY_TAGS = [
+  { label: 'Мобильное приложение', value: 'Мобильное приложение' },
+  { label: 'Web', value: 'Web' },
+  { label: 'GameDev', value: 'GameDev' },
+  { label: 'Аналитика', value: 'Аналитика' },
+];
+
+const EXTRA_TAGS = [
+  { label: 'Mobile', value: 'Mobile' },
+  { label: 'Python', value: 'Python' },
+  { label: 'Go', value: 'Go' },
+  { label: 'Backend', value: 'Backend' },
+  { label: 'ML', value: 'ML' },
+];
+
+interface TabProps {
+  form: CreateProjectForm;
+  stepErrors: StepErrors;
+  partners: { value: string; verbose: string }[];
+}
+
+export function MainInfoTab({ form, stepErrors, partners }: TabProps) {
+  // Вспомогательная функция для ошибок
+  const getErrorMessage = (error: unknown): string | undefined => {
+    if (typeof error === 'string') return error;
+    if (error && typeof error === 'object' && 'message' in error) {
+      return String(error.message);
+    }
+    return undefined;
+  };
+
+  return (
+    <div className={clsx(styles.mainFieldContainer)}>
+      <div className={styles.mainInfo}>
+        <h5>
+          Заполните основную информацию
+        </h5>
+        <p>
+          После этого вы сможете создать проект и перейти к PRD
+        </p>
+      </div>
+
+      {/* Название */}
+      <form.Field name="meta.title">
+        {(field) => (
+          <TextFieldForm
+            title={'Название проекта'}
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            placeholder={"Например: FinTrack — учёт финансов"}
+            maxLength={500}
+            validError={getErrorMessage(field.state.meta.errors[0]) || stepErrors['meta.title']?.[0]}
+          />
+        )}
+      </form.Field>
+
+      {/* Описание */}
+      <form.Field name="meta.description">
+        {(field) => (
+          <TextFieldForm
+            title={'Описание'}
+            value={field.state.value}
+            onChange={(e) => field.handleChange(e.target.value)}
+            placeholder={"Например: FinTrack — учёт финансов"}
+            maxLength={500}
+            validError={getErrorMessage(field.state.meta.errors[0]) || stepErrors['meta.title']?.[0]}
+          />
+        )}
+      </form.Field>
+
+      {/* Основной тег — RadioChip */}
+      <form.Field name="primaryTag">
+        {(field) => (
+          <div className={styles.tagGroup}>
+            <span className={styles.tagGroupLabel}>Основной тег</span>
+            <div className={styles.chipRow}>
+              {PRIMARY_TAGS.map((tag) => (
+                <RadioChip
+                  key={tag.value}
+                  label={tag.label}
+                  name="primaryTag"
+                  value={tag.value}
+                  checked={field.state.value === tag.value}
+                  onChange={() => field.handleChange(tag.value)}
+                />
+              ))}
+            </div>
+            {(field.state.meta.errors.length > 0 || stepErrors['primaryTag']) && (
+              <span className={styles.errorText}>
+                {getErrorMessage(field.state.meta.errors[0]) || stepErrors['primaryTag']?.[0]}
+              </span>
+            )}
+          </div>
+        )}
+      </form.Field>
+
+      {/* Дополнительные теги — мульти-выбор плашками */}
+      <form.Field name="tags">
+        {(field) => (
+          <div className={styles.tagGroup}>
+            <span className={styles.tagGroupLabel}>Дополнительные теги</span>
+            <div className={styles.tagBadgeRow}>
+              {EXTRA_TAGS.map((tag) => {
+                const isSelected = (field.state.value || []).includes(tag.value);
+                return (
+                  <button
+                    key={tag.value}
+                    type="button"
+                    className={clsx(styles.tagBadge, isSelected && styles.tagBadgeActive)}
+                    onClick={() => {
+                      const current = field.state.value || [];
+                      field.handleChange(
+                        isSelected
+                          ? current.filter((t) => t !== tag.value)
+                          : [...current, tag.value],
+                      );
+                    }}
+                  >
+                    {tag.label}
+                    {isSelected && <Cross className={styles.crossIcon} />}
+                  </button>
+                );
+              })}
+            </div>
+            {(field.state.meta.errors.length > 0 || stepErrors['tags']) && (
+              <span className={styles.errorText}>
+                {getErrorMessage(field.state.meta.errors[0]) || stepErrors['tags']?.[0]}
+              </span>
+            )}
+          </div>
+        )}
+      </form.Field>
+
+      {/* Партнёр */}
+      <form.Field name="partnerId">
+        {(field) => {
+          // DropDownList работает со строками; внутренне храним ID
+          const selectedVerbose = partners.find((p) => p.value === field.state.value)?.verbose;
+          return (
+            <DropDownList
+              label="Заказчик"
+              options={partners.map((p) => p.verbose)}
+              value={selectedVerbose}
+              onChange={(verbose) => {
+                const partner = partners.find((p) => p.verbose === verbose);
+                field.handleChange(partner?.value ?? '');
+              }}
+              placeholder="Выберите заказчика"
+              error={
+                getErrorMessage(field.state.meta.errors[0]) ||
+                stepErrors['partnerId']?.[0]
+              }
+            />
+          );
+        }}
+      </form.Field>
+    </div>
+  );
+}

@@ -8,6 +8,7 @@
 .title {
   font: var(--field-label-interface);
   color: var(--color-brand-black);
+  box-sizing: border-box;
 }
 
 .error {
