@@ -1,0 +1,1 @@
+export { useCompetencies } from './api/queries'

@@ -1,17 +1,28 @@
 import { useProjects } from '@/entities/project/api/queries';
 import { ProjectCardFactory } from '@/entities/project/ui/ProjectCardFactory/ProjectCardFactory';
 import styles from './ProjectsGrid.module.css';
+import { useFilterStore } from '@/features/filter/model/useFilterStore';
 
 export default function ProjectsGrid() {
-  const { data, isLoading, isError } = useProjects();
+  const {tags, competencies, projectTypes, sort, isRelevanceSort, query, limit, page} = useFilterStore()
+  const { data, isLoading, isError } = useProjects({
+    q: query,
+    projectType: Array.from(projectTypes),
+    tagId: Array.from(tags),
+    roleTypeId: Array.from(competencies),
+    sort: isRelevanceSort ? 'relevance' : sort,
+    limit: limit,
+    offset: (page - 1) * limit
+  });
+  const {projects, total} = data || {projects: [], total: 0}
 
-  if (isLoading) return <div>Загрузка проектов...</div>;
-  if (isError) return <div>Ошибка при загрузке проектов</div>;
-  if (!data?.projects.length) return <div>Проектов пока нет</div>;
+  if (isLoading) return <h2>Загрузка проектов...</h2>;
+  if (isError) return <h2>Ошибка при загрузке проектов</h2>;
+  if (!total) return <h2>Проектов не нашлось</h2>;
 
   return (
     <div className={styles.body}>
-      {data.projects.map((project, index) => (
+      {projects.map((project, index) => (
         <ProjectCardFactory key={project.id} project={project} index={index} />
       ))}
     </div>

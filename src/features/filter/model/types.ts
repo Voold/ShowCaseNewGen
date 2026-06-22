@@ -1,0 +1,1 @@
+export type SortKey = 'created_asc' | 'created_desc' | 'relevance'

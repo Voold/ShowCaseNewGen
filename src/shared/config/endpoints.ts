@@ -7,4 +7,7 @@ export const ENDPOINTS = {
   USER_BY_ID: import.meta.env.VITE_REF_GET_CURRENT_USER,
   USERS_BY_NAME: import.meta.env.VITE_REF_GET_USERS_BY_NAME,
   PROJECTS_BY_NAME: import.meta.env.VITE_REF_GET_PROJECTS_BY_NAME,
+  TAGS: import.meta.env.VITE_REF_GET_TAGS,
+  TAG_BY_ID: (tagId: string) => `${import.meta.env.VITE_REF_GET_TAGS}/${tagId}`,
+  ROLE_TYPES: import.meta.env.VITE_REF_GET_ROLE_TYPES
 };
