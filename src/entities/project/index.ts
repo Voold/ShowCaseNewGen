@@ -6,3 +6,6 @@ export { typeProjectsLabel } from '../../shared/ui/type-project-label/typeProjec
 export { ProjectCardFactory } from './ui/ProjectCardFactory/ProjectCardFactory';
 export * from './model/types';
 export { useProjects, useProjectDetails, useCreateProject } from './api/queries';
+export { getProjectFormatTranslation } from './lib/translations'
+export { PROJECT_FORMATS } from './model/constants'
+export { getProjectPlural } from './lib/plurals'

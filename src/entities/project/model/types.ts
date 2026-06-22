@@ -1,5 +1,7 @@
+import type { PROJECT_FORMATS } from "./constants";
+
 export type ProjectDirection = 'web' | 'mobile' | 'engineering' | 'ml' | 'fintech' | 'design';
-export type ProjectFormat = 'Case' | 'Real' | 'Study' | 'Paid';
+export type ProjectFormat = typeof PROJECT_FORMATS[number];
 export type CreateProjectRequestType = 
   | 'Case' 
   | 'Real' 
@@ -136,6 +138,7 @@ export interface ProjectsResponseDto {
 
 export interface GetProjectsQueryParams {
   q?: string;
+  projectType?: string[]
   status?: string[];
   tagId?: string[];
   roleTypeId?: string[];
