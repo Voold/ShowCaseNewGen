@@ -1,53 +1,53 @@
 :root {
   --color-brand-green: #28BE46;
-  --color-brand-black: #1D1D1F;
+  --color-brand-black: #1B1B1D;
   --color-brand-violet: #6573FF;
 
   --color-white: #FFFFFF;
-  --color-red: #EE4E43;
-  --color-yellow: #FFC929;
+  --color-red: #FF3344;
+  --color-yellow: #FFB600;
 
 
   --grad-lime: linear-gradient(45deg,
-      #28BE46 0%,
-      #5AC823 50%,
-      #8FD600 100%);
+  #1BBB1B 0%,
+  #56D317 50%,
+  #96E000 100%);
   --grad-fiolet: linear-gradient(180deg,
-      #AE94F9 0%,
-      #D3B6FB 55%,
-      #F1DCFB 100%);
+  #AB8FFF 0%,
+  #D2B2FF 55%,
+  #F2D8FF 100%);
   --grad-orange: linear-gradient(180deg,
-      #F9948B 0%,
-      #FFAE9E 55%,
-      #FFC9BC 100%);
+  #FF8F85 0%,
+  #FFAE9E 55%,
+  #FFC9BC 100%);
   --grad-blue: linear-gradient(180deg,
-      #81BDF8 0%,
-      #A1D3F7 55%,
-      #B2E8FF 100%);
+  #75BAFF 0%,
+  #99D5FF 55%,
+  #B2E8FF 100%);
   --grad-green: linear-gradient(180deg,
-      #47C20A 0%,
-      #80CC66 55%,
-      #94E085 100%);
+  #49C70A 0%,
+  #80CC66 55%,
+  #94E085 100%);
 
   --grad-brand: linear-gradient(90deg,
-      #27FF6F 0%,
-      #29EDB8 30%,
-      #00C7E6 55%,
-      #0096FF 80%,
-      #6573FF 100%);
+  #27FF6F 0%,
+  #29EDB8 30%,
+  #00C7E6 55%,
+  #0096FF 80%,
+  #6573FF 100%);
 
   --color-gray-900: #2E3038;
   --color-gray-750: #454754;
   --color-gray-650: #5C5F70;
-  --color-gray-600: #6E7181;
-  --color-gray-500: #808491;
-  --color-gray-400: #9195A1;
-  --color-gray-350: #ACB0B9;
-  --color-gray-250: #D3D6DF;
-  --color-gray-200: #DCDEE5;
-  --color-gray-150: #E4E6EC;
-  --color-gray-100: #EAEBF0;
-  --color-gray-50: #F6F6F9;
+  --color-gray-600: #6C7084;
+  --color-gray-500: #7D8294;
+  --color-gray-400: #8F94A3;
+  --color-gray-350: #ABB0BA;
+  --color-gray-250: #CDD0DA;
+  --color-gray-200: #D6D9E1;
+  --color-gray-150: #DDE0E9;
+  --color-gray-100: #E7E9EF;
+  --color-gray-50: #EFF1F5;
 
 
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -87,6 +87,10 @@
   --inter-14-500: 500 14px/1.3 var(--font-inter);
   --inter-11-400: 400 11px/1.1 var(--font-inter);
   --inter-11-600: 600 11px/1.1 var(--font-inter);
+
+  --inter-15-700: 700 15px/1.1 var(--font-inter);
+  --inter-13-700: 700 13px/1.1 var(--font-inter);
+
   --OS-14-550: 550 14px/1 var(--font-open-sans);
   --OS-14-400: 400 14px/1 var(--font-open-sans);
   --OS-14-500: 500 14px/1 var(--font-open-sans);
@@ -94,6 +98,9 @@
   --OS-15-700: 700 15px/1 var(--font-open-sans);
   /*Чет не работает вариация, поэтому пока жирное*/
   --OS-12-550: 700 12px/1 var(--font-open-sans);
+
+
+  --ALS-9-400: 400 9px/1 var(--font-ALS);
 
   --small-11-light: 300 11px/1.1 var(--font-inter);
 

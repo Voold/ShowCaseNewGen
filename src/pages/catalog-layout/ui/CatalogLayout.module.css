@@ -7,4 +7,7 @@
   background-color: var(--color-gray-50);
   align-items: center;
   overflow: hidden;
+
+  /*TODO*/
+  padding-top: calc(54px - 26px);
 }

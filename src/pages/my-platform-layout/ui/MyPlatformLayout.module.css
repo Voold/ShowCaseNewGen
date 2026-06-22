@@ -3,6 +3,8 @@
   flex-direction: column;
   width: 100%;
   flex: 1;
+  /*TODO*/
+  padding-top: calc(54px - 26px);
   min-height: 0;
   background-color: var(--color-gray-50);
   align-items: center;

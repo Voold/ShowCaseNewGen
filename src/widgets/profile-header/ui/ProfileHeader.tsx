@@ -4,9 +4,10 @@ import EditIcon from '@/shared/ui/icons/edit.svg?react';
 import BigInfoIcon from '@/shared/ui/icons/big_info.svg?react';
 import { LinkBlock } from '@/shared/ui/link-block/LinkBlock';
 import styles from './ProfileHeader.module.css';
+import ava from '@/shared/assets/ava.webp';
 
 interface ProfileLink {
-  type?: 'tg' | 'vk';
+  type?: 'tg' | 'vk' | 'element';
   link?: string;
   anotherType?: string;
 }
@@ -22,14 +23,18 @@ export const ProfileHeader = ({ data, links }: ProfileHeaderProps) => {
       <div className={styles.infoGrid}>
         <section className={styles.mainInfoContainer}>
           <div className={styles.avatar}>
-            {data.profilePicture ? (
-              <img className={styles.avatarImg} src={data.profilePicture} alt='Аватар' />
-            ) : (
-              <p className={styles.avatarName}>{data.meta.firstName.slice(0, 1)}</p>
-            )}
+            <img src={ava} alt="avatar" className={styles.avatarImg} />
+            {/*{data.profilePicture ? (*/}
+            {/*  <img className={styles.avatarImg} src={data.profilePicture} alt='Аватар' />*/}
+            {/*) : (*/}
+            {/*  <p className={styles.avatarName}>{data.meta.firstName.slice(0, 1)}</p>*/}
+            {/*)}*/}
             <button className={styles.editButton}>
               <EditIcon />
             </button>
+            <div className={styles.status}>
+              mentor
+            </div>
           </div>
           <div className={styles.nameContainer}>
             <div className={styles.name}>

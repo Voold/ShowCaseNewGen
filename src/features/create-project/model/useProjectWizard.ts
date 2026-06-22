@@ -1,10 +1,11 @@
 import { useForm } from '@tanstack/react-form';
 import { z } from 'zod';
 import type { CreateProjectDto } from '@/entities/project/model/types';
+import { useState } from 'react';
 
 export const createProjectRoleSchema = z.object({
   roleTypeId: z.string().min(1, 'Выберите роль'),
-  placesCount: z.number().min(1, 'Максимум мест должен быть не менее 1'),
+  placesCount: z.number().min(1, 'Минимум мест должен быть не менее 1'),
   minPlacesCount: z.number().min(1, 'Минимум мест должен быть не менее 1'),
   meta: z.object({
     name: z.string().min(2, 'Минимум 2 символа'),
@@ -78,6 +79,43 @@ export const createProjectSchema = z.discriminatedUnion('type', [
 
 export type CreateProjectFormValues = z.infer<typeof createProjectSchema>;
 
+// ---------------------------------------------------------------------------
+// Схемы валидации по шагам — только поля текущего шага
+// ---------------------------------------------------------------------------
+
+// Шаг 1: основная инфо (название, описание, теги, партнёр)
+const step1Schema = z.object({
+  meta: baseProjectSchema.shape.meta,
+  tagIds: baseProjectSchema.shape.tagIds,
+  partnerId: baseProjectSchema.shape.partnerId,
+});
+
+// Шаг 2: роли и чекпоинты
+const step2Schema = z.object({
+  roles: baseProjectSchema.shape.roles,
+  checkpoints: baseProjectSchema.shape.checkpoints,
+});
+
+// Шаг 3: PRD (зависит от type)
+const step3Schema = z.object({
+  prdMeta: z.union([studyPrdSchema, casePrdSchema, realPrdSchema]),
+});
+
+const STEP_SCHEMAS: Record<number, z.ZodTypeAny> = {
+  1: step1Schema,
+  2: step2Schema,
+  3: step3Schema,
+};
+
+const TOTAL_STEPS = 4;
+
+// ---------------------------------------------------------------------------
+// Типы
+// ---------------------------------------------------------------------------
+
+/** Плоский словарь ошибок: путь поля -> список сообщений */
+export type StepErrors = Record<string, string[]>;
+
 interface UseProjectWizardProps {
   onSubmit: (values: CreateProjectDto) => void | Promise<void>;
   defaultValues?: Partial<CreateProjectFormValues>;
@@ -95,6 +133,9 @@ const STUDY_DEFAULTS: CreateProjectFormValues = {
 };
 
 export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardProps) => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [stepErrors, setStepErrors] = useState<StepErrors>({});
+
   const form = useForm({
     validators: {
       onSubmit: createProjectSchema,
@@ -109,5 +150,38 @@ export const useProjectWizard = ({ onSubmit, defaultValues }: UseProjectWizardPr
     },
   });
 
-  return form;
+  const validateCurrentStep = (): boolean => {
+    const schema = STEP_SCHEMAS[currentStep];
+    if (!schema) return true; // шаг без схемы — пропускаем
+
+    const result = schema.safeParse(form.state.values);
+
+    if (result.success) {
+      setStepErrors({});
+      return true;
+    }
+
+    // Превращаем ошибки в плоский словарь { 'meta.title': ['...'] }
+    const errors: StepErrors = {};
+    for (const issue of result.error.issues) {
+      const key = issue.path.join('.');
+      if (!errors[key]) errors[key] = [];
+      errors[key].push(issue.message);
+    }
+    setStepErrors(errors);
+    return false;
+  };
+
+  const nextStep = () => {
+    const isValid = validateCurrentStep();
+    if (!isValid) return;
+    setCurrentStep((s) => Math.min(s + 1, TOTAL_STEPS));
+  };
+
+  const prevStep = () => {
+    setStepErrors({});
+    setCurrentStep((s) => Math.max(s - 1, 1));
+  };
+
+  return { form, currentStep, stepErrors, nextStep, prevStep };
 };

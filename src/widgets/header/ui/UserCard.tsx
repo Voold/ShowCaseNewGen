@@ -1,13 +1,15 @@
-import { useMe, useAuthStore, placeholderUser } from "@/entities/user";
+// import { useMe, useAuthStore, placeholderUser } from "@/entities/user";
+import { useAuthStore } from "@/entities/user";
 import styles from './UserCard.module.css'
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/index.ts";
 import EnterButton from "@/widgets/header/ui/EnterButton/EnterButton.tsx";
+import ava from "@/shared/assets/ava.webp";
 
 export function UserCard() {
   const status = useAuthStore((s) => s.status);
   const navigate = useNavigate()
-  const { data: user = placeholderUser } = useMe(status === "authenticated");
+  // const { data: user = placeholderUser } = useMe(status === "authenticated");
 
   if (status !== "authenticated" && status !== "loading") {
     return <EnterButton />;
@@ -20,7 +22,11 @@ export function UserCard() {
         {user.meta.name}
       </p>
       <p style={{ color: "white", fontSize: "12px" }}>{user.id}</p> */}
-        {user.profilePicture ? <img className={styles.avatar} src={user.profilePicture} /> : <p className={styles.symbol}>{user.meta.name.slice(0, 1)}</p>}
+        {/*{user.profilePicture ? <img className={styles.avatar} src={user.profilePicture} /> : <p className={styles.symbol}>{user.meta.name.slice(0, 1)}</p>}*/}
+        <img src={ava} alt="avatar" className={styles.avatar} />
+        <div className={styles.status}>
+          mentor
+        </div>
       </div>
     </div>
 

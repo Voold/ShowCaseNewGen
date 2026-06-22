@@ -199,3 +199,13 @@
   flex: none;
   padding: 1px;
 }
+
+.status {
+  position: absolute;
+  padding: 2px 8px 4px 8px;
+  background-color: var(--color-brand-green);
+  border-radius: 28px;
+  bottom: -2px;
+  right: 0;
+  color: white;
+}

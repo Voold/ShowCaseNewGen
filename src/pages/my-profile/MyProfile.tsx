@@ -10,10 +10,11 @@ export const MyProfile = () => {
   const navigate = useNavigate();
   const { data: user } = useMe();
 
-  const links: { type?: 'tg' | 'vk'; link?: string; anotherType?: string }[] = [
+  const links: { type?: 'tg' | 'vk' | 'element'; link?: string; anotherType?: string }[] = [
+    { type: 'element', link: 'Mys2018' },
     { type: 'tg', link: 'Mys2018' },
     { type: 'vk' },
-    { anotherType: 'Max', link: '@mys2018' },
+    // { anotherType: 'Max', link: '@mys2018' },
   ];
 
   if (!user || user.id === 'loading...') {

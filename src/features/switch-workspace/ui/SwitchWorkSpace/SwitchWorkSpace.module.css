@@ -3,7 +3,7 @@
   align-items: center;
   gap: 4px;
   height: 48px;
-  font: var(--label-interface);
+  font: var(--inter-13-700);
   color: white;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .mySpace {
-  font-size: 15px;
+  font: var(--inter-15-700);
   z-index: 1;
 }
 
