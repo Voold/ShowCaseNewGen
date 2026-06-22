@@ -13,7 +13,14 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
-    svgr()
+    svgr({
+      svgrOptions: {
+        dimensions: false,
+        icon: true,
+        ref: true,
+      },
+      include: "**/*.svg?react",
+    }),
   ],
   resolve: {
     alias: {
