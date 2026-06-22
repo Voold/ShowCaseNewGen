@@ -82,7 +82,7 @@ export function ProjectInfoStep({ form, stepErrors, isPending, onSubmit, onDelet
 // Таб 1: Основная информация
 // ──────────────────────────────────────────────
 interface TabProps {
-  form: ReactFormExtendedApi<CreateProjectFormValues, any>;
+  form: ReactFormExtendedApi<CreateProjectFormValues, never, never, never, never, never, never, never, never, never, never, never>;
   stepErrors: StepErrors;
 }
 
