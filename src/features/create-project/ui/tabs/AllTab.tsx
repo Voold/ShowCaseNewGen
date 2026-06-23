@@ -1,15 +1,19 @@
-import type { CreateProjectForm, StepErrors } from '../../model/useProjectWizard';
+// import type { CreateProjectForm, StepErrors } from '../../model/useProjectWizard';
+import styles from "./Tabs.module.css";
 
-interface PrdFieldProps {
-  form: CreateProjectForm;
-  stepErrors: StepErrors;
-}
+// interface PrdFieldProps {
+//   form: CreateProjectForm;
+//   stepErrors: StepErrors;
+// }
 
-export function AllTab({ form: _form, stepErrors: _stepErrors }: PrdFieldProps) {
+// export function AllTab({ form: _form, stepErrors: _stepErrors }: PrdFieldProps) {
+export function AllTab() {
   return (
-    <div>
+    <div className={styles.mainInfo}>
       <h3>Разделы сплошным списком</h3>
-      <p>Этот раздел находится в разработке.</p>
+      <p>
+        Данный раздел находится в разработке
+      </p>
     </div>
   );
 }

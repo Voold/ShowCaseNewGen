@@ -99,9 +99,10 @@ export function ProjectInfoStep({ form, stepErrors, isPending, onSubmit, onDelet
         <div>
           {activeTab === 'main' && <MainInfoTab form={form} stepErrors={stepErrors} partners={partners} />}
           {activeTab === 'prd' && <PrdTab form={form} stepErrors={stepErrors} />}
-          {activeTab === 'roles' && <RolesTab form={form} stepErrors={stepErrors} />}
-          {activeTab === 'dates' && <DatesTab form={form} stepErrors={stepErrors} />}
-          {activeTab === 'all' && <AllTab form={form} stepErrors={stepErrors} />}
+          {/*{activeTab === 'roles' && <RolesTab form={form} stepErrors={stepErrors} />}*/}
+          {activeTab === 'roles' && <RolesTab/>}
+          {activeTab === 'dates' && <DatesTab/>}
+          {activeTab === 'all' && <AllTab/>}
         </div>
 
         {/* Нижние кнопки */}
