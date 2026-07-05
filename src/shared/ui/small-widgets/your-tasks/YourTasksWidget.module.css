@@ -210,3 +210,7 @@
 .completedTask {
   opacity: 0.4;
 }
+
+.checkIcon {
+  color: var(--color-brand-green);
+}

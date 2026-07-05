@@ -124,8 +124,12 @@
   color: white
 }
 
-.path {
-  stroke-width: 1;
+.checkIcon {
+  color: var(--color-gray-400);
+}
+
+.checkIcon path {
+  stroke-width: 1px;
 }
 
 @media (max-width: 1280px) {

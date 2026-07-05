@@ -87,7 +87,6 @@
 
 .response {
   display: flex;
-  /*position: absolute;*/
   top: 12px;
   right: 12px;
   align-items: flex-end;
@@ -110,7 +109,6 @@
 
 .dimmed {
   opacity: 0.45;
-  /* pointer-events: none; */
 }
 
 
@@ -230,7 +228,6 @@
 }
 
 .plusButton {
-  /*position: absolute;*/
   bottom: 8px;
   right: 8px;
   width: 20px ;
@@ -254,10 +251,6 @@
   flex-shrink: 0;
 }
 
-/*.plusIcon, .checkIcon  {*/
-/*  padding-top: 1px;*/
-/*  padding-right: 1px*/
-/*}*/
 .plusIcon {
   color: white;
 }
@@ -265,4 +258,15 @@
 .countFree {
   font: var(--subhead-interface);
   color: var(--color-gray-150)
+}
+
+.checkIcon {
+  color: var(--color-brand-green);
+  width: 9px;
+  height: 9px;
+}
+
+.feedbackIcon {
+  width: 8px;
+  height: 11px;
 }

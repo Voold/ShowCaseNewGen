@@ -1,5 +1,5 @@
-import { GoIcon } from '@/shared';
-import { TpuPoint } from '@/shared';
+import GoIcon from '@/shared/ui/icons/go.svg?react';
+import TpuPoint from '@/shared/ui/icons/tpuPoint.svg?react';
 import { InfoTooltip } from '@/shared';
 import type { ClosingDiscipline } from './model/types';
 import styles from './YourPointsWidget.module.css'

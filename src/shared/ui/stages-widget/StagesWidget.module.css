@@ -24,22 +24,40 @@
 }
 
 .count {
-  font-family: var(--font-open-sans);
+  font-family: var(--font-open-sans), serif;
   font-weight: 400;
   font-size: 18px;
   color: var(--color-gray-600);
 }
 
 .label {
-  font-family: var(--font-inter);
+  font-family: var(--font-inter), serif;
   font-weight: 600;
   font-size: 15px;
   color: var(--color-gray-650);
 }
 
 .snippet {
-  font-family: var(--font-open-sans);
+  font-family: var(--font-open-sans), serif;
   font-weight: 400;
   font-size: 12px;
   color: var(--color-gray-350);
+}
+
+.feedbackIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-gray-600)
+}
+
+.folderIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-gray-600)
+}
+
+.likeIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-gray-600)
 }

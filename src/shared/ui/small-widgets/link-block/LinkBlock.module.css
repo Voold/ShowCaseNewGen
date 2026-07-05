@@ -25,5 +25,10 @@
 .service {
   font: var(--body-small-platform);
   color: var(--color-gray-500);
-  
+}
+
+.openIcon {
+  width: 11px;
+  height: 11px;
+  color: var(--color-gray-600);
 }

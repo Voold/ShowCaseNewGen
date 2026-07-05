@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { FeedBackIcon } from '../icons/FeedBackIcon';
-import { FolderIcon } from '../icons/FolderIcon';
-import { LikeIcon } from '../icons/LikeIcon';
+import FeedBackIcon from '@/shared/ui/icons/feedback.svg?react';
+import FolderIcon from '@/shared/ui/icons/folder.svg?react';
+import LikeIcon from '@/shared/ui/icons/like.svg?react';
 import styles from './StagesWidget.module.css'
 
 
@@ -25,11 +25,11 @@ const getName = (type: string) => {
 const getIcon = (type: string) => {
   switch (type) {
     case 'projects':
-      return <FolderIcon size={18} color={'var(--color-gray-600)'} />;
+      return <FolderIcon className={styles.folderIcon}/>;
     case 'feedback':
-      return <FeedBackIcon size={18} color={'var(--color-gray-600)'} />;
+      return <FeedBackIcon className={styles.feedbackIcon}/>;
     case 'likes':
-      return <LikeIcon size={18} color={'var(--color-gray-600)'} />;
+      return <LikeIcon className={styles.likeIcon}/>;
     default:
       return null;
   }

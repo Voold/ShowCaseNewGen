@@ -1,4 +1,4 @@
-import { CheckIcon } from '../icons/CheckIcon';
+import CheckIcon from '@/shared/ui/icons/check.svg?react';
 import styles from './ProjectPrd.module.css'
 import type {PrdMeta} from "@/entities/project";
 
@@ -126,7 +126,7 @@ export const ProjectPrd = ({ PRD }: ProjectPrdProps) => {
               {
                 functional.map((req, index) => (
                     <div key={index} className={styles.fun}>
-                      <p className={styles.index}><CheckIcon className={styles.path}/></p>
+                      <p className={styles.index}> <CheckIcon className={styles.checkIcon}/></p>
                       <p className={styles.bodyText}> {req}</p>
                     </div>
                 ))

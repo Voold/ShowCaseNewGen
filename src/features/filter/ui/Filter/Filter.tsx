@@ -2,7 +2,7 @@ import styles from './Filter.module.css'
 import { useFilterStore } from '../../model/useFilterStore'
 import { useCompetencies } from '@/entities/competency'
 import { useTags } from '@/entities/tag'
-import { FolderIcon } from '@/shared/ui'
+import FolderIcon from '@/shared/ui/icons/folder.svg?react';
 import { getProjectFormatTranslation, PROJECT_FORMATS } from '@/entities/project'
 
 export default function Filter() {
@@ -28,7 +28,7 @@ export default function Filter() {
               className={`${styles.project} ${chosenProjectTypes.has(format) ? styles.selected : ''}`}
               onClick={() => toggleProjectType(format)}
             >
-              <FolderIcon pathClassName={styles.folderPath} size={12} />
+              <FolderIcon className={styles.folderIcon}/>
               <p className={styles.projectTitle}>{getProjectFormatTranslation(format)}</p>
             </div>
           ))}

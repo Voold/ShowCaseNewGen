@@ -1,4 +1,5 @@
-import { OpenIcon } from '../../icons/OpenIcon';
+import OpenIcon from '@/shared/ui/icons/open.svg?react';
+
 import styles from './LinkBlock.module.css';
 
 interface LinkBlockProps {
@@ -14,7 +15,7 @@ export const LinkBlock = ({title, service, link} : LinkBlockProps) => {
       <p className={styles.title}>{title}</p>
       <a className={styles.linkBlock} href={link}>
         <p className={styles.service}>{service}</p>
-        <OpenIcon color={'var(--color-gray-600)'} size={11}/>
+        <OpenIcon className={styles.openIcon} />
       </a>
     </div>
   )

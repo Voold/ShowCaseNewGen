@@ -1,6 +1,6 @@
 import { formatDeadline, getDaysUntil } from '@/shared/lib/date';
-import { CalendarIcon } from '../../icons/CalendarIcon'
-import { CheckIcon } from '../../icons/CheckIcon';
+import CalendarIcon from '@/shared/ui/icons/calendar.svg?react';
+import CheckIcon from '@/shared/ui/icons/check.svg?react';
 import ClockIcon from '@/shared/ui/icons/clock.svg?react'
 import styles from './KeyPoints.module.css'
 
@@ -24,7 +24,7 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
       <div className={styles.header}>
         <p className={styles.title}>Ключевые точки</p>
         <div className={styles.leftTimeBlock}>
-          <CalendarIcon size={11} color={'var(--color-gray-600)'}/>
+          <CalendarIcon/>
           <p className={styles.leftTime}>{leftTime}</p>
         </div>
       </div>
@@ -70,7 +70,7 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
                 </p>
                 <p className={styles.keyDeadline}>
                   {isCompleted ? (
-                    <span className={styles.completedText}>Завершено <CheckIcon color='#28BE46'/></span>
+                    <span className={styles.completedText}>Завершено  <CheckIcon className={styles.checkIcon}/></span>
                   ) : (
                     <>
                       {formatDeadline(keyPoint.deadline)}

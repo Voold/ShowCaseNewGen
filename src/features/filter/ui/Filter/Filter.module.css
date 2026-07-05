@@ -36,9 +36,11 @@
   color: var(--color-gray-650);
   transition: border-color 0.2s, color 0.2s, background-image 0.2s;
 
-  & .folderPath {
+  & .folderIcon {
     transition: stroke-width 0.2s, stroke 0.2s;
     stroke: currentColor;
+    width: 12px;
+    height: 12px;
     stroke-width: 0;
   }
 
@@ -47,11 +49,11 @@
     color: var(--color-gray-500);
   }
 
-  &:hover .folderPath {
+  &:hover .folderIcon {
     stroke-width: 0.2;
   }
 
-  &.selected .folderPath {
+  &.selected .folderIcon {
     stroke-width: 0.4;
   }
 }

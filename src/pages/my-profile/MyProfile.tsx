@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './MyProfile.module.css';
-import { BackIcon } from '@/shared';
 import { useMe } from '@/entities/user/api/queries';
 import { ProfileHeader } from '@/widgets/profile-header';
 import { AboutMe } from "@/features/about-me/ui/AboutMe.tsx";
 import { MyCompetenciesList } from "@/features/my-competencies";
+import BackIcon from '@/shared/ui/icons/back.svg?react';
 
 export const MyProfile = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const MyProfile = () => {
   return (
     <div className={styles.mainContent}>
       <section className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
-        <BackIcon pathClassName={styles.backIcon} color='#93959B' />
+        <BackIcon/>
         <p className={styles.back}>Назад к списку проектов</p>
       </section>
 

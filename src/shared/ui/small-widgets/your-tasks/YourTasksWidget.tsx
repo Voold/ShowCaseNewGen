@@ -3,7 +3,7 @@ import ClockIcon from '@/shared/ui/icons/clock.svg?react'
 import { InfoTooltip } from '../../info-tooltip/InfoTooltip';
 import type { Activity } from './model/types';
 import styles from './YourTasksWidget.module.css'
-import { CheckIcon } from '../..';
+import CheckIcon from '@/shared/ui/icons/check.svg?react';
 
 type YourTasksWidgetProps = {
   data?: Activity[]
@@ -95,7 +95,7 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
                     {activity.status === 'completed' && (
                       <div className={styles.completedLabel}>
                         Пройдено
-                        <CheckIcon color='#28BE46' />
+                        <CheckIcon className={styles.checkIcon}/>
                       </div>
                     )}
                   </div>

@@ -1,5 +1,5 @@
 import styles from './InfoTooltip.module.css'
-import { QuestionIcon } from '../icons/QuestionIcon'
+import QuestionIcon from '@/shared/ui/icons/question.svg?react';
 
 interface InfoTooltipProps {
     className: string;
@@ -9,7 +9,7 @@ interface InfoTooltipProps {
 export const InfoTooltip = ({ className, text }: InfoTooltipProps) => {
     return (
         <div className={`${styles.questionIcon} ${className}`}>
-            <QuestionIcon pathClassName={styles.questionIconPath} />
+            <QuestionIcon className={styles.questionIcon} />
             <span className={styles.tooltip}>
                 {text}
             </span>

@@ -1,5 +1,7 @@
 import styles from './FreeCompetencies.module.css'
-import {CheckIcon, FeedBackIcon, StarDetailIcon} from "@/shared/ui";
+import CheckIcon from '@/shared/ui/icons/check.svg?react';
+import FeedBackIcon from '@/shared/ui/icons/feedback.svg?react';
+import StarDetailIcon from '@/shared/ui/icons/starDetail.svg?react';
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import {useState} from "react";
 
@@ -88,8 +90,10 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
                                 {skill.skillName}
                                 {skill.requireSkill && (
                                     <>
-                                      <StarDetailIcon className={styles.starIcon}
-                                                      color={`${isSelected ? 'var(--color-brand-green)' : 'white'}`}/>
+                                      <StarDetailIcon
+                                        className={styles.starIcon}
+                                        color={`${isSelected ? 'var(--color-brand-green)' : 'white'}`}
+                                      />
                                       <span className={styles.tooltip}>
                                 менеджер проекта считает этот навык приоритетным
                               </span>
@@ -107,7 +111,7 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
                         <p className={styles.countRes}>
                           {67}
                         </p>
-                        <FeedBackIcon size={11} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `}/>
+                        <FeedBackIcon className={styles.feedbackIcon} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `}/>
                         <span className={styles.tooltip}>
                           столько откликов на эту компетенцию
                         </span>
@@ -115,8 +119,8 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
 
                       <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>
                         {isSelected ?
-                            <CheckIcon className={styles.checkIcon} size={9} color={'var(--color-brand-green)'}/> :
-                            <Plus className={styles.plusIcon}/>
+                          <CheckIcon className={styles.checkIcon}/> :
+                          <Plus className={styles.plusIcon}/>
                         }
                       </div>
 

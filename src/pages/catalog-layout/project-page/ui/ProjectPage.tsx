@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BackIcon, IdIcon, ShareIcon } from '@/shared/ui';
+import IdIcon from '@/shared/ui/icons/id.svg?react';
+import ShareIcon from '@/shared/ui/icons/share.svg?react';
+import BackIcon from '@/shared/ui/icons/back.svg?react';
 import styles from './ProjectPage.module.css';
 import { ProfileWidget } from '@/shared/ui/small-widgets/profile-widget/ProfileWidget';
 import { LinkBlock } from '@/shared/ui/small-widgets/link-block/LinkBlock';
@@ -73,7 +75,7 @@ export function ProjectPage() {
   return (
     <main className={styles.main}>
       <div className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
-        <BackIcon pathClassName={styles.backIcon} color='#93959B' />
+        <BackIcon/>
         <p className={styles.back}>Назад к списку проектов</p>
       </div>
 
