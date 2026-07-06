@@ -1,23 +1,22 @@
 @font-face {
   font-family: "ALS Sirius";
-  src: url("./fonts/ALS_Sirius_Regular_0.95.otf") format("opentype");
-  font-weight: normal;
+  src: url("./fonts/ALS_Sirius_Regular_0.95.woff2") format("woff2");
+  font-weight: 400;
 }
 
 @font-face {
   font-family: "ALS Sirius";
-  src: url("./fonts/ALS_Sirius_Bold_0.95.otf") format("opentype");
-  font-weight: bold;
+  src: url("./fonts/ALS_Sirius_Bold_0.95.woff2") format("woff2");
+  font-weight: 700;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./fonts/Inter.ttf") format("opentype");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  src: url("./fonts/OpenSans.ttf") format("opentype");
+  font-family: 'Inter Variable';
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+  src: url('./fonts/Inter-Variable.woff2') format('woff2')
 }
 
 @font-face {
@@ -26,9 +25,5 @@
   font-stretch: 75% 100%;
   font-style: normal;
   font-display: swap;
-  src: url('./fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
-}
-
-* {
-  box-sizing: border-box;
+  src: url('./fonts/OpenSans-Variable.woff2') format('woff2');
 }

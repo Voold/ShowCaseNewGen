@@ -7,6 +7,12 @@
   --color-red: #FF3344;
   --color-yellow: #FFB600;
 
+  --black: 29, 29, 31;
+  --green: 40, 190, 70;
+  --middle-gray: 207, 209, 211;
+  --light-gray: 240, 242, 245;
+  --dark-blue: 43, 43, 59;
+  --description: 129, 132, 152;
 
   --grad-lime: linear-gradient(45deg,
   #1BBB1B 0%,
@@ -50,7 +56,7 @@
   --color-gray-50: #EFF1F5;
 
 
-  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-inter: 'Inter Variable', system-ui, sans-serif;
   --font-ALS: 'ALS Sirius', system-ui, sans-serif;
   --font-open-sans: 'Open Sans Variable', sans-serif;
 

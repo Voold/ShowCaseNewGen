@@ -10,6 +10,9 @@
   font-family: 'ALS Sirius', serif;
     margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 h1 {
@@ -50,6 +53,9 @@ body, p {
 body {
   background-color: var(--color-gray-50);
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ul {
