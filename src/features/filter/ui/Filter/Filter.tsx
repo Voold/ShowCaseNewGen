@@ -2,7 +2,7 @@ import styles from './Filter.module.css'
 import { useFilterStore } from '../../model/useFilterStore'
 import { useCompetencies } from '@/entities/competency'
 import { useTags } from '@/entities/tag'
-import FolderIcon from '@/shared/ui/icons/folder.svg?react';
+import FolderIcon from '@/shared/ui/icons/folder.svg?react'
 import { getProjectFormatTranslation, PROJECT_FORMATS } from '@/entities/project'
 
 export default function Filter() {
@@ -28,7 +28,7 @@ export default function Filter() {
               className={`${styles.project} ${chosenProjectTypes.has(format) ? styles.selected : ''}`}
               onClick={() => toggleProjectType(format)}
             >
-              <FolderIcon className={styles.folderIcon}/>
+              <FolderIcon className={styles.folderIcon} />
               <p className={styles.projectTitle}>{getProjectFormatTranslation(format)}</p>
             </div>
           ))}
@@ -40,18 +40,20 @@ export default function Filter() {
       <div className={styles.tagsContainer}>
         <h3 className={styles.title}>Трек-теги</h3>
         <div className={styles.bodyTags}>
-          {tagGroups.map(group => (
-            <div className={styles.tagBlock}>
-              <p className={styles.field}>{group.name}</p>
-              <div className={styles.tagsList}>
-                {group.tags.map(tag => (
-                  <div key={tag.id} className={`${styles.tag} ${chosenTags.has(tag.id) ? styles.selected : ''}`} onClick={() => toggleTag(tag.id)}>
-                    {tag.name}
-                  </div>
-                ))}
+          {tagGroups
+            .filter(g => g.tags.length)
+            .map(group => (
+              <div className={styles.tagBlock}>
+                <p className={styles.field}>{group.name}</p>
+                <div className={styles.tagsList}>
+                  {group.tags.map(tag => (
+                    <div key={tag.id} className={`${styles.tag} ${chosenTags.has(tag.id) ? styles.selected : ''}`} onClick={() => toggleTag(tag.id)}>
+                      {tag.name}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
