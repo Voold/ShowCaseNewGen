@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import IdIcon from '@/shared/ui/icons/id.svg?react';
 import ShareIcon from '@/shared/ui/icons/share.svg?react';
@@ -13,6 +13,7 @@ import { ProjectInfo } from '@/shared/ui/project-info/ProjectInfo';
 import { ProjectPrd } from '@/shared/ui/project-prd/ProjectPrd';
 import { useProjectDetails } from '@/entities/project/api/queries';
 import TargetIcon from '@/shared/ui/icons/target.svg?react'
+import clsx from "clsx";
 
 
 export function ProjectPage() {
@@ -23,6 +24,36 @@ export function ProjectPage() {
   const leftWidgetsRef = useRef<HTMLDivElement>(null);
   const projectsInfoRef = useRef<HTMLElement>(null);
   const rightWidgetsRef = useRef<HTMLDivElement>(null);
+
+  const titleLabelRef = useRef<HTMLElement>(null)
+  const titleTextRef = useRef<HTMLSpanElement>(null)
+
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const label = titleLabelRef.current
+    const text = titleTextRef.current
+
+    if (!label || !text) return;
+
+    const checkOverflow = () => {
+      const hasOverflow = text.offsetWidth > label.offsetWidth;
+      console.log(text.offsetWidth);
+      console.log(label.offsetWidth);
+      setIsScrolling(hasOverflow);
+      console.log(hasOverflow);
+    }
+
+
+
+    checkOverflow()
+
+    const resizeObserver = new ResizeObserver(() => checkOverflow())
+    resizeObserver.observe(label)
+
+    return resizeObserver.disconnect()
+  }, [project]);
+
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     const target = e.currentTarget;
@@ -56,22 +87,6 @@ export function ProjectPage() {
     { title: 'Постерная сессия', deadline: '29-05-2026', status: false }
   ];
 
-  // const PRDdata = {
-  //   prerequisites: project.prdMeta.context || 'Нет информации',
-  //   productVision: '',
-  //   audience: project.prdMeta.audience ? [{ title: project.prdMeta.audience, description: '', minAge: 0, maxAge: 99 }] : [],
-  //   goalsProjects: '',
-  //   goalsBusiness: '',
-  //   requirements: {
-  //     keyFunctionality: project.prdMeta.requirements,
-  //     functional: project.prdMeta.requirements,
-  //     nonFunctional: []
-  //   },
-  //   problemStatement: project.prdMeta.problem || 'Нет проблемы',
-  //   businessMetrics: [],
-  //   projectPlan: []
-  // };
-
   return (
     <main className={styles.main}>
       <div className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
@@ -96,12 +111,26 @@ export function ProjectPage() {
         </div>
       </aside>
 
-      <section className={styles.title}>
-        <div className={styles.marqueeContent}>
-          <span className={styles.titleText}>{project.meta.title}</span>
-          <span className={styles.dot}>•</span>
-          <span className={styles.titleText}>{project.meta.title}</span>
-          <span className={styles.dot}>•</span>
+      <section className={clsx(styles.title)} ref={titleLabelRef}>
+        <div
+          className={isScrolling ? styles.marqueeContent : styles.marqueeContentStatic}
+        >
+          <span
+            className={styles.titleText}
+            ref={titleTextRef}
+          >
+            {project.meta.title}
+          </span>
+
+          {isScrolling && (
+            <>
+              <span className={styles.dot}>  </span>
+              <span className={styles.titleText}>
+                {project.meta.title}
+              </span>
+              <span className={styles.dot}>  </span>
+            </>
+          )}
         </div>
       </section>
 
