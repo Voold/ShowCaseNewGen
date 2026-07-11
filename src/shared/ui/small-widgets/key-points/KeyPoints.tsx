@@ -11,11 +11,10 @@ interface KeyPoint {
 }
 
 interface KeyPointsProps {
-  leftTime: string;
   keyPoints: KeyPoint[];
 }
 
-export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
+export const KeyPoints = ({ keyPoints }: KeyPointsProps) => {
   const lastCompletedIndex = keyPoints.reduce((acc, kp, i) => kp.status ? i : acc, -1)
   const activeIndex = lastCompletedIndex + 1 < keyPoints.length ? lastCompletedIndex + 1 : -1
 
@@ -25,7 +24,7 @@ export const KeyPoints = ({ leftTime, keyPoints }: KeyPointsProps) => {
         <p className={styles.title}>Ключевые точки</p>
         <div className={styles.leftTimeBlock}>
           <CalendarIcon/>
-          <p className={styles.leftTime}>{leftTime}</p>
+          <p className={styles.leftTime}>{'4 месяца'}</p>
         </div>
       </div>
 

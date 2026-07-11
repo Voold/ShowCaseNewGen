@@ -3,7 +3,7 @@
 
   position: relative;
   box-sizing: border-box;
-  background-color: var(--color-gray-100);
+  background-color: var(--color-gray-150);
   border-radius: 20px;
 
   padding: 14px;
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: var(--color-gray-750);
+  overflow: hidden;
 }
 
 .avatarImg {
@@ -35,14 +35,20 @@
   gap: 4px;
 }
 
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .name {
-  font: var(--meta-title-interface);
-  font-size: 13px;
+  font: var(--ALS-13-700);
+  color: var(--color-gray-900);
 }
 
 .desc {
-  font: var(--field-label-interface);
-  font-size: 10px;
+  font: var(--ALS-10-400);
+  color: var(--color-gray-900);
 }
 
 .questionIcon {
@@ -52,9 +58,6 @@
   cursor: pointer;
 }
 
-.questionIconPath {
-  fill: var(--color-gray-350)
-}
 
 .tooltip {
   position: absolute;

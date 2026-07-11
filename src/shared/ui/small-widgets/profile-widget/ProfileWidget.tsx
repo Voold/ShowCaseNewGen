@@ -1,29 +1,37 @@
 import styles from './ProfileWidget.module.css';
-import { InfoTooltip } from '../../info-tooltip/InfoTooltip.tsx';
+import { InfoTooltip } from '@/shared';
+import FallbackMentorIcon from '@/shared/ui/icons/fallback_mentor.svg?react';
 
 interface ProfileWidgetProps {
-  name: string,
+  first_name: string;
+  last_name: string;
   role: string,
   avatarSrc?: string,
 }
 
 
-export const ProfileWidget = ({ name, role, avatarSrc }: ProfileWidgetProps) => {
+export const ProfileWidget = ({ first_name, last_name, role, avatarSrc }: ProfileWidgetProps) => {
   return (
     <div className={styles.profileWidget}>
       <div className={styles.avatar}>
         {
-          avatarSrc && <img className={styles.avatarImg} src={avatarSrc} alt='Аватар' />
+          avatarSrc ? <img className={styles.avatarImg} src={avatarSrc} alt='Аватар' /> : <FallbackMentorIcon/>
         }
 
       </div>
       <div className={styles.info}>
-        <div className={styles.name}>{name}</div>
+
+        <div className={styles.nameContainer}>
+          <div className={styles.name}>{last_name}</div>
+          <div className={styles.name}>{first_name}</div>
+        </div>
+
         <div className={styles.role}>{role}</div>
       </div>
       <InfoTooltip
-        text="Менеджер проекта"
+        text="Человек который отвечает за этот проект"
         className={styles.questionIcon}
+        type={'help'}
       />
     </div>
   )

@@ -4,26 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { typeProjectsLabel } from '@/shared/ui/type-project-label/typeProjectsLabel.tsx';
 import { useState } from 'react';
 import { LikeButton } from '@/shared/ui';
+import { getProjectTagBackground } from '../../lib/getProjectTagBackground';
 
 interface ProjectCardProps {
   project: ProjectCardData;
-}
-
-const getColorFromTag = (tag: string) => {
-  switch (tag) {
-    case 'Веб-разработка':
-      return styles.violet
-    case 'Инженерия':
-      return styles.blue
-    case 'E-commerce':
-      return styles.pink
-    case 'VR/AR':
-      return styles.pink
-    case 'Мобайл-разработка':
-      return styles.green
-    default:
-      return styles.blue
-  }
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
@@ -37,9 +21,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   const remainCount = tags.length - 1;
 
-  // Собираем названия компетенций из массива ролей
   const competencies = roles.map(role => role.meta.name);
-  // Если есть описание — считаем карточку расширенной
 
   return (
     <div className={`${styles.cardBody}`} data-bg={primaryTag.tagName}
@@ -52,7 +34,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className={`${styles.like} ${isLiked ? styles.liked : ''}`}
       />
 
-      <div className={`${styles.header} ${getColorFromTag(primaryTag.tagName)}`} data-bg={primaryTag.tagName}>
+      <div className={styles.header} data-bg={primaryTag.tagName} style={{ background: getProjectTagBackground(primaryTag.tagName) }}>
         <div className={styles.directionTag}>{primaryTag.tagName}</div>
         {remainCount > 0 && (
           <div className={styles.tags}>

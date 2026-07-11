@@ -14,12 +14,21 @@ import { ProjectPrd } from '@/shared/ui/project-prd/ProjectPrd';
 import { useProjectDetails } from '@/entities/project/api/queries';
 import TargetIcon from '@/shared/ui/icons/target.svg?react'
 import clsx from "clsx";
+import {useUserById} from "@/entities/user";
 
 
 export function ProjectPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data: project, isLoading, isError } = useProjectDetails(id || '');
+
+  // TODO
+  const { data: owner } = useUserById(
+    project?.ownerId?.toString() || ''
+  )
+
+  console.log(project)
+
 
   const leftWidgetsRef = useRef<HTMLDivElement>(null);
   const projectsInfoRef = useRef<HTMLElement>(null);
@@ -43,8 +52,6 @@ export function ProjectPage() {
       setIsScrolling(hasOverflow);
       console.log(hasOverflow);
     }
-
-
 
     checkOverflow()
 
@@ -71,7 +78,11 @@ export function ProjectPage() {
   };
 
   if (isLoading) return <div style={{ padding: 40 }}>Загрузка проекта...</div>;
-  if (isError || !project) return <div style={{ padding: 40 }}>Проект не найден</div>;
+  if (isError || !project || !owner) return <div style={{ padding: 40 }}>Проект не найден</div>;
+
+
+
+
   const teamMock = [
     { name: 'Фадеев', role: 'Backend', avatarSrc: '' },
     { name: 'Яра', role: 'Frontend', avatarSrc: '' }
@@ -91,17 +102,17 @@ export function ProjectPage() {
     <main className={styles.main}>
       <div className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
         <BackIcon/>
-        <p className={styles.back}>Назад к списку проектов</p>
+        <p className={styles.back}>Назад</p>
       </div>
 
       <aside className={styles.leftWidgets} ref={leftWidgetsRef} onScroll={handleScroll}>
         <ProfileWidget
-          name="Организатор"
-          role="Менеджер"
+          last_name={owner.meta.lastName}
+          first_name={owner.meta.firstName}
+          role="Менеджер данного проекта"
           avatarSrc=""
         />
         <KeyPoints
-          leftTime="В процессе"
           keyPoints={checkpointsMock}
         />
         <div className={styles.links}>
@@ -140,14 +151,12 @@ export function ProjectPage() {
       </section>
 
       <aside className={styles.idBlock}>
-        <p className={styles.id}>
-          <IdIcon />
-          ID: {project.id}
-        </p>
+
         <a className={styles.share} href='#'>
           <ShareIcon />
           Поделиться проектом
         </a>
+        <IdIcon />
       </aside>
 
       <aside className={styles.rightWidgets} ref={rightWidgetsRef} onScroll={handleScroll}>

@@ -4,6 +4,7 @@ import FeedBackIcon from '@/shared/ui/icons/feedback.svg?react';
 import StarDetailIcon from '@/shared/ui/icons/starDetail.svg?react';
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import {useState} from "react";
+import {InfoTooltip} from "@/shared";
 
 interface FreeCompetenciesProps {
   roles: {
@@ -79,30 +80,44 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
                       onClick={() => toggleCometencySelect(role.roleId)}
                   >
                     <div className={styles.leftHalfRole}>
-                      <p className={styles.role}>
-                        {role.meta.name}
-                      </p>
-                      <ul className={styles.skillsList}>
-                        {
-                          role.skills.map((skill) => (
-                              <li className={`${styles.skill} ${skill.requireSkill ? styles.required : ''}`}
-                                  key={skill.skillName}>
-                                {skill.skillName}
-                                {skill.requireSkill && (
+                      <div className={styles.competencyHeader}>
+                        <p className={styles.role}>
+                          {role.meta.name}
+                        </p>
+                        <InfoTooltip
+                          type={'help'}
+                          className={styles.tooltip}
+                          iconClassName={styles.tooltipIcon}
+                        />
+                      </div>
+
+                      {
+                        role.skills.length !== 0 ? (
+                          <ul className={styles.skillsList}>
+                            {
+                              role.skills.map((skill) => (
+                                <li className={`${styles.skill} ${skill.requireSkill ? styles.required : ''}`}
+                                    key={skill.skillName}>
+                                  {skill.skillName}
+                                  {skill.requireSkill && (
                                     <>
                                       <StarDetailIcon
                                         className={styles.starIcon}
                                         color={`${isSelected ? 'var(--color-brand-green)' : 'white'}`}
                                       />
-                                      <span className={styles.tooltip}>
-                                менеджер проекта считает этот навык приоритетным
-                              </span>
                                     </>
-                                )}
-                              </li>
-                          ))
-                        }
-                      </ul>
+                                  )}
+                                </li>
+                              ))
+                            }
+                          </ul>
+                        ) : (
+                          <p className={styles.withoutSkills}>
+                            Определённые навыки не требуются
+                          </p>
+                        )
+                      }
+
                     </div>
 
                     <div className={styles.aside}>
@@ -112,9 +127,6 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
                           {67}
                         </p>
                         <FeedBackIcon className={styles.feedbackIcon} color={`${isSelected ? 'white' : 'var(--color-gray-600)'} `}/>
-                        <span className={styles.tooltip}>
-                          столько откликов на эту компетенцию
-                        </span>
                       </div>
 
                       <div className={`${styles.plusButton} ${isSelected ? styles.selected : ''}`}>

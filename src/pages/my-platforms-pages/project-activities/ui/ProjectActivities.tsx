@@ -85,7 +85,7 @@ export const ProjectActivities = () => {
             <aside className={styles.profile}>
                 <ProjectProfile name={user?.meta.name} role={data.role} avatarSrc={user?.profilePicture} />
             </aside>
-            <h1 className={styles.welcomeMessage}>C возвращением, {data.name}!</h1>
+            <h1 className={styles.welcomeMessage}>C возвращением, {user?.meta.firstName}!</h1>
             <aside className={styles.activities} ref={widgetRef} onScroll={handleScroll}>
                 <YourTasksWidget data={data.activities} />
                 <YourPointsWidget disciplines={data.closingDisciplines} tpuPoints={307} />

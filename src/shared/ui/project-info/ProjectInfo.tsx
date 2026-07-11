@@ -1,6 +1,7 @@
 import type { ProjectCardData } from '@/entities/project/model/types';
 import styles from './ProjectInfo.module.css'
-import { typeProjectsLabel } from '@/entities/project';
+import { typeProjectsLabel, getProjectTagBackground } from '@/entities/project';
+import {InfoTooltip, LikeButton} from "@/shared";
 
 type ProjectInfoProps = {
   data: ProjectCardData
@@ -8,7 +9,7 @@ type ProjectInfoProps = {
 
 export const ProjectInfo = ({ data }: ProjectInfoProps) => {
   return (
-    <div className={styles.projectMain}>
+    <div className={styles.projectMain} style={{ background: getProjectTagBackground(data.primaryTag.tagName) }}>
       <div className={styles.topLabel}>
         <div className={styles.mainInfo}>
           <div className={styles.tags}>
@@ -25,19 +26,27 @@ export const ProjectInfo = ({ data }: ProjectInfoProps) => {
           </div>
         </div>
         <div className={styles.format}>
-          {typeProjectsLabel(data.type)}
+          <InfoTooltip
+            text={'Можно пробовать с минимальными навыками: главное — желание учиться и открывать для себя новые скиллы. Мы тебя ждём!'}
+          >
+            {typeProjectsLabel(data.type)}
+          </InfoTooltip>
+
+          <LikeButton isLiked={false} onClick={() => {}}/>
         </div>
       </div>
 
-      <div className={styles.orgBlock}>
-        <div className={styles.orgAvatar}>Т</div>
-        <div className={styles.orgInfo}>
-          <span className={styles.orgName}>{data.partnerId.verbose}</span>
-          <span className={styles.orgSub}>публикационная активность</span>
+      <div className={styles.mainBlock}>
+        <div className={styles.orgBlock}>
+          <div className={styles.orgAvatar}>Т</div>
+          <div className={styles.orgInfo}>
+            <span className={styles.orgName}>{data.partnerId.verbose}</span>
+            <span className={styles.orgSub}>публикационная активность</span>
+          </div>
         </div>
-      </div>
 
-      <p className={styles.description}>{data.meta.description}</p>
+        <p className={styles.description}>{data.meta.description}</p>
+      </div>
     </div>
   );
 };

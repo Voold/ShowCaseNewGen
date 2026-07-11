@@ -62,7 +62,6 @@
   color: var(--color-brand-black);
 }
 
-
 .skillsList {
   display: flex;
   flex-wrap: wrap;
@@ -111,8 +110,11 @@
   opacity: 0.45;
 }
 
-
 .selected .role {
+  color: white;
+}
+
+.selected .withoutSkills {
   color: white;
 }
 
@@ -140,9 +142,9 @@
 }
 
 .button {
-  padding: 14px 28px 12px 28px;
+  padding: 14px 28px 15px 28px;
   border: 1px solid white;
-  font: var(--label-interface);
+  font: var(--inter-13-600);
   color: var(--color-brand-green);
   background-color: white;
   font-weight: 500;
@@ -174,63 +176,10 @@
   fill: var(--color-gray-350)
 }
 
-.tooltip {
-  position: absolute;
-  z-index: 10000;
-  display: block;
-  width: max-content;
-  max-width: 220px;
-  padding: 7px 8px 8px 8px;
-  background-color: #E6E6E6;
-  color: var(--color-gray-900);
-  font-family: var(--font-inter);
-  font-size: 9px;
-  line-height: 1.1;
-  border-radius: 4px 0 4px 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  white-space: normal;
-  font-weight: 300;
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.2s;
-}
-
-.skill:hover .tooltip,
-.response:hover .tooltip,
-.questionIcon:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.skill .tooltip {
-  top: calc(100% + 8px);
-  left: 0;
-  transform: translateY(-4px);
-  border-radius: 4px 4px 4px 4px;
-}
-
-.response .tooltip {
-  top: calc(100% + 8px);
-  right: 0;
-  transform: translateY(-4px);
-}
-
-.questionIcon .tooltip {
-  top: calc(100% + 8px);
-  right: 0;
-  transform: translateY(-4px);
-}
-
 .plusButton {
-  bottom: 8px;
-  right: 8px;
-  width: 20px ;
+  bottom: 9px;
+  right: 9px;
+  width: 20px;
   height: 20px;
   border-radius: 10px;
   background-color: var(--color-brand-black);
@@ -269,4 +218,38 @@
 .feedbackIcon {
   width: 8px;
   height: 11px;
+}
+
+.withoutSkills {
+  font: var(--description-platform);
+  color: var(--color-gray-750)
+}
+
+.competencyHeader {
+  display: flex;
+  gap: 4px;
+  align-items: end;
+}
+
+.competency:hover .tooltip {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.competency:hover:not(.selected):not(.dimmed) {
+  border-color: var(--color-brand-black);
+}
+
+.tooltip {
+  opacity: 0;
+  width: 12px;
+  height: 13px;
+}
+
+.tooltipIcon {
+  color: var(--color-gray-500);
+}
+
+.selected .tooltipIcon {
+  color: var(--color-gray-100);
 }

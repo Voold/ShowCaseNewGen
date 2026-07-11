@@ -1,6 +1,7 @@
 import styles from './ProjectTeam.module.css'
-import { InfoTooltip } from '../../info-tooltip/InfoTooltip.tsx'
 import CheckIcon from '@/shared/ui/icons/check.svg?react';
+import PersonFallbackIcon from '@/shared/ui/icons/fallback_personal.svg?react';
+
 
 type ProjectTeamProps = {
   list: {
@@ -16,7 +17,7 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
       <div className={styles.header}>
         <h3 className={styles.title}>Команда проекта</h3>
         <p className={styles.description}>
-          Что-то из карточки проекта
+          Текущий состав участников, которые реализуют этот проект
         </p>
       </div>
       <ul className={styles.teamList}>
@@ -28,13 +29,10 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
                   {item.role}
                 </p>
                 <div className={styles.info}>
-                  {item.avatarSrc ? (
-                    <img className={styles.avatar} src={item.avatarSrc} alt={item.name} />
-                  ) : (
-                    <div className={styles.avatarPlaceholder}>
-                      {item.name ? item.name.charAt(0).toUpperCase() : ''}
-                    </div>
-                  )}
+                  {item.avatarSrc ?
+                    <img className={styles.avatar} src={item.avatarSrc} alt={item.name} /> :
+                    <PersonFallbackIcon className={styles.fallbackIcon}/>
+                  }
                   <p className={styles.name}>
                     {item.name}
                   </p>
@@ -45,11 +43,6 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
           })
         }
       </ul>
-      <InfoTooltip
-        text="Здесь показаны все участники проекта"
-        className={styles.questionIcon}
-      />
-      
     </div>
   );
 };

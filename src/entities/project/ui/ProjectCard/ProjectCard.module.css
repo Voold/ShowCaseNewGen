@@ -65,21 +65,6 @@
   top: -40px;
 }
 
-.violet {
-  background: var(--grad-fiolet);
-}
-
-.green {
-  background: var(--grad-green);
-}
-
-.blue {
-  background: var(--grad-blue);
-}
-
-.pink {
-  background: var(--grad-orange);
-}
 
 .directionTag {
   display: inline-block;
