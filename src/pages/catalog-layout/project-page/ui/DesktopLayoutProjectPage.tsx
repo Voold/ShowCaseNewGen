@@ -47,10 +47,7 @@ export const DesktopLayoutProjectPage = ({project}: ProjectPageProps) => {
 
     const checkOverflow = () => {
       const hasOverflow = text.offsetWidth > label.offsetWidth;
-      console.log(text.offsetWidth);
-      console.log(label.offsetWidth);
       setIsScrolling(hasOverflow);
-      console.log(hasOverflow);
     }
 
     checkOverflow()

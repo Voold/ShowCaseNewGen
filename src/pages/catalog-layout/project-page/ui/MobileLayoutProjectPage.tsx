@@ -16,6 +16,8 @@ import {ProjectTeam} from "@/shared/ui/small-widgets/project-team/ProjectTeam.ts
 import {KeyPoints} from "@/shared/ui/small-widgets/key-points/KeyPoints.tsx";
 import {LinkContainer} from "@/shared/ui/small-widgets/link-block/LinkContainer.tsx";
 import {ProjectPrd} from "@/shared/ui/project-prd/ProjectPrd.tsx";
+import {Drawer} from "@/features/drawer/Drawer.tsx";
+import {FreeCompetencies} from "@/shared/ui/small-widgets/free-competencies/FreeCompetencies.tsx";
 
 interface ProjectPageProps {
   project: ProjectCardData
@@ -29,6 +31,8 @@ export const MobileLayoutProjectPage = ({project} : ProjectPageProps ) => {
     project?.ownerId?.toString() || ''
   )
   const [activeTab, setActiveTab] = useState<'about' | 'team'>('about');
+
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const options = [
     { value: 'about', label: 'О проекте' },
@@ -112,6 +116,14 @@ export const MobileLayoutProjectPage = ({project} : ProjectPageProps ) => {
         <UpIcon />
         Наверх
       </a>
+
+      <button className={styles.choiseComp} onClick={() => setDrawerOpen(true)}>
+        Выбрать компетенцию
+      </button>
+
+      <Drawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
+        <FreeCompetencies roles={project.roles}/>
+      </Drawer>
     </main>
   )
 }

@@ -253,3 +253,19 @@
 .selected .tooltipIcon {
   color: var(--color-gray-100);
 }
+
+@media (max-width: 768px) {
+  .title {
+    font: var(--field-label-interface)
+  }
+
+  .competency:hover:not(.selected):not(.dimmed) {
+    border-color: white;
+  }
+
+  .footer {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    gap: 16px
+  }
+}
