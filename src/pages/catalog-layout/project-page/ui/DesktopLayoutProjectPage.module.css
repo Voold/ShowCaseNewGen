@@ -1,0 +1,267 @@
+.main {
+  width: 100%;
+  height: calc(100vh);
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  grid-template-rows: 48px 1fr;
+  padding: 0 180px;
+  margin-top: 26px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  max-width: calc(1560px + 180px*2);
+}
+
+.leftWidgets {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.leftWidgets::-webkit-scrollbar {
+  display: none;
+}
+
+.projectsInfo {
+
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: none;
+
+  padding-top: 8px;
+
+  &::before {
+    content: '';
+    grid-column: 1;
+    grid-row: 2;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(to bottom, var(--color-gray-50), transparent);
+    height: 8px;
+  }
+}
+
+
+.projectsInfo::-webkit-scrollbar {
+  display: none;
+}
+
+.rightWidgets {
+  grid-column: 3;
+  grid-row: 2;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.rightWidgets::-webkit-scrollbar {
+  display: none;
+}
+
+.leftWidgets,
+.rightWidgets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px 18px 16px;
+}
+
+.headerLeft {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0 16px 0 16px;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.backIcon {
+  fill: #93959B
+}
+
+.projectPrdBlock {
+  padding: 32px 24px;
+  margin: 0 16px 16px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.back {
+  height: 100%;
+  align-content: center;
+  font: var(--step-title-platform);
+  color: var(--color-gray-400)
+}
+
+.title {
+  font: var(--hero-title-platform);
+  width: 100%;
+  grid-column: 2;
+  grid-row: 1;
+  padding: 0 16px;
+
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: start;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(to right,var(--color-gray-50), var(--color-gray-50), transparent);
+
+    z-index: 10;
+
+    top: 0;
+    left: 0;
+
+    width: 32px;
+    height: 100%;
+
+    animation: opacityShadow 12s infinite linear;
+
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(to left, var(--color-gray-50), var(--color-gray-50), transparent);
+
+    z-index: 10;
+
+    top: 0;
+    right: 0;
+
+    width: 32px;
+    height: 100%;
+
+  }
+}
+
+.title:has(.marqueeContentStatic)::before,
+.title:has(.marqueeContentStatic)::after {
+  animation: none;
+  opacity: 0;
+}
+
+.marqueeContent {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  will-change: transform;
+
+  /* 12s cycle: 2s pause (16.67%) + 10s slide */
+  animation: marquee 12s infinite linear;
+}
+
+.marqueeContentStatic {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.titleText {
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.dot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  color: var(--color-gray-400);
+}
+
+
+@keyframes marquee {
+  0%, 16.67% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes opacityShadow {
+  0%, 16.67% {
+    opacity: 0;
+  }
+  16.671% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.idBlock {
+  display: flex;
+  padding: 0 16px 4px 16px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.id,
+.share {
+  font: var(--step-title-platform);
+  color: var(--color-gray-400);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none
+}
+
+.projectStatus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 12px;
+  background-color: var(--color-gray-150);
+  border-radius: 20px
+}
+
+.statusLabel {
+  font: var(--label-interface);
+  color: var(--color-gray-650)
+}
+
+
+
+.green {
+  color: var(--color-brand-green);
+}
+
+.red {
+  color: var(--color-red);
+}
+
+@media (max-width: 1600px) {
+  .main {
+    padding: 0 40px 0;
+  }
+}
+
+@media (max-width: 1280px) {
+  .main {
+    padding: 0 20px 0;
+  }
+}

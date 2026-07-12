@@ -11,3 +11,9 @@
   /*TODO*/
   padding-top: calc(54px - 26px);
 }
+
+@media (max-width: 768px) {
+  .wrap {
+    padding-top: 0;
+  }
+}

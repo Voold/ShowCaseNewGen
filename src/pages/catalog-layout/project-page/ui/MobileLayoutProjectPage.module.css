@@ -1,0 +1,82 @@
+.main {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content;
+
+  padding-top: 24px;
+  padding-bottom: 24px;
+  gap: 16px;
+
+  overflow: auto;
+  scrollbar-width: none;
+
+  scroll-behavior: smooth;
+
+  position: relative;
+}
+
+.topElement {
+  position: absolute;
+  top: 0;
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.topBlock {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.leftTopBlock {
+  display: flex;
+  gap: 12px
+}
+
+.rightTopBlock {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.title {
+  font: var(--hero-title-platform);
+  color: var(--color-brand-black);
+  padding: 0 20px;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.prdBlock {
+  padding-top: 12px;
+}
+
+.widgetList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upButton {
+  font: var(--inter-13-600);
+  color: var(--color-brand-black);
+
+  margin: 0 20px;
+  height: 50px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 59px;
+  background-color: white;
+}

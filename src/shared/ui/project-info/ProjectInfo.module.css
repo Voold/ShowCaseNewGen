@@ -9,12 +9,11 @@
   margin: 0 16px;
 }
 
-
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  width: 427px;
+  width: auto;
 }
 
 .tag {
@@ -82,4 +81,14 @@
 .description {
   font: var(--body-text-platform);
   padding-right: 54px;
+}
+
+@media (max-width: 768px) {
+  .format {
+    display: none;
+  }
+
+  .description {
+    padding-right: 0;
+  }
 }

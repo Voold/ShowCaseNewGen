@@ -1,11 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 32px 24px;
   background-color: white;
   border-radius: 20px;
   gap: 48px;
-  margin: 0 16px 18px;
 }
 
 .smallBlock {
@@ -136,6 +134,13 @@
 @media (max-width: 1280px) {
   .container {
     gap: 36px
+  }
+}
+
+@media (max-width: 768px) {
+
+  .audienceGrid {
+    grid-template-columns: 1fr;
   }
 }
 

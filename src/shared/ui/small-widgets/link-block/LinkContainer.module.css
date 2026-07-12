@@ -1,0 +1,9 @@
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.links> :first-child:nth-last-child(odd) {
+  grid-column: span 2;
+}
