@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px 8px 12px 8px;
+  width: 100%;
 
   background-color: var(--color-brand-violet);
   border-radius: 20px;
@@ -256,7 +257,11 @@
 
 @media (max-width: 768px) {
   .title {
-    font: var(--field-label-interface)
+    font: var(--field-title-big-interface)
+  }
+
+  .freeCompetencies {
+    padding: 0;
   }
 
   .competency:hover:not(.selected):not(.dimmed) {

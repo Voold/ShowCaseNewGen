@@ -97,28 +97,30 @@ export default function CreateProjectPage() {
   const typeLabel = selectedType === 'Study' ? 'Учебный' : selectedType === 'Case' ? 'Кейс' : 'Реальный';
 
   return (
-    <main className={styles.mainContent}>
-      <div
-        className={styles.headerLeft}
-        onClick={() => setPageStep('type-select')}
-        style={{ cursor: 'pointer' }}
-      >
-        <BackIcon />
-        <p>Назад к выбору типа проекта</p>
-      </div>
+    <div className={styles.formPageWrapper}>
+      <main className={styles.mainContent}>
+        <div
+          className={styles.headerLeft}
+          onClick={() => setPageStep('type-select')}
+          style={{ cursor: 'pointer' }}
+        >
+          <BackIcon />
+          <p>Назад к выбору типа проекта</p>
+        </div>
 
-      <h1 className={styles.title}>Новый проект — «{typeLabel}»</h1>
+        <h1 className={styles.title}>Новый проект — «{typeLabel}»</h1>
 
-      <section className={styles.body}>
-        <ProjectInfoStep
-          form={form}
-          stepErrors={stepErrors}
-          isPending={isPending}
-          onSubmit={handleSubmit}
-          onDeleteDraft={handleDeleteDraft}
-          partners={MOCK_PARTNERS}
-        />
-      </section>
-    </main>
+        <section className={styles.body}>
+          <ProjectInfoStep
+            form={form}
+            stepErrors={stepErrors}
+            isPending={isPending}
+            onSubmit={handleSubmit}
+            onDeleteDraft={handleDeleteDraft}
+            partners={MOCK_PARTNERS}
+          />
+        </section>
+      </main>
+    </div>
   );
 }

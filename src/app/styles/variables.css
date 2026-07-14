@@ -62,6 +62,11 @@
 
   --section-title-interface: 600 20px/1 var(--font-inter);
   --field-label-interface: 400 18px/1 var(--font-ALS);
+
+  /*Новые бля*/
+  --field-title-small-interface: 700 14.5px/1 var(--font-ALS);
+  --field-title-big-interface: 400 16px/1 var(--font-ALS);
+
   --meta-title-interface: 700 15px/1.25 var(--font-ALS);
   --subhead-interface: 300 15px/1 var(--font-inter);
   --label-interface: 300 12px/1 var(--font-inter);

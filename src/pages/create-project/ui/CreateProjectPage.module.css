@@ -1,3 +1,11 @@
+.formPageWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
 .mainContent {
   width: 100%;
   height: 100%;
@@ -6,10 +14,9 @@
   grid-template-rows: 48px 168px 132px 1fr;
   /*TODO*/
   padding: 54px calc(180px + 16px) 0;
-   /*padding: 0 calc(180px + 16px); */
+  /*padding: 0 calc(180px + 16px); */
   /* margin-top: 26px; */
 
-  background-color: white;
 
   overflow-y: auto;
 
@@ -85,4 +92,3 @@
     padding: 54px 24px 0;
   }
 }
-

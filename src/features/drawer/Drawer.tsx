@@ -1,5 +1,5 @@
 import styles from './Drawer.module.css'
-import {type ReactNode, useEffect, useRef, useState} from "react";
+import {type ReactNode, type TouchEvent, useEffect, useRef, useState} from "react";
 import clsx from "clsx";
 
 interface DrawerProps {
@@ -27,15 +27,15 @@ export const Drawer = ({isOpen, onClose, children}: DrawerProps) => {
     }
   }, [isOpen]);
 
-  const handleTouchStart = (e: TouchEvent) => {
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
     startY.current = e.touches[0].clientY
   }
 
-  const handleTouchMove = (e: TouchEvent) => {
+  const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
     const currentY = e.touches[0].clientY
     const diff = currentY - startY.current
 
-    if (diff < 0) {
+    if (diff > 0) {
       setDragY(diff)
     }
   }
@@ -54,11 +54,11 @@ export const Drawer = ({isOpen, onClose, children}: DrawerProps) => {
 
       <div
         className={styles.sheet}
-        onTouchStart={() => handleTouchStart}
-        onTouchMove={() =>handleTouchMove}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         style={{
-          transform: isOpen ? `translateY(${dragY}px` : 'translateY(100%)',
+          transform: isOpen ? `translateY(${dragY}px)` : 'translateY(100%)',
           transition: dragY > 0 ? 'none' : 'transform 0.35s ease-out',
         }}
       >

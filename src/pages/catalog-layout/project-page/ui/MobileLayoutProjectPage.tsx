@@ -101,7 +101,10 @@ export const MobileLayoutProjectPage = ({project} : ProjectPageProps ) => {
                   role="Менеджер данного проекта"
                   avatarSrc=""
                 />
-                <ProjectTeam list={teamMock} />
+                <ProjectTeam
+                  list={teamMock}
+                  openFreeCompetency={() => setDrawerOpen(true)}
+                />
                 <KeyPoints
                   keyPoints={checkpointsMock}
                 />
@@ -117,7 +120,7 @@ export const MobileLayoutProjectPage = ({project} : ProjectPageProps ) => {
         Наверх
       </a>
 
-      <button className={styles.choiseComp} onClick={() => setDrawerOpen(true)}>
+      <button className={styles.choiceComp} onClick={() => setDrawerOpen(true)}>
         Выбрать компетенцию
       </button>
 

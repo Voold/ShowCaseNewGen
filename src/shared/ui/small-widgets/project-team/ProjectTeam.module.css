@@ -102,3 +102,38 @@
 .checkIcon {
   color: var(--color-gray-600);
 }
+
+.listWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.addBlock {
+
+  display: none;
+  background-color: var(--color-brand-violet);
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.addBlock p {
+  color: white;
+  font: var(--body-small-platform)
+}
+
+.addBlock button {
+  background-color: white;
+  font: var(--inter-11-600);
+  color: var(--color-brand-green);
+  padding: 12px 24px;
+  border-radius: 59px;
+}
+
+@media (max-width: 768px) {
+  .addBlock {
+    display: flex;
+  }
+}

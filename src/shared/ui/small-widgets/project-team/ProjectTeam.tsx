@@ -8,7 +8,8 @@ type ProjectTeamProps = {
     name: string,
     role: string,
     avatarSrc?: string,
-  }[]
+  }[],
+  openFreeCompetency?: () => void
 };
 
 export const ProjectTeam = (props: ProjectTeamProps) => {
@@ -20,29 +21,40 @@ export const ProjectTeam = (props: ProjectTeamProps) => {
           Текущий состав участников, которые реализуют этот проект
         </p>
       </div>
-      <ul className={styles.teamList}>
-        {
-          props.list.map((item, i) => {
-            return (
-              <li key={i} className={styles.item}>
-                <p className={styles.role}>
-                  {item.role}
-                </p>
-                <div className={styles.info}>
-                  {item.avatarSrc ?
-                    <img className={styles.avatar} src={item.avatarSrc} alt={item.name} /> :
-                    <PersonFallbackIcon className={styles.fallbackIcon}/>
-                  }
-                  <p className={styles.name}>
-                    {item.name}
+
+      <div className={styles.listWrap}>
+        <ul className={styles.teamList}>
+          {
+            props.list.map((item, i) => {
+              return (
+                <li key={i} className={styles.item}>
+                  <p className={styles.role}>
+                    {item.role}
                   </p>
-                </div>
-                <CheckIcon className={styles.checkIcon}/>
-              </li>
-            )
-          })
-        }
-      </ul>
+                  <div className={styles.info}>
+                    {item.avatarSrc ?
+                      <img className={styles.avatar} src={item.avatarSrc} alt={item.name} /> :
+                      <PersonFallbackIcon className={styles.fallbackIcon}/>
+                    }
+                    <p className={styles.name}>
+                      {item.name}
+                    </p>
+                  </div>
+                  <CheckIcon className={styles.checkIcon}/>
+                </li>
+              )
+            })
+          }
+        </ul>
+        <div className={styles.addBlock}>
+          <p>
+            Места в команде ещё свободны. Выберите свою компетенцию!
+          </p>
+          <button onClick={props.openFreeCompetency}>
+            Выбрать
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

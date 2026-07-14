@@ -71,7 +71,7 @@
   font: var(--inter-13-600);
   color: var(--color-brand-black);
 
-  margin: 0 20px;
+  margin: 0 20px calc(56px );
   height: 50px;
   display: flex;
   gap: 16px;
@@ -81,14 +81,17 @@
   background-color: white;
 
   text-decoration: none;
+
+
 }
 
-.choiseComp {
+.choiceComp {
   position: fixed;
   bottom: 11px;
   left: 50%;
   transform:  translateX(-50%);
   padding: 8px 24px;
+
 
   font: var(--inter-13-600);
   color: var(--color-brand-green);
