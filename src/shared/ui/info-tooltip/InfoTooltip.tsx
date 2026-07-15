@@ -1,48 +1,110 @@
 import styles from './InfoTooltip.module.css'
 import QuestionIcon from '@/shared/ui/icons/question.svg?react';
 import HelpIcon from '@/shared/ui/icons/help_icons.svg?react';
+import ImportantIcon from '@/shared/ui/icons/important.svg?react';
 import React from "react";
+import clsx from "clsx";
+
+type SizeTooltip = 'small' | 'large'
+type Pointer = 'topLeft' | 'bottomLeft' | 'topRight' | 'bottomRight'
 
 interface InfoTooltipProps {
   className?: string;
   iconClassName?: string;
   children?: React.ReactNode;
   title?: string;
-  subTitle?: string;
-  text?: string;
-  footer?: string;
+  body: {
+    subtitle?: string;
+    text?: string[];
+  }[]
+  size: SizeTooltip;
+  importantText: string;
   link?: string;
   type?: 'question' | 'help';
+  pointer: Pointer;
 }
+
+const THEME_MAP: Record<SizeTooltip, {
+  title: string;
+  subtitle: string;
+  text: string;
+  important: string;
+  link: string;
+  tooltipBg: string;
+}> = {
+  small: {
+    title: styles.titleSmall,
+    subtitle: styles.subtitleSmall,
+    text: styles.textSmall,
+    important: styles.importantSmall,
+    link: styles.linkSmall,
+    tooltipBg: styles.tooltipSmall
+  },
+  large: {
+    title: styles.titleLarge,
+    subtitle: styles.subtitleLarge,
+    text: styles.textLarge,
+    important: styles.importantLarge,
+    link: styles.linkLarge,
+    tooltipBg: styles.tooltipLarge
+  }
+};
 
 const getIconByType = (type: string, classNames: string) => {
   switch (type) {
     case 'question':
       return <QuestionIcon className={classNames} />;
     case 'help':
-      return <HelpIcon className={classNames}/>;
+      return <HelpIcon className={classNames} />;
   }
 }
 
-export const InfoTooltip = ({children, className, iconClassName, title, subTitle, text, footer, link, type }: InfoTooltipProps) => {
+export const InfoTooltip = ({ children, className, iconClassName, title, body, size, importantText, link, pointer, type }: InfoTooltipProps) => {
+
+  const s = THEME_MAP[size];
+
   return (
     <div className={[styles.tooltipBody, className].filter(Boolean).join(' ')}>
       {
         type ? getIconByType(type, iconClassName || '') : children
       }
-      <div className={styles.tooltip}>
-        <p className={styles.title}>
+      <div className={clsx(styles.tooltip, s.tooltipBg, styles[pointer], type && styles.centered)}>
+        <p className={clsx(styles.title, s.title)}>
           {title}
         </p>
-        <p className={styles.subTitle}>
-          {subTitle}
-        </p>
-        <p className={styles.text}>
-          {text}
-        </p>
-        <a className={styles.footer} href={link}>
-          {footer}
+        {
+          body.map((block, index) => (
+            <div key={index} className={styles.block}>
+              {
+                block.subtitle &&
+                <p className={clsx(styles.subtitle, s.subtitle)}>
+                  {block.subtitle}
+                </p>
+              }
+              <div className={styles.textList}>
+                {
+                  block.text?.map((text, index) => (
+                    <p key={index} className={clsx(styles.text, s.text)}>
+                      {text}
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+          ))
+        }
+
+        <div className={styles.importantBlock}>
+          <ImportantIcon />
+          <p className={clsx(styles.important, s.important)}>
+            {importantText}
+          </p>
+        </div>
+
+        <a className={clsx(styles.link, s.link)} href={link}>
+          Ссылка на FAQ
         </a>
+
       </div>
     </div>
   )

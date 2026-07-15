@@ -12,6 +12,7 @@ export const Drawer = ({isOpen, onClose, children}: DrawerProps) => {
 
   const [dragY, setDragY] = useState(0)
   const startY = useRef(0)
+  const sheetRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -27,17 +28,33 @@ export const Drawer = ({isOpen, onClose, children}: DrawerProps) => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleTouchMoveNative = (e: globalThis.TouchEvent) => {
+      const currentY = e.touches[0].clientY
+      const diff = currentY - startY.current
+
+      if (diff > 0) {
+        if (e.cancelable) {
+          e.preventDefault()
+        }
+        setDragY(diff)
+      }
+    }
+
+    const sheet = sheetRef.current
+    if (sheet) {
+      sheet.addEventListener('touchmove', handleTouchMoveNative, { passive: false })
+    }
+
+    return () => {
+      if (sheet) {
+        sheet.removeEventListener('touchmove', handleTouchMoveNative)
+      }
+    }
+  }, [])
+
   const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
     startY.current = e.touches[0].clientY
-  }
-
-  const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-    const currentY = e.touches[0].clientY
-    const diff = currentY - startY.current
-
-    if (diff > 0) {
-      setDragY(diff)
-    }
   }
 
   const handleTouchEnd = () => {
@@ -54,8 +71,8 @@ export const Drawer = ({isOpen, onClose, children}: DrawerProps) => {
 
       <div
         className={styles.sheet}
+        ref={sheetRef}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         style={{
           transform: isOpen ? `translateY(${dragY}px)` : 'translateY(100%)',

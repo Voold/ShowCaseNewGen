@@ -85,9 +85,23 @@ export const FreeCompetencies = ({roles}: FreeCompetenciesProps) => {
                           {role.meta.name}
                         </p>
                         <InfoTooltip
-                          type={'help'}
                           className={styles.tooltip}
                           iconClassName={styles.tooltipIcon}
+                          title="Заголовок тултипа"
+                          body={
+                            [
+                              {
+                                text: [
+                                  'Бла бла',
+                                ]
+                              },
+                            ]
+                          }
+                          size={'small'}
+                          pointer={'topLeft'}
+                          importantText={'Важно тут!'}
+                          link={'sdfsdsdsds'}
+                          type={'help'}
                         />
                       </div>
 

@@ -28,8 +28,26 @@ export const ProfileWidget = ({ first_name, last_name, role, avatarSrc }: Profil
 
         <div className={styles.role}>{role}</div>
       </div>
+      {/*<InfoTooltip*/}
+      {/*  text="Человек который отвечает за этот проект"*/}
+      {/*  className={styles.questionIcon}*/}
+      {/*  type={'help'}*/}
+      {/*/>*/}
       <InfoTooltip
-        text="Человек который отвечает за этот проект"
+        title="Заголовок тултипа"
+        body={
+          [
+            {
+              text: [
+                'Бла бла',
+              ]
+            },
+          ]
+        }
+        size={'small'}
+        pointer={'topRight'}
+        importantText={'Важно тут!'}
+        link={'sdfsdsdsds'}
         className={styles.questionIcon}
         type={'help'}
       />

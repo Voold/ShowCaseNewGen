@@ -26,8 +26,23 @@ export const ProjectInfo = ({ data }: ProjectInfoProps) => {
           </div>
         </div>
         <div className={styles.format}>
+
           <InfoTooltip
-            text={'Можно пробовать с минимальными навыками: главное — желание учиться и открывать для себя новые скиллы. Мы тебя ждём!'}
+            title="Заголовок тултипа"
+            body={
+              [
+                {
+                  text: [
+                    'Можно пробовать с минимальными навыками: главное — желание учиться и открывать для себя новые скиллы. Мы тебя ждём!',
+                  ]
+                },
+              ]
+            }
+            size={'small'}
+            pointer={'topRight'}
+            importantText={'Важно тут!'}
+            link={'sdfsdsdsds'}
+            className={styles.questionIcon}
           >
             {typeProjectsLabel(data.type)}
           </InfoTooltip>
