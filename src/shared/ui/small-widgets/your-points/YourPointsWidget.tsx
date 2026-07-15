@@ -37,7 +37,25 @@ export const YourPointsWidget = ({ disciplines, tpuPoints }: YourPointsWidgetPro
             </li>
           ))}
         </ul>
-        <InfoTooltip text={'Информация о закрытии дисциплин'} className={styles.infoTooltip} />
+        <InfoTooltip
+          title="Заголовок тултипа"
+          body={
+            [
+              {
+                text: [
+                  'Информация о закрытии дисциплин',
+                ]
+              },
+            ]
+          }
+          size={'small'}
+          pointer={'topRight'}
+          importantText={'Важно тут!'}
+          link={'sdfsdsdsds'}
+          className={styles.infoTooltip}
+          iconClassName={styles.infoIconTooltip}
+          type={'help'}
+        />
       </div>
 
       <div className={styles.shop}>

@@ -94,16 +94,23 @@ export const InfoTooltip = ({ children, className, iconClassName, title, body, s
           ))
         }
 
-        <div className={styles.importantBlock}>
-          <ImportantIcon />
-          <p className={clsx(styles.important, s.important)}>
-            {importantText}
-          </p>
-        </div>
+        {
+          importantText &&
+          <div className={styles.importantBlock}>
+            <ImportantIcon />
+            <p className={clsx(styles.important, s.important)}>
+              {importantText}
+            </p>
+          </div>
+        }
 
-        <a className={clsx(styles.link, s.link)} href={link}>
-          Ссылка на FAQ
-        </a>
+        {
+          link &&
+          <a className={clsx(styles.link, s.link)} href={link}>
+            Ссылка на FAQ
+          </a>
+        }
+
 
       </div>
     </div>

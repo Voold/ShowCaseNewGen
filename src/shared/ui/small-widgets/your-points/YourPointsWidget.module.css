@@ -94,6 +94,10 @@
   right: 16px;
 }
 
+.infoIconTooltip {
+  color: var(--color-gray-350);
+}
+
 .shop {
   display: flex;
   gap: 16px;

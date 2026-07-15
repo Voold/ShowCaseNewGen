@@ -53,7 +53,24 @@ export const YourTasksWidget = ({ data }: YourTasksWidgetProps) => {
                   </span>
                   <span className={styles.extra}>
                     {activity.extra === 'tooltip' && !completedStage && (
-                      <InfoTooltip text={'Дополнительная информация по задаче'} className={''} />
+                      <InfoTooltip
+                        title="Заголовок тултипа"
+                        body={
+                          [
+                            {
+                              text: [
+                                'Дополнительная информация по задаче',
+                              ]
+                            },
+                          ]
+                        }
+                        size={'small'}
+                        pointer={'topRight'}
+                        importantText={'Важно тут!'}
+                        link={'sdfsdsdsds'}
+                        className={styles.infoIconTooltip}
+                        type={'help'}
+                      />
                     )}
                     {activity.extra === 'all' && !completedStage  && <a href="#" className={styles.allLink}>{"Все>"}</a>}
                     {
