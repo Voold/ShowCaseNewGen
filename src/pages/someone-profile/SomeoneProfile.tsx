@@ -1,24 +1,26 @@
-import { useNavigate } from 'react-router-dom';
-import styles from './MyProfile.module.css';
-import { useMe } from '@/entities/user/api/queries';
-import { ProfileHeader } from '@/widgets/profile-header';
-import { AboutMe } from "@/features/about-me/ui/AboutMe.tsx";
-import { MyCompetenciesList } from "@/features/my-competencies";
+import styles from './SomeoneProfile.module.css'
+import {MyCompetenciesList} from "@/features/my-competencies";
+import {useNavigate, useParams} from "react-router-dom";
+import {useUserById} from "@/entities/user";
 import BackIcon from '@/shared/ui/icons/back.svg?react';
-import EyeIcon from '@/shared/ui/icons/eye.svg?react';
+import {SomeoneProfileHeader} from "@/shared/ui/someone-profile-header/SomeoneProfileHeader.tsx";
+import MoreLogo from '@/shared/ui/icons/more.svg?react'
 
-export const MyProfile = () => {
+
+export function SomeoneProfile() {
   const navigate = useNavigate();
-  const { data: user } = useMe();
+  const params = useParams<{ id: string }>()
+  const uid = params.id  || ''
+  const { data: user } = useUserById(uid)
+  console.log(user)
 
   const links: { type?: 'tg' | 'vk' | 'element'; link?: string; anotherType?: string }[] = [
     { type: 'element', link: 'Mys2018' },
     { type: 'tg', link: 'Mys2018' },
-    { type: 'vk' },
     // { anotherType: 'Max', link: '@mys2018' },
   ];
 
-  if (!user || user.id === 'loading...') {
+  if (!user) {
     return null;
   }
 
@@ -30,26 +32,19 @@ export const MyProfile = () => {
       </section>
 
       <section className={styles.title}>
-        <h2>Мой профиль</h2>
+        Профиль студентика
       </section>
 
       <section className={styles.see} onClick={() => navigate(`/profile/${user.id}`)}>
-        <EyeIcon/>
-        <p>
-          Посмотреть опубликованный вид
-        </p>
+        <MoreLogo/>
       </section>
 
       <section className={styles.profile}>
-        <ProfileHeader data={user} links={links} />
+        <SomeoneProfileHeader user={user} links={links} />
         <div className={styles.body}>
-          <AboutMe
-            bio={user.meta.bio}
-            className={styles.wid}
-          />
           <MyCompetenciesList savedSkills={user.meta.skills} />
         </div>
       </section>
     </div>
   );
-};
+}

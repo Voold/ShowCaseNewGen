@@ -5,8 +5,6 @@
   grid-template-columns: 300px 1fr 300px;
   grid-template-rows: 48px 168px 132px 1fr;
   padding: 54px calc(180px + 16px) 0;
-  /* padding: 0 calc(180px + 16px); */
-  /* margin-top: 26px; */
 
   background-color: white;
 
@@ -60,6 +58,7 @@
   flex-direction: column;
   padding: 0 16px;
   margin-top: 8px;
+  gap: 8px;
 
   grid-column: 2 / 4;
   grid-row: 2 / 5;
@@ -72,6 +71,13 @@
   display: none;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px 16px;
+}
+
 .see {
   display: flex;
   gap: 5px;
@@ -82,23 +88,17 @@
   cursor: pointer;
 }
 
-.see p {
-  font: var(--OS-13-400);
-  color: var(--color-gray-400);
-}
 
 
-.body {
-  display: flex;
-  flex-direction: column;
-  padding: 24px 16px;
-  gap: 32px;
-  width: 100%;
-}
 
 @media (max-width: 1280px) {
   .mainContent {
     padding: 54px 20px 0;
     /* padding: 0 20px; */
+  }
+
+  .profile {
+    grid-column: 1 / 4;
+    grid-row: 2 / 5;
   }
 }

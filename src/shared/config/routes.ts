@@ -15,5 +15,6 @@ export const ROUTES = {
   MY_PLATFORM_CREATE: 'create',
 
   // Роуты пользователя
-  MY_PROFILE: 'profile'
+  MY_PROFILE: 'profile',
+  SOMEONE_PROFILE: 'profile/:id'
 };

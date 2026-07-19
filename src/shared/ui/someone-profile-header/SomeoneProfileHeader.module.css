@@ -1,0 +1,184 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--color-gray-150);
+  padding: 54px;
+  border-radius: 32px;
+}
+
+.header {
+  display: flex;
+  gap: 12px;
+}
+
+.bioBlock {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  padding: 8px;
+  background-color: white;
+  border-radius: 100px;
+  position: relative;
+  align-items: center;
+}
+
+.roleLabel {
+  position: absolute;
+  display: flex;
+  font: var(--inter-11-400);
+  color: white;
+  background-color: var(--color-brand-green);
+  border-radius: 40px;
+  padding: 2px 8px 4px 8px;
+
+  bottom: 8px;
+  right: calc(100% - 108px - 8px)
+}
+
+.statuses {
+  position: absolute;
+  width: 100%;
+  justify-content: flex-end;
+  display: flex;
+  gap: 8px;
+  top: -12px;
+  right: 24px;
+}
+
+.avatar {
+  width: 108px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  overflow: hidden;
+
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
+
+  border: 1px solid transparent;
+
+  background-image: linear-gradient(to top, var(--color-white), var(--color-white)), var(--grad-brand);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nameBlock p {
+  font: var(--OS-20-550);
+  color: var(--color-gray-900)
+}
+
+.groupBlock {
+  display: flex;
+  gap: 12px;
+  font: var(--OS-11-400);
+  color: var(--color-gray-900)
+}
+
+
+.linkBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-brand-violet);
+  border-radius: 16px;
+  padding: 24px;
+
+  justify-content: space-between;
+}
+
+.headerLink {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerLink p {
+  font: var(--field-label-interface);
+  color: white;
+}
+
+.email {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: white;
+  font: var(--OS-14-550)
+}
+
+.whiteShareLogo {
+  width: 12px;
+}
+
+.linkList {
+  display: flex;
+  gap: 8px
+}
+
+.linkBody {
+  display: flex;
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px 12px 8px 8px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.body p {
+  font: var(--OS-14-550);
+  color: var(--color-brand-black)
+}
+
+.special {
+  background-color: var(--color-brand-green);
+
+}
+
+.tpu {
+  color: white !important;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.footer p:nth-child(1) {
+  font: var(--field-label-interface);
+  color: var(--color-brand-black);
+}
+
+.footer p:nth-child(2) {
+  font: var(--body-text-platform);
+  color: var(--color-brand-black);
+}

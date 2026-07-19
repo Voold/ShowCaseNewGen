@@ -10,6 +10,7 @@ import { ROUTES } from "@/shared";
 import { RootRoute } from "./RootRoute";
 import { MyProfile } from "@/pages/my-profile";
 import CreateProjectPage from "@/pages/create-project/ui/CreateProjectPage";
+import {SomeoneProfile} from "@/pages/someone-profile/SomeoneProfile.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +91,11 @@ export const router = createBrowserRouter([
             path: ROUTES.MY_PROFILE,
             element: <MyProfile />
           },
+
+          {
+            path: ROUTES.SOMEONE_PROFILE,
+            element: <SomeoneProfile />
+          }
         ],
       },
       {
