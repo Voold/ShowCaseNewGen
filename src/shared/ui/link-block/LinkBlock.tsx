@@ -4,13 +4,17 @@ import ElementLogo from '@/shared/assets/tpu_element.svg?react'
 import VkLogo from '@/shared/ui/icons/vk.svg?react'
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import clsx from "clsx";
-import type {Messengers} from "@/entities/user/model/types.ts";
+import type {Messengers, MessengerType} from "@/entities/user/model/types.ts";
+import {useModalStore} from "@/shared/model";
+import {useUpdateProfileMeta} from "@/entities/user/api/queries.ts";
 
 type LinkBlockProps = {
   linksObj: Messengers
 };
 
-const getLogo = (type: string, link?: string) => {
+
+
+const getLogo = (type: MessengerType, link?: string) => {
   switch (type) {
     case 'telegram':
       return <TgLogo className={`${styles.logo} ${link ? '' : styles.smallLogo}`}/>
@@ -19,11 +23,11 @@ const getLogo = (type: string, link?: string) => {
     case 'element':
       return <ElementLogo className={`${styles.logo} ${link ? '' : styles.smallLogo}`}/>
     default:
-      return 
+      return
   }
 }
 
-const getLabel = (type: string) => {
+const getLabel = (type: MessengerType) => {
   switch (type) {
     case 'telegram':
       return "Telegram"
@@ -38,7 +42,15 @@ const getLabel = (type: string) => {
 
 export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
 
-  const links = [
+  const { openModal, closeModal} = useModalStore();
+
+  const { mutate: updateProfileMeta} = useUpdateProfileMeta();
+
+  const links: Array<{ type: MessengerType; link?: string }> = [
+    {
+      type: 'element',
+      link: linksObj.element
+    },
     {
       type: 'telegram',
       link: linksObj.telegram
@@ -46,20 +58,41 @@ export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
     {
       type: 'vk',
       link: linksObj.vk
-    },
-    {
-      type: 'element',
-      link: linksObj.element
-    },
+    }
   ]
+
+  const handleOpenModal = (type: MessengerType, value: string | undefined) => {
+    console.log("OPEN MODAL")
+    openModal('LINK_UPDATE', {
+      firstValue: value,
+      linkType: type,
+      onSubmit: (newValue: string) => {
+        updateProfileMeta({
+          messengers: {
+            ...linksObj,
+            [type]: newValue
+          }
+        })
+      },
+      onDelete: () => {
+        updateProfileMeta({
+          messengers: {
+            ...linksObj,
+            [type]: null
+          }
+        })
+      },
+      onClose: closeModal
+    })
+  }
 
   return (
     <div className={styles.linkList}>
       {
         links.map((link, index) => (
-          <div key={index} className={clsx(styles.container, (link ? styles.active : ''),  (link.type === 'element' && styles.special))}>
+          <div key={index} className={clsx(styles.container, (link.link ? styles.active : ''),  (link.type === 'element' && styles.special))}>
             {
-              link.link === "" ? (
+              link.link !== null ? (
                 <div className={styles.innerContainerActive}>
                   {link.type && getLogo(link.type, link.link)}
                   <div className={styles.info}>
@@ -75,8 +108,12 @@ export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
                 <div className={styles.innerContainer}>
                   <div className={styles.header}>
                     {link.type ? getLogo(link.type, link.link) : ''}
+                    <h6 className={clsx(link.type === 'element' && styles.special)}>
+                      {getLabel(link.type)}
+                    </h6>
+
                   </div>
-                  <button>
+                  <button onClick={() => handleOpenModal(link.type, link.link)}>
                     <Plus/>
                     Добавить
                   </button>

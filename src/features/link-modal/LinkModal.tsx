@@ -1,22 +1,33 @@
 import styles from './LinkModal.module.css'
 import {Modal} from "@/shared/ui/modal/Modal.tsx";
 import TrashIcon from "@/shared/ui/icons/trash.svg?react"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 type LinkModalProps = {
   isOpen: boolean,
   onClose: () => void,
-  onSubmit: () => void,
+  onSubmit: (value: string) => void,
+  onDelete: () => void,
   firstValue: string
   typeLink: string
 }
 
-export function LinkModal({ isOpen, onClose, onSubmit, firstValue, typeLink}: LinkModalProps) {
+export function LinkModal({ isOpen, onClose, onSubmit, onDelete, firstValue, typeLink}: LinkModalProps) {
   const [value, setValue] = useState(firstValue)
 
+  useEffect(() => {
+    setValue(firstValue);
+  }, [firstValue]);
+
+
   const handleSubmit = () => {
+    onSubmit(value)
     onClose()
-    onSubmit()
+  }
+
+  const handleDelete = () => {
+    onDelete()
+    onClose()
   }
 
   return (
@@ -29,7 +40,7 @@ export function LinkModal({ isOpen, onClose, onSubmit, firstValue, typeLink}: Li
             </h3>
             <button
               className={styles.deleteButton}
-              onClick={handleSubmit}
+              onClick={handleDelete}
             >
               <TrashIcon/>
               Удалить
@@ -51,10 +62,10 @@ export function LinkModal({ isOpen, onClose, onSubmit, firstValue, typeLink}: Li
 
       <Modal.Footer>
         <div className={styles.buttonContainer}>
-          <button>
+          <button onClick={onClose}>
             Отмена
           </button>
-          <button>
+          <button className={styles.submitButton} onClick={handleSubmit}>
             Сохранить изменения
           </button>
         </div>

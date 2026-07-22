@@ -1,3 +1,5 @@
+import type {Messengers} from "@/entities/user/model/types.ts";
+
 export interface OAuthExchangeParams {
   code: string;
   codeVerifier: string;
@@ -15,6 +17,7 @@ export interface RoleTypeDto {
 export interface UpdateProfileMetaRequest {
   bio?: string;
   experience?: string;
+  messengers?: Messengers;
   skills?: {
     roleTypeId: string;
     skillIds: string[];

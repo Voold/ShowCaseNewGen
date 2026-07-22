@@ -30,6 +30,8 @@ export type Messengers = {
   element: string
 }
 
+export type MessengerType = keyof Messengers;
+
 export type UserBase = {
   id: string
   email: string
