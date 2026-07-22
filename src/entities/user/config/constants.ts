@@ -32,7 +32,12 @@ export const placeholderUser: User = {
     lastName: '',
     bio: '',
     skills: [],
-    experience: ''
+    experience: '',
+    messengers: {
+      telegram: '',
+      vk: '',
+      element: ''
+    }
   },
   roles: [{ type: 'Default', weight: ROLE_WEIGHTS.Default }],
   capabilities: []

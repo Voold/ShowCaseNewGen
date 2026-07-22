@@ -18,9 +18,16 @@ export type User = UserBase & {
     lastName: string
     bio: string
     skills: CompetenceDto[]
-    experience: string
+    experience: string,
+    messengers: Messengers
   }
   capabilities: string[]
+}
+
+export type Messengers = {
+  telegram: string,
+  vk: string,
+  element: string
 }
 
 export type UserBase = {
@@ -51,7 +58,8 @@ export type UserDto = {
     lastName: string
     bio: string
     skills: CompetenceDto[]
-    experience: string
+    experience: string,
+    messengers: Messengers
   }
   group?: string
   grade?: string

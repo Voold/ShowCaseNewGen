@@ -12,9 +12,8 @@ type FooterBlockFieldsProps = {
 
   handleCancel?: () => void,
   handleSubmit?: () => void
-
+  customError?: string
 };
-
 
 export const FooterBlockFields = ({
    MIN_LENGTH = 100,
@@ -23,10 +22,14 @@ export const FooterBlockFields = ({
    isValid,
    disabled,
    handleCancel,
-   handleSubmit
+   handleSubmit,
+   customError
 }: FooterBlockFieldsProps) => {
 
   const label = () => {
+    if (customError) {
+      return <p className={`${styles.footerLabel} ${styles.error}`}>{customError}</p>
+    }
     if (valueLength < MIN_LENGTH) {
       return <p className={`${styles.footerLabel} ${isValidSymbol ? styles.success : styles.error}`}>Мин: {MIN_LENGTH} символов</p>
     }
@@ -49,7 +52,7 @@ export const FooterBlockFields = ({
           Отмена
         </button>
         <button
-          className={`${styles.saveButton} ${disabled ? styles.disable : ''}`}
+          className={styles.saveButton}
           onClick={handleSubmit}
           disabled={disabled}
         >

@@ -1,4 +1,4 @@
-import type { User } from '@/entities/user/model/types';
+import type {Messengers, User} from '@/entities/user/model/types';
 import EmailIcon from '@/shared/ui/icons/email.svg?react';
 import EditIcon from '@/shared/ui/icons/edit.svg?react';
 import BigInfoIcon from '@/shared/ui/icons/big_info.svg?react';
@@ -6,15 +6,11 @@ import { LinkBlock } from '@/shared/ui/link-block/LinkBlock';
 import styles from './ProfileHeader.module.css';
 import ava from '@/shared/assets/ava.webp';
 
-interface ProfileLink {
-  type?: 'tg' | 'vk' | 'element';
-  link?: string;
-  anotherType?: string;
-}
+
 
 interface ProfileHeaderProps {
   data: User;
-  links: ProfileLink[];
+  links: Messengers;
 }
 
 export const ProfileHeader = ({ data, links }: ProfileHeaderProps) => {
@@ -77,16 +73,9 @@ export const ProfileHeader = ({ data, links }: ProfileHeaderProps) => {
             </div>
           </div>
 
-          <div className={styles.linkList}>
-            {links.map((link, index) => (
-              <LinkBlock
-                key={index}
-                type={link.type}
-                link={link.link}
-                anotherType={link.anotherType}
-              />
-            ))}
-          </div>
+          <LinkBlock
+            linksObj={links}
+          />
         </section>
       </div>
       <div className={styles.infoLabel}>

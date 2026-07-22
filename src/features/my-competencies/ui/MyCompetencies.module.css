@@ -43,11 +43,10 @@
 
 }
 
-.pencilIcon {
-  width: 19.4px;
-  height: 19.4px;
-  color: var(--color-brand-green);
-  stroke-width: 1.5;
+.trashIcon {
+  width: 15px;
+  height: 15px;
+  color: var(--color-gray-400);
 }
 
 .addButton {

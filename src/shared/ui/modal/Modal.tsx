@@ -19,12 +19,16 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
   )
 }
 
-Modal.Header = ({title, subtitle}: { title: string; subtitle?: string }) => (
+Modal.Header = ({title, subtitle}: { title?: string; subtitle?: string }) => (
   <div className={styles.header}>
     <h2 className={styles.title}>{title}</h2>
     {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
   </div>
 )
+
+Modal.SpecialBlock = ({ children }: { children: ReactNode }) => (
+  <div className={styles.body}>{children}</div>
+);
 
 Modal.Body = ({ children }: { children: ReactNode }) => (
   <div className={styles.body}>{children}</div>

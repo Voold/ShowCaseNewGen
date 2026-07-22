@@ -8,14 +8,24 @@
   border-radius: 16px;
 
   box-shadow: var(--drop-down);
+  padding: 19px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  justify-content: space-between;
 
+  width: 100%;
+  z-index: 3;
+}
+
+.skillsList {
   display: flex;
   flex-wrap: wrap;
-  max-width: 75%;
+  width: 100%;
   height: min-content;
-  padding: 19px;
+
   gap: 12px;
-  z-index: 3;
+
 }
 
 .skill {
@@ -28,4 +38,11 @@
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
+}
+
+.closeButton {
+  font: var(--label-interface);
+  color: var(--color-gray-500);
+
+  cursor: pointer;
 }

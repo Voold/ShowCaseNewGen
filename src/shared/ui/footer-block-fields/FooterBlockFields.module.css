@@ -1,6 +1,7 @@
 .footer {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .footerLabel {
@@ -30,8 +31,9 @@
   color: white;
 }
 
-.disable {
-  opacity: 0.25;
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .error {

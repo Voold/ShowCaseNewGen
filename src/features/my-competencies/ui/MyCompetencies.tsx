@@ -1,5 +1,5 @@
 import styles from './MyCompetencies.module.css';
-import Pencil from '@/shared/ui/icons/pencil.svg?react'
+
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import Trash from '@/shared/ui/icons/trash.svg?react'
 import Cross from '@/shared/ui/icons/cross.svg?react'
@@ -8,30 +8,32 @@ import { MyCompetenciesModal } from "@/features/my-competencies/ui/MyCompetencie
 
 type MyCompetenciesProps = {
   data: Competence,
-  editingId: string | null,
+  isEditing: boolean,
   currentFullSkills: Skill[],
   removeSkill: (competenceId: string, skillId: string) => void;
   addSkill: (skill: Skill) => void;
   removeCompetency: (competenceId: string) => void;
   popoverOpenFor: string | null;
   setPopoverOpenFor: (competenceId: string | null) => void;
-  startEditing: (competenceId: string) => void;
   getSkillsForCompetence: (competenceId: string) => void;
 
 };
 
 export function MyCompetencies({
   data,
-  editingId,
+  isEditing,
   currentFullSkills,
   removeSkill,
   addSkill,
   removeCompetency,
   popoverOpenFor,
   setPopoverOpenFor,
-  startEditing,
   getSkillsForCompetence
 }: MyCompetenciesProps) {
+
+  if (!isEditing && data.skills.length === 0) {
+    return null;
+  }
 
   return (
     <section className={styles.body}>
@@ -42,9 +44,9 @@ export function MyCompetencies({
         <div className={styles.competenciesContainer}>
           {
             data.skills.map((competency) => (
-              <div key={competency.skillId} className={`${styles.competency} ${editingId === data.roleTypeId ? styles.editing : ''}`}>
+              <div key={competency.skillId} className={`${styles.competency} ${isEditing ? styles.editing : ''}`}>
                 {competency.skillName}
-                {editingId === data.roleTypeId &&
+                {isEditing &&
                   <button
                     onClick={() => removeSkill(data.roleTypeId, competency.skillId)}
                   >
@@ -55,7 +57,7 @@ export function MyCompetencies({
             ))
           }
           {
-            (editingId === data.roleTypeId && !popoverOpenFor) &&
+            (isEditing && !popoverOpenFor) &&
             <button className={styles.addButton}
                     onClick={() => {
               getSkillsForCompetence(data.roleTypeId)
@@ -73,24 +75,12 @@ export function MyCompetencies({
               }
             </button>
           }
-          {
-            (data.skills.length === 0 && !(editingId === data.roleTypeId))&&
-            <p className={styles.addLabel}>
-              Еще нет добавленных навыков
-            </p>
-          }
         </div>
       </div>
       {
-        !(editingId === data.roleTypeId) &&
-        <button className={styles.editButton} onClick={() => startEditing(data.roleTypeId)}>
-          <Pencil className={styles.pencilIcon}/>
-        </button>
-      }
-      {
-        editingId === data.roleTypeId &&
+        isEditing &&
         <button className={styles.editButton} onClick={() => removeCompetency(data.roleTypeId)}>
-          <Trash className={styles.pencilIcon}/>
+          <Trash className={styles.trashIcon}/>
         </button>
       }
       {popoverOpenFor === data.roleTypeId && (
@@ -99,6 +89,7 @@ export function MyCompetencies({
           <MyCompetenciesModal
             currentFullSkills={currentFullSkills}
             addSkill={addSkill}
+            setPopoverOpenFor={setPopoverOpenFor}
           />
         </>
       )}

@@ -42,7 +42,7 @@ export function SomeoneProfile() {
       <section className={styles.profile}>
         <SomeoneProfileHeader user={user} links={links} />
         <div className={styles.body}>
-          <MyCompetenciesList savedSkills={user.meta.skills} />
+          <MyCompetenciesList savedSkills={user.meta.skills} readonly={true} />
         </div>
       </section>
     </div>

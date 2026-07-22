@@ -4,16 +4,26 @@ import type { Skill } from "@/features/my-competencies/model/types.ts";
 type MyCompetenciesModalProps = {
   currentFullSkills: Skill[],
   addSkill: (skill: Skill) => void;
+  setPopoverOpenFor: (competenceId: string | null) => void;
 };
 
-export const MyCompetenciesModal = ({ currentFullSkills, addSkill }: MyCompetenciesModalProps) => {
+export const MyCompetenciesModal = ({ currentFullSkills, addSkill, setPopoverOpenFor }: MyCompetenciesModalProps) => {
   return (
     <div className={styles.modalBody}>
-      {currentFullSkills.map((skill) => (
-        <button key={skill.skillId} className={styles.skill} onClick={() => addSkill(skill)}>
-          {skill.skillName}
-        </button>
-      ))}
+      <div className={styles.skillsList}>
+        {currentFullSkills.map((skill) => (
+          <button key={skill.skillId} className={styles.skill} onClick={() => addSkill(skill)}>
+            {skill.skillName}
+          </button>
+        ))}
+      </div>
+
+      <button
+        className={styles.closeButton}
+        onClick={() => setPopoverOpenFor(null)}
+      >
+        свернуть
+      </button>
     </div>
   );
 };

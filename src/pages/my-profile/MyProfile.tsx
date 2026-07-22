@@ -11,16 +11,19 @@ export const MyProfile = () => {
   const navigate = useNavigate();
   const { data: user } = useMe();
 
-  const links: { type?: 'tg' | 'vk' | 'element'; link?: string; anotherType?: string }[] = [
-    { type: 'element', link: 'Mys2018' },
-    { type: 'tg', link: 'Mys2018' },
-    { type: 'vk' },
-    // { anotherType: 'Max', link: '@mys2018' },
-  ];
+  // const links: { type?: 'tg' | 'vk' | 'element'; link?: string; anotherType?: string }[] = [
+  //   { type: 'element', link: 'Mys2018' },
+  //   { type: 'tg', link: 'Mys2018' },
+  //   { type: 'vk' },
+  //   // { anotherType: 'Max', link: '@mys2018' },
+  // ];
 
   if (!user || user.id === 'loading...') {
     return null;
   }
+
+  console.log(user.meta.messengers)
+  console.log(user)
 
   return (
     <div className={styles.mainContent}>
@@ -41,7 +44,7 @@ export const MyProfile = () => {
       </section>
 
       <section className={styles.profile}>
-        <ProfileHeader data={user} links={links} />
+        <ProfileHeader data={user} links={user.meta.messengers} />
         <div className={styles.body}>
           <AboutMe
             bio={user.meta.bio}

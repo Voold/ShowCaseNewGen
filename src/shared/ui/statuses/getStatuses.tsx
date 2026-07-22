@@ -1,6 +1,7 @@
 import styles from './GetStatuses.module.css'
 import ToughGuyIcon from '@/shared/ui/icons/statuses/toughGuy.svg?react'
 import BugHunterIcon from '@/shared/ui/icons/statuses/bugHunter.svg?react'
+import AhaIcon from '@/shared/ui/icons/statuses/aha.svg?react'
 
 
 const getIconAndColorStatus = ( type: string) => {
@@ -18,6 +19,12 @@ const getIconAndColorStatus = ( type: string) => {
         icon: <BugHunterIcon className={cl}/>,
         color: 'var(--color-brand-violet)',
         text: 'Баг хантер'
+      }
+    case 'aha':
+      return {
+        icon: <AhaIcon className={cl}/>,
+        color: '#fb753c',
+        text: 'Ахаха'
       }
     default:
       return {

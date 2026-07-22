@@ -17,7 +17,7 @@ export function TextArea({ value, maxLength, handleChange, isDisable, isValid, i
         value={value}
         onChange={handleChange}
         disabled={isDisable}
-        placeholder={'Что да как кратенько'}
+        placeholder={'Компетентный опыт, софт-скиллы, ваш подход к работе...'}
       >
       </textarea>
       <p className={isValid ? styles.valid : styles.error}>

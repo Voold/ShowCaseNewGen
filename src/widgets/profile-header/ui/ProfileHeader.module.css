@@ -175,10 +175,6 @@
   color: var(--color-gray-900)
 }
 
-.linkList {
-  display: flex;
-  gap: 8px
-}
 
 .infoLabel {
   display: flex;

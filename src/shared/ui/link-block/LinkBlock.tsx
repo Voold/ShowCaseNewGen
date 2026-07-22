@@ -4,18 +4,15 @@ import ElementLogo from '@/shared/assets/tpu_element.svg?react'
 import VkLogo from '@/shared/ui/icons/vk.svg?react'
 import Plus from '@/shared/ui/icons/plus.svg?react'
 import clsx from "clsx";
-
-type linkType = 'tg' | 'vk' | 'element'
+import type {Messengers} from "@/entities/user/model/types.ts";
 
 type LinkBlockProps = {
-  type?: linkType,
-  link?: string, 
-  anotherType?: string
+  linksObj: Messengers
 };
 
-const getLogo = (type: linkType, link?: string) => {
+const getLogo = (type: string, link?: string) => {
   switch (type) {
-    case 'tg':
+    case 'telegram':
       return <TgLogo className={`${styles.logo} ${link ? '' : styles.smallLogo}`}/>
     case 'vk':
       return <VkLogo className={`${styles.logo} ${link ? '' : styles.smallLogo}`}/>
@@ -26,9 +23,9 @@ const getLogo = (type: linkType, link?: string) => {
   }
 }
 
-const getLabel = (type: linkType) => {
+const getLabel = (type: string) => {
   switch (type) {
-    case 'tg':
+    case 'telegram':
       return "Telegram"
     case 'vk':
       return "ВК"
@@ -39,36 +36,55 @@ const getLabel = (type: linkType) => {
   }
 }
 
-export const LinkBlock = ({type, link, anotherType}: LinkBlockProps) => {
+export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
+
+  const links = [
+    {
+      type: 'telegram',
+      link: linksObj.telegram
+    },
+    {
+      type: 'vk',
+      link: linksObj.vk
+    },
+    {
+      type: 'element',
+      link: linksObj.element
+    },
+  ]
+
   return (
-    <div className={clsx(styles.container, (link ? styles.active : ''),  (type === 'element' && styles.special))}>
+    <div className={styles.linkList}>
       {
-        link ? (
-          <div className={styles.innerContainerActive}>
-            {type && getLogo(type, link)}
-            <div className={styles.info}>
-              <h6 className={clsx(type === 'element' && styles.special)}>
-                {type ? getLabel(type) : anotherType}
-              </h6>
-              <p className={clsx(type === 'element' && styles.special)}>
-                {link}
-              </p>
-            </div>
+        links.map((link, index) => (
+          <div key={index} className={clsx(styles.container, (link ? styles.active : ''),  (link.type === 'element' && styles.special))}>
+            {
+              link.link === "" ? (
+                <div className={styles.innerContainerActive}>
+                  {link.type && getLogo(link.type, link.link)}
+                  <div className={styles.info}>
+                    <h6 className={clsx(link.type === 'element' && styles.special)}>
+                      {getLabel(link.type)}
+                    </h6>
+                    <p className={clsx(link.type === 'element' && styles.special)}>
+                      {link.link}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.innerContainer}>
+                  <div className={styles.header}>
+                    {link.type ? getLogo(link.type, link.link) : ''}
+                  </div>
+                  <button>
+                    <Plus/>
+                    Добавить
+                  </button>
+                </div>
+              )
+            }
           </div>
-        ) : (
-          <div className={styles.innerContainer}>
-            <div className={styles.header}>
-              {type ? getLogo(type, link) : ''}
-              <h6>
-                {type ? getLabel(type) : 'Другой способ связи'}
-              </h6>
-            </div>
-            <button>
-              <Plus/>
-              Добавить
-            </button>
-          </div>
-        )
+        ))
       }
     </div>
   );

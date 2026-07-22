@@ -8,7 +8,7 @@ interface SkillsStoreTypes {
   currentFullSkills: Skill[];
   hasChanges: boolean;
 
-  editingId: string | null;
+  isEditing: boolean;
   popoverOpenFor: string | null;
 
   globalSkills: Skill[];
@@ -16,7 +16,7 @@ interface SkillsStoreTypes {
 
   setInitialData: (data: Competence[]) => void;
   setOriginalData: (draftData: Competence[]) => void;
-  startEditing: (competenceId: string) => void;
+  startEditing: () => void;
   cancelEditing: () => void;
   // TODO Сохранить данные
   saveChanges: () => void;
@@ -40,7 +40,7 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
 
   currentFullSkills: [],
 
-  editingId: '',
+  isEditing: false,
   popoverOpenFor: null,
 
   globalSkills: [],
@@ -49,11 +49,11 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
   setInitialData: (data) => set({ originalData: data, draftData: data, hasChanges: false }),
   setOriginalData: (data) => set({ originalData: data }),
   
-  startEditing: (competenceId) => { set({ editingId: competenceId, popoverOpenFor: null }) },
+  startEditing: () => { set({ isEditing: true, popoverOpenFor: null }) },
   
-  cancelEditing: () => { set((state) => ({ editingId: '', draftData: [...state.originalData], hasChanges: false, popoverOpenFor: null })) },
+  cancelEditing: () => { set((state) => ({ isEditing: false, draftData: [...state.originalData], hasChanges: false, popoverOpenFor: null })) },
   
-  saveChanges: () => set((state) => ({ originalData: state.draftData, hasChanges: false, editingId: '', popoverOpenFor: null })),
+  saveChanges: () => set((state) => ({ originalData: state.draftData, hasChanges: false, isEditing: false, popoverOpenFor: null })),
   
   resetHasChanges: () => set({ hasChanges: false }),
 
@@ -77,7 +77,9 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
 
   addSkill: (skill) => set((state) => {
     const newDraft = state.draftData.map((comp) => {
-      if (comp.roleTypeId == state.editingId) {
+      // Check if this skill actually belongs to the current competence being edited if needed.
+      // Assuming addSkill adds to the competence that opened the popover:
+      if (comp.roleTypeId === state.popoverOpenFor) {
         if (comp.skills.some((s) => s.skillId === skill.skillId)) return comp;
         return { ...comp, skills: [...comp.skills, skill] }
       }
@@ -89,8 +91,7 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
 
   removeCompetency: (competenceId) => set((state) => ({
     draftData: state.draftData.filter((comp) => comp.roleTypeId !== competenceId),
-    originalData: state.originalData.filter((comp) => comp.roleTypeId !== competenceId),
-    editingId: ''
+    hasChanges: true
   })),
 
   addCompetency: (competenceId, roleTypeName) => set((state) => {
@@ -101,7 +102,7 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     };
     return {
       draftData: [...state.draftData, newCompetence],
-      originalData: [...state.originalData, newCompetence]
+      hasChanges: true
     };
   }),
 

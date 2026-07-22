@@ -56,8 +56,9 @@ export function SomeoneProfileHeader({ user, links }: SomeoneProfileHeaderProps)
           </div>
 
           <div className={styles.statuses}>
-            {getStatuses({ type: 'toughGuy' })}
+            {getStatuses({ type: 'aha' })}
             {getStatuses({ type: 'bugHunter' })}
+            {getStatuses({ type: 'toughGuy' })}
           </div>
 
           <div className={styles.infoBlock}>
