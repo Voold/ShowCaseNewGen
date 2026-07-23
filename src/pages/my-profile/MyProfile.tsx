@@ -24,7 +24,7 @@ export const MyProfile = () => {
   return (
     <div className={styles.mainContent}>
       <section className={styles.headerLeft} onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
-        <BackIcon/>
+        <BackIcon className={styles.backIcon}/>
         <p className={styles.back}>Назад к списку проектов</p>
       </section>
 

@@ -29,7 +29,7 @@
 }
 
 .backIcon {
-  fill: #93959B
+  color: var(--color-gray-400)
 }
 
 .back {
