@@ -91,7 +91,6 @@
   color: var(--color-gray-900)
 }
 
-
 .linkBlock {
   width: 100%;
   display: flex;
@@ -183,4 +182,90 @@
 .footer p:nth-child(2) {
   font: var(--body-text-platform);
   color: var(--color-brand-black);
+}
+
+.mobileHeader {
+  display: flex;
+  background-color: var(--color-gray-150);
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.titleMobile {
+  font: var(--hero-title-platform);
+  width: 100%;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: start;
+}
+
+.seeMobile {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    border-radius: 0 0 20px 20px;
+    padding: 20px;
+  }
+
+  .header {
+    display: contents;
+  }
+
+  .nameBlock p {
+    font: var(--OS-16-600);
+  }
+
+  .groupBlock {
+    gap: 4px
+  }
+
+  .groupBlock p {
+    font: var(--OS-11-400);
+  }
+
+  .linkBlock {
+    order: 4;
+    padding: 20px;
+    gap: 20px
+  }
+
+  .bioBlock {
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .footer {
+    padding: 20px;
+    gap: 8px
+  }
+
+  .linkBody {
+    width: fit-content;
+    padding: 8px;
+    gap: 8px
+  }
+
+  .linkBody:not(.special) p {
+    display: none;
+    box-sizing: border-box;
+  }
+
+  .linkBody:not(.special) .shareLogo {
+    display: none;
+    box-sizing: border-box;
+  }
 }

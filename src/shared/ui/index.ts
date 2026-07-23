@@ -11,4 +11,6 @@ export { YourPointsWidget } from './small-widgets/your-points/YourPointsWidget.t
 export type { ClosingDiscipline } from './small-widgets/your-points/model/types.ts'
 export { TextArea } from './textarea/TextArea.tsx'
 export { FooterBlockFields } from './footer-block-fields/FooterBlockFields.tsx'
+export { Checkbox } from './fields/checkbox'
+
 

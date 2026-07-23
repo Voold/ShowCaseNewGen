@@ -1,14 +1,29 @@
 .footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 16px
+  gap: 16px;
+}
+
+.errorText {
+  font: var(--body-text-platform);
+  color: var(--color-red);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
 }
 
 .cancel {
   font: var(--inter-13-600);
   color: var(--color-gray-500);
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .agree {
@@ -21,9 +36,11 @@
   border: 1px solid var(--color-brand-green);
   padding: 14px 24px 15px 24px;
   cursor: pointer;
+  background: transparent;
+  transition: opacity 0.2s ease;
 
   &:hover:not(:disabled) {
-    opacity: 0.25;
+    opacity: 0.75;
   }
 
   &:disabled {

@@ -1,0 +1,68 @@
+.wrapper {
+  display: flex;
+  padding: 12px;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.customCheckbox {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  border-radius: 2.5px;
+  border: 1px solid var(--color-gray-250);
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkIcon {
+  width: 9px;
+  height: 6px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+
+  color: white;
+}
+
+.wrapper.active .customCheckbox {
+  background-color: var(--color-brand-violet);
+  border-color: var(--color-brand-violet);
+}
+
+.wrapper.active .checkIcon {
+  opacity: 1;
+}
+
+.label {
+  font: var(--body-text-platform);
+  color: var(--color-gray-500);
+}
+
+.wrapper.active {
+  border: 1px solid var(--color-brand-violet);
+}
+
+.wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

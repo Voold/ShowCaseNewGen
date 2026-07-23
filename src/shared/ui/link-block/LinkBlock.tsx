@@ -3,6 +3,7 @@ import TgLogo from '@/shared/ui/icons/telegram.svg?react'
 import ElementLogo from '@/shared/assets/tpu_element.svg?react'
 import VkLogo from '@/shared/ui/icons/vk.svg?react'
 import Plus from '@/shared/ui/icons/plus.svg?react'
+import EditIcon from '@/shared/ui/icons/edit.svg?react'
 import clsx from "clsx";
 import type {Messengers, MessengerType} from "@/entities/user/model/types.ts";
 import {useModalStore} from "@/shared/model";
@@ -65,7 +66,7 @@ export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
     console.log("OPEN MODAL")
     openModal('LINK_UPDATE', {
       firstValue: value,
-      linkType: type,
+      typeLink: getLabel(type),
       onSubmit: (newValue: string) => {
         updateProfileMeta({
           messengers: {
@@ -91,6 +92,12 @@ export const LinkBlock = ({ linksObj }: LinkBlockProps) => {
       {
         links.map((link, index) => (
           <div key={index} className={clsx(styles.container, (link.link ? styles.active : ''),  (link.type === 'element' && styles.special))}>
+            {
+              link.link ?
+                <button className={styles.editButton} onClick={() => handleOpenModal(link.type, link.link)}>
+                  <EditIcon className={link.type === 'element' ? styles.specialEditIcon : styles.editIcon}/>
+                </button> : ''
+            }
             {
               link.link !== null ? (
                 <div className={styles.innerContainerActive}>

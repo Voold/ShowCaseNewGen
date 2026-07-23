@@ -7,6 +7,7 @@ import VkLogo from '@/shared/ui/icons/vk.svg?react'
 import CopyLogo from '@/shared/ui/icons/copy.svg?react'
 import OpenLogo from '@/shared/ui/icons/open.svg?react'
 import MailLogo from '@/shared/ui/icons/email.svg?react'
+import MoreLogo from '@/shared/ui/icons/more.svg?react'
 import clsx from "clsx";
 import {getStatuses} from "@/shared/ui/statuses/getStatuses.tsx";
 
@@ -32,13 +33,25 @@ const getLogo = (type: linkType | undefined) => {
 }
 
 type SomeoneProfileHeaderProps = {
+  onClickSee?: () => void,
   user: User;
   links: ProfileLink[];
 }
 
-export function SomeoneProfileHeader({ user, links }: SomeoneProfileHeaderProps) {
+export function SomeoneProfileHeader({onClickSee, user, links }: SomeoneProfileHeaderProps) {
   return (
     <div className={styles.container}>
+
+      <div className={styles.mobileHeader}>
+        <p className={styles.titleMobile}>
+          Профиль студентика
+        </p>
+
+        <button className={styles.seeMobile} onClick={onClickSee}>
+          <MoreLogo/>
+        </button>
+      </div>
+
       <div className={styles.header}>
         <div className={styles.bioBlock}>
 
@@ -57,7 +70,6 @@ export function SomeoneProfileHeader({ user, links }: SomeoneProfileHeaderProps)
 
           <div className={styles.statuses}>
             {getStatuses({ type: 'aha' })}
-            {getStatuses({ type: 'bugHunter' })}
             {getStatuses({ type: 'toughGuy' })}
           </div>
 
@@ -122,9 +134,16 @@ export function SomeoneProfileHeader({ user, links }: SomeoneProfileHeaderProps)
         <p>
           О себе
         </p>
-        <p>
-          {user.meta.bio}
-        </p>
+        {
+          user.meta.bio ?
+            <p>
+              {user.meta.bio}
+            </p> :
+            <p>
+              Приветик! Я первый раз на этом сайтике и еще не успел заполнить свой профиль. Надеюсь ничего страшного 👉👈
+            </p>
+        }
+
       </div>
     </div>
   )

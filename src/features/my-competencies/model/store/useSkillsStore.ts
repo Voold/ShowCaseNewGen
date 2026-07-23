@@ -27,8 +27,9 @@ interface SkillsStoreTypes {
   addSkill: (skill: Skill) => void;
   removeCompetency: (competenceId: string) => void;
   addCompetency: (competenceId: string, roleTypeName: string) => void;
+  setCompetencies: (selectedRoles: { id: string; name: string }[]) => void;
 
-  setPopoverOpenFor: (competenceId: string | null) => void
+  setPopoverOpenFor: (competenceId: string | null) => void;
 
   getSkillsForCompetence: (competenceId: string) => void;
 }
@@ -103,6 +104,33 @@ export const useSkillsStore = create<SkillsStoreTypes>((set) => ({
     return {
       draftData: [...state.draftData, newCompetence],
       hasChanges: true
+    };
+  }),
+
+  setCompetencies: (selectedRoles) => set((state) => {
+    const selectedMap = new Map(selectedRoles.map((r) => [r.id, r.name]));
+    const newDraft: Competence[] = [];
+
+    // Keep existing competencies that are still selected
+    for (const existing of state.draftData) {
+      if (selectedMap.has(existing.roleTypeId)) {
+        newDraft.push(existing);
+        selectedMap.delete(existing.roleTypeId);
+      }
+    }
+
+    // Add newly selected competencies
+    for (const [id, name] of selectedMap.entries()) {
+      newDraft.push({
+        roleTypeId: id,
+        roleTypeName: name,
+        skills: []
+      });
+    }
+
+    return {
+      draftData: newDraft,
+      hasChanges: JSON.stringify(newDraft) !== JSON.stringify(state.originalData)
     };
   }),
 

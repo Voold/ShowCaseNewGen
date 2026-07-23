@@ -1,27 +1,56 @@
 import styles from './LinkModal.module.css'
-import {Modal} from "@/shared/ui/modal/Modal.tsx";
+import { Modal } from "@/shared/ui/modal/Modal.tsx";
 import TrashIcon from "@/shared/ui/icons/trash.svg?react"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 type LinkModalProps = {
   isOpen: boolean,
   onClose: () => void,
   onSubmit: (value: string) => void,
   onDelete: () => void,
-  firstValue: string
+  firstValue?: string
   typeLink: string
 }
 
-export function LinkModal({ isOpen, onClose, onSubmit, onDelete, firstValue, typeLink}: LinkModalProps) {
-  const [value, setValue] = useState(firstValue)
+const formatSocialLink = (input: string): string => {
+  if (!input) return '';
+  if (input === '@') return '@';
+
+  const cleaned = input.replace(/^@+/, '');
+  if (!cleaned) return '';
+
+  return `@${cleaned}`;
+};
+
+export function LinkModal({ isOpen, onClose, onSubmit, onDelete, firstValue = '', typeLink }: LinkModalProps) {
+  const [value, setValue] = useState(() => formatSocialLink(firstValue))
 
   useEffect(() => {
-    setValue(firstValue);
+    setValue(formatSocialLink(firstValue || ''));
   }, [firstValue]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value;
+    const formatted = formatSocialLink(rawValue);
+    setValue(formatted);
+  };
+
+  const handleFocus = () => {
+    if (!value) {
+      setValue('@');
+    }
+  };
+
+  const handleBlur = () => {
+    if (value === '@') {
+      setValue('');
+    }
+  };
 
   const handleSubmit = () => {
-    onSubmit(value)
+    const finalValue = value === '@' ? '' : value;
+    onSubmit(finalValue)
     onClose()
   }
 
@@ -33,31 +62,29 @@ export function LinkModal({ isOpen, onClose, onSubmit, onDelete, firstValue, typ
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.SpecialBlock>
-        {
-          <div className={styles.header}>
-            <h3>
-              {typeLink}
-            </h3>
-            <button
-              className={styles.deleteButton}
-              onClick={handleDelete}
-            >
-              <TrashIcon/>
-              Удалить
-            </button>
-          </div>
-        }
+        <div className={styles.header}>
+          <h3>
+            {typeLink}
+          </h3>
+          <button
+            className={styles.deleteButton}
+            onClick={handleDelete}
+          >
+            <TrashIcon />
+            Удалить
+          </button>
+        </div>
       </Modal.SpecialBlock>
 
       <Modal.Body>
-        {
-          <input
-            className={styles.input}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={"@id"}
-          />
-        }
+        <input
+          className={styles.input}
+          value={value}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={"@id"}
+        />
       </Modal.Body>
 
       <Modal.Footer>
@@ -65,7 +92,7 @@ export function LinkModal({ isOpen, onClose, onSubmit, onDelete, firstValue, typ
           <button onClick={onClose}>
             Отмена
           </button>
-          <button className={styles.submitButton} onClick={handleSubmit}>
+          <button className={clsx(styles.submitButton, firstValue === value ? styles.disable : '')} onClick={handleSubmit}>
             Сохранить изменения
           </button>
         </div>

@@ -1,42 +1,69 @@
 import { Modal } from '@/shared/ui/modal/Modal.tsx';
-import { useState } from "react";
-import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
-import { useRoleTypes } from "@/entities/user/api/queries.ts";
-import { Radio } from "@/shared/ui/fields/radio/Radio.tsx";
-import { ModalFooter } from "@/shared/ui/modal-footer/ModalFooter.tsx";
+import { useEffect, useMemo, useState } from 'react';
+import { useSkillsStore } from '@/features/my-competencies/model/store/useSkillsStore.ts';
+import { useRoleTypes } from '@/entities/user/api/queries.ts';
+import { Checkbox } from '@/shared/ui/fields/checkbox/Checkbox.tsx';
+import { ModalFooter } from '@/shared/ui/modal-footer/ModalFooter.tsx';
+import { ALL_COMPETENCIES } from '@/features/my-competencies/model/store/mock.ts';
+import styles from './SelectCompetencyModal.module.css';
 
 interface SelectCompetencyModalProps {
-  isOpen: boolean,
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
+  maxCount?: number;
 }
 
-export const SelectCompetencyModal = ({ isOpen, onClose }: SelectCompetencyModalProps) => {
-  const { addCompetency, draftData } = useSkillsStore();
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+export const SelectCompetencyModal = ({ isOpen, onClose, maxCount }: SelectCompetencyModalProps) => {
+  const { draftData, setCompetencies } = useSkillsStore();
+  const { data: roleTypesData = [], isLoading } = useRoleTypes();
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const { data: roleTypes = [], isLoading } = useRoleTypes();
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedIds(draftData.map((c) => c.roleTypeId));
+    }
+  }, [isOpen, draftData]);
 
-  const availableCompetencies = roleTypes.filter(
-    competency => !draftData.some(existing => existing.roleTypeId === competency.id)
-  );
+  const availableCompetencies = useMemo(() => {
+    if (roleTypesData.length > 0) {
+      return roleTypesData;
+    }
+    return ALL_COMPETENCIES.map((c) => ({
+      id: c.roleTypeId,
+      name: c.roleTypeName,
+    }));
+  }, [roleTypesData]);
+
+  const limit = maxCount ?? 7;
+
+  const handleToggle = (id: string) => {
+    setSelectedIds((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id);
+      }
+      if (prev.length >= limit) {
+        return prev;
+      }
+      return [...prev, id];
+    });
+  };
 
   const handleSubmit = () => {
-    if (!selectedValue) return;
-
-    const selectedRole = availableCompetencies.find(c => c.id === selectedValue);
-
-    if (selectedRole) {
-      addCompetency(selectedRole.id, selectedRole.name);
-      onClose();
-    }
+    if (selectedIds.length === 0) return;
+    const selectedRoles = availableCompetencies
+      .filter((c) => selectedIds.includes(c.id))
+      .map((c) => ({ id: c.id, name: c.name ?? '' }));
+    setCompetencies(selectedRoles);
+    onClose();
   };
+
+  const title = selectedIds.length > 0 ? 'Добавьте или измените компетенции' : 'Выбор компетенций';
+  const subtitle = `Выбрано ${selectedIds.length}/${limit}`;
+  const errorMessage = selectedIds.length === 0 ? 'Выберите хотя бы 1 компетенцию' : null;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Modal.Header
-        title={'Выберите новую компетенцию'}
-        subtitle={'После этого сможете наполнить её нужными навыками'}
-      />
+      <Modal.Header title={title} subtitle={subtitle} />
 
       <Modal.Body>
         {isLoading ? (
@@ -44,18 +71,24 @@ export const SelectCompetencyModal = ({ isOpen, onClose }: SelectCompetencyModal
             Загрузка компетенций...
           </p>
         ) : availableCompetencies.length > 0 ? (
-          availableCompetencies.map(competencyRadio => (
-            <Radio
-              key={competencyRadio.id}
-              name="competence"
-              label={competencyRadio.name}
-              onChange={() => setSelectedValue(competencyRadio.id)}
-              checked={selectedValue === competencyRadio.id}
-            />
-          ))
+          <div className={styles.list}>
+            {availableCompetencies.map((competency) => {
+              const isChecked = selectedIds.includes(competency.id);
+              const isDisabled = !isChecked && selectedIds.length >= limit;
+              return (
+                <Checkbox
+                  key={competency.id}
+                  label={competency.name}
+                  checked={isChecked}
+                  disabled={isDisabled}
+                  onChange={() => handleToggle(competency.id)}
+                />
+              );
+            })}
+          </div>
         ) : (
           <p style={{ color: 'var(--color-gray-500)', textAlign: 'center', padding: '20px 0' }}>
-            Все доступные компетенции уже добавлены
+            Нет доступных компетенций
           </p>
         )}
       </Modal.Body>
@@ -64,7 +97,8 @@ export const SelectCompetencyModal = ({ isOpen, onClose }: SelectCompetencyModal
         <ModalFooter
           onClose={onClose}
           handleSubmit={handleSubmit}
-          selectedValue={selectedValue}
+          disabled={selectedIds.length === 0}
+          error={errorMessage}
         />
       </Modal.Footer>
     </Modal>

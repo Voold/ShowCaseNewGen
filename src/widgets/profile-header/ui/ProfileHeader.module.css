@@ -3,7 +3,7 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
   background-color: var(--color-gray-50);
   border-radius: 32px;
 }
@@ -67,6 +67,8 @@
   border-radius: 50%;
   top: 0;
   right: 0;
+
+  color: white;
 }
 
 .nameContainer {
@@ -179,7 +181,7 @@
 .infoLabel {
   display: flex;
   gap: 10px;
-  width: 100%;
+  width: 67%;
   align-items: center;
 }
 

@@ -5,6 +5,7 @@ import {useUserById} from "@/entities/user";
 import BackIcon from '@/shared/ui/icons/back.svg?react';
 import {SomeoneProfileHeader} from "@/shared/ui/someone-profile-header/SomeoneProfileHeader.tsx";
 import MoreLogo from '@/shared/ui/icons/more.svg?react'
+import {Portfolio} from "@/features/portfolio/Portfolio.tsx";
 
 
 export function SomeoneProfile() {
@@ -40,9 +41,10 @@ export function SomeoneProfile() {
       </section>
 
       <section className={styles.profile}>
-        <SomeoneProfileHeader user={user} links={links} />
+        <SomeoneProfileHeader user={user} links={links} onClickSee={() => navigate(`/profile/${user.id}`)}/>
         <div className={styles.body}>
           <MyCompetenciesList savedSkills={user.meta.skills} readonly={true} />
+          <Portfolio firsValue={"I don't wonna let go. I don't wonna let go"} readonly={true}/>
         </div>
       </section>
     </div>

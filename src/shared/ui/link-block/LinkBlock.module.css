@@ -5,6 +5,8 @@
   border: 1px solid var(--color-gray-250);
   border-radius: 12px;
   width: 100%;
+
+  position: relative;
 }
 
 .logo {
@@ -70,6 +72,22 @@
 .linkList {
   display: flex;
   gap: 8px
+}
+
+.specialEditIcon {
+  color: white;
+}
+
+.editButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 11px;
+  height: 11px;
+}
+
+.editIcon {
+  color: var(--color-gray-500)
 }
 
 .header h6 {

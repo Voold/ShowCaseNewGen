@@ -6,17 +6,13 @@ import { AboutMe } from "@/features/about-me/ui/AboutMe.tsx";
 import { MyCompetenciesList } from "@/features/my-competencies";
 import BackIcon from '@/shared/ui/icons/back.svg?react';
 import EyeIcon from '@/shared/ui/icons/eye.svg?react';
+import {Portfolio} from "@/features/portfolio/Portfolio.tsx";
 
 export const MyProfile = () => {
   const navigate = useNavigate();
   const { data: user } = useMe();
 
-  // const links: { type?: 'tg' | 'vk' | 'element'; link?: string; anotherType?: string }[] = [
-  //   { type: 'element', link: 'Mys2018' },
-  //   { type: 'tg', link: 'Mys2018' },
-  //   { type: 'vk' },
-  //   // { anotherType: 'Max', link: '@mys2018' },
-  // ];
+  const portfolio = ''
 
   if (!user || user.id === 'loading...') {
     return null;
@@ -51,6 +47,7 @@ export const MyProfile = () => {
             className={styles.wid}
           />
           <MyCompetenciesList savedSkills={user.meta.skills} />
+          <Portfolio firsValue={portfolio} />
         </div>
       </section>
     </div>
