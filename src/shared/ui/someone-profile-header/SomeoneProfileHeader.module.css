@@ -7,6 +7,13 @@
   border-radius: 32px;
 }
 
+.mobileHeader {
+  display: none;
+  background-color: var(--color-gray-150);
+  align-items: center;
+  padding-bottom: 12px;
+}
+
 .header {
   display: flex;
   gap: 12px;
@@ -184,13 +191,6 @@
   color: var(--color-brand-black);
 }
 
-.mobileHeader {
-  display: flex;
-  background-color: var(--color-gray-150);
-  align-items: center;
-  padding-bottom: 12px;
-}
-
 .titleMobile {
   font: var(--hero-title-platform);
   width: 100%;
@@ -214,6 +214,10 @@
   .container {
     border-radius: 0 0 20px 20px;
     padding: 20px;
+  }
+
+  .mobileHeader {
+    display: flex;
   }
 
   .header {
