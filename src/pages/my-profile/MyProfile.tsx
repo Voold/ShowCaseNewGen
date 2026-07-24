@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useBlocker } from 'react-router-dom';
 import styles from './MyProfile.module.css';
 import { useMe } from '@/entities/user/api/queries';
 import { ProfileHeader } from '@/widgets/profile-header';
@@ -7,10 +7,50 @@ import { MyCompetenciesList } from "@/features/my-competencies";
 import BackIcon from '@/shared/ui/icons/back.svg?react';
 import EyeIcon from '@/shared/ui/icons/eye.svg?react';
 import {Portfolio} from "@/features/portfolio/Portfolio.tsx";
+import { useProfileEditStore, useModalStore } from '@/shared/model';
+import { useSkillsStore } from '@/features/my-competencies/model/store/useSkillsStore.ts';
+import { useEffect } from 'react';
 
 export const MyProfile = () => {
   const navigate = useNavigate();
   const { data: user } = useMe();
+  const { activeEditBlock, hasUnsavedChanges, setActiveEditBlock, setHasUnsavedChanges } = useProfileEditStore();
+  const { openModal, closeModal } = useModalStore();
+
+  useEffect(() => {
+    return () => {
+      setActiveEditBlock(null);
+      setHasUnsavedChanges(false);
+      useSkillsStore.getState().cancelEditing();
+    };
+  }, [setActiveEditBlock, setHasUnsavedChanges]);
+
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      hasUnsavedChanges && currentLocation.pathname !== nextLocation.pathname
+  );
+
+  useEffect(() => {
+    if (blocker.state === 'blocked') {
+      openModal('CONFIRM_CANCEL', {
+        title: 'У вас есть несохраненные изменения',
+        description: 'Если вы покинете страницу, они будут безвозвратно потеряны. Вы уверены, что хотите уйти?',
+        cancelText: 'Покинуть страницу',
+        confirmText: 'Вернуться к редактированию',
+        onDecline: () => {
+          closeModal();
+          useSkillsStore.getState().cancelEditing();
+          blocker.proceed?.();
+          setActiveEditBlock(null);
+          setHasUnsavedChanges(false);
+        },
+        onConfirm: () => {
+          closeModal();
+          blocker.reset?.();
+        }
+      });
+    }
+  }, [blocker, openModal, closeModal, setActiveEditBlock, setHasUnsavedChanges]);
 
   const portfolio = ''
 
@@ -40,14 +80,22 @@ export const MyProfile = () => {
       </section>
 
       <section className={styles.profile}>
-        <ProfileHeader data={user} links={user.meta.messengers} />
+        <div style={{ opacity: activeEditBlock ? 0.5 : 1, pointerEvents: activeEditBlock ? 'none' : 'auto', transition: 'opacity 0.2s' }}>
+          <ProfileHeader data={user} links={user.meta.messengers} />
+        </div>
         <div className={styles.body}>
-          <AboutMe
-            bio={user.meta.bio}
-            className={styles.wid}
-          />
-          <MyCompetenciesList savedSkills={user.meta.skills} />
-          <Portfolio firsValue={portfolio} />
+          <div style={{ opacity: activeEditBlock === 'competencies' ? 0.5 : 1, pointerEvents: activeEditBlock === 'competencies' ? 'none' : 'auto', transition: 'opacity 0.2s', flex: 1 }}>
+            <AboutMe
+              bio={user.meta.bio}
+              className={styles.wid}
+            />
+          </div>
+          <div style={{ opacity: activeEditBlock === 'aboutMe' ? 0.5 : 1, pointerEvents: activeEditBlock === 'aboutMe' ? 'none' : 'auto', transition: 'opacity 0.2s', flex: 1 }}>
+            <MyCompetenciesList savedSkills={user.meta.skills} />
+          </div>
+          <div style={{ opacity: activeEditBlock ? 0.5 : 1, pointerEvents: activeEditBlock ? 'none' : 'auto', transition: 'opacity 0.2s', flex: 1 }}>
+            <Portfolio firsValue={portfolio} />
+          </div>
         </div>
       </section>
     </div>

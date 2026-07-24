@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.questionIcon {
+  width: 50px;
+  height: 50px;
+  color: var(--color-gray-350)
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.title {
+  font: var(--field-title-big-interface);
+  color: var(--color-gray-900);
+  text-align: center;
+}
+
+.description {
+  font: var(--body-text-platform);
+  color: var(--color-gray-900);
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.cancelBtn {
+  font: var(--inter-13-600);
+  color: var(--color-gray-500)
+}
+
+.confirmBtn {
+  padding: 14px 24px 15px 24px;
+  background-color: var(--color-brand-green);
+  color: white;
+  border-radius: 50px;
+  font: var(--inter-13-600);
+}
+
+.cancelBtn:hover, .confirmBtn:hover {
+  opacity: 0.8;
+  transition: all 0.5s;
+}

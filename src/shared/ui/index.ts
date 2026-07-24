@@ -14,3 +14,4 @@ export { FooterBlockFields } from './footer-block-fields/FooterBlockFields.tsx'
 export { Checkbox } from './fields/checkbox'
 
 
+export { ConfirmModal } from './confirm-modal/ConfirmModal.tsx';

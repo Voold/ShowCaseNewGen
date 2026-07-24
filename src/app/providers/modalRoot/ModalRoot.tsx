@@ -3,10 +3,13 @@ import { SelectCompetencyModal } from '@/features/my-competencies/ui/modal-compe
 import type {ModalType} from "@/shared/model/useModalStore.ts";
 import React from "react";
 import {LinkModal} from "@/features/link-modal/LinkModal.tsx";
+import { ConfirmModal } from "@/shared/ui";
 
 const MODAL_COMPONENTS : Record<NonNullable<ModalType>, React.ElementType> = {
   COMPETENCY_CHOICE: SelectCompetencyModal,
   LINK_UPDATE: LinkModal,
+  CONFIRM_SAVE: ConfirmModal,
+  CONFIRM_CANCEL: ConfirmModal,
 }
 
 export function ModalRoot() {

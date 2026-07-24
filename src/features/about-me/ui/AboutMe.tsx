@@ -3,6 +3,7 @@ import Pencil from '@/shared/ui/icons/pencil.svg?react'
 import { type ChangeEvent, useState, useEffect } from "react";
 import { FooterBlockFields, TextArea } from "@/shared";
 import { useUpdateProfileMeta } from '@/entities/user/api/queries';
+import { useModalStore, useProfileEditStore } from '@/shared/model';
 
 type AboutMeProps = {
   bio: string,
@@ -16,6 +17,9 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   const [value, setValue] = useState<string>(bio || '')
   const [prevValue, setPrevValue] = useState<string>(bio || '')
   const [isEditing, setIsEditing] = useState<boolean>(false)
+
+  const { setActiveEditBlock, setHasUnsavedChanges } = useProfileEditStore()
+  const { openModal, closeModal } = useModalStore()
 
   const { mutate: updateProfileMeta, isPending } = useUpdateProfileMeta()
 
@@ -31,13 +35,40 @@ export function AboutMe({ bio, className }: AboutMeProps) {
   const hasUpdate = value.trim() !== (bio || '').trim()
   const disabled = !hasUpdate || !isValid || isPending
 
+  useEffect(() => {
+    if (isEditing) {
+      setHasUnsavedChanges(hasUpdate);
+    }
+  }, [isEditing, hasUpdate, setHasUnsavedChanges]);
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
   }
 
   const handleCancel = () => {
-    setIsEditing(false)
-    setValue(prevValue)
+    if (hasUpdate) {
+      openModal('CONFIRM_SAVE', {
+        title: 'Сохранить изменения?',
+        cancelText: 'Удалить',
+        confirmText: 'Сохранить',
+        onDecline: () => {
+          closeModal();
+          setIsEditing(false);
+          setActiveEditBlock(null);
+          setHasUnsavedChanges(false);
+          setValue(prevValue);
+        },
+        onConfirm: () => {
+          closeModal();
+          handleSubmit();
+        }
+      });
+    } else {
+      setIsEditing(false);
+      setActiveEditBlock(null);
+      setHasUnsavedChanges(false);
+      setValue(prevValue);
+    }
   }
 
   const handleSubmit = () => {
@@ -48,6 +79,8 @@ export function AboutMe({ bio, className }: AboutMeProps) {
       {
         onSuccess: () => {
           setIsEditing(false);
+          setActiveEditBlock(null);
+          setHasUnsavedChanges(false);
           setPrevValue(value);
         }
       }
@@ -65,6 +98,7 @@ export function AboutMe({ bio, className }: AboutMeProps) {
             className={styles.editButton}
             onClick={() => {
               setIsEditing(true)
+              setActiveEditBlock('aboutMe')
               setPrevValue(value)
             }}
             disabled={isPending}

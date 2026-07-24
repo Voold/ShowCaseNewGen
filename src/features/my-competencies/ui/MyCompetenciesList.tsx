@@ -5,7 +5,7 @@ import Plus from '@/shared/ui/icons/plus.svg?react';
 import Pencil from '@/shared/ui/icons/pencil.svg?react';
 import { FooterBlockFields } from "@/shared";
 import { useSkillsStore } from "@/features/my-competencies/model/store/useSkillsStore.ts";
-import { useModalStore } from "@/shared/model";
+import { useModalStore, useProfileEditStore } from "@/shared/model";
 import { useUpdateProfileMeta, useSkills } from '@/entities/user/api/queries';
 import type { CompetenceDto } from '@/entities/user/model/types';
 
@@ -33,10 +33,47 @@ export function MyCompetenciesList({ savedSkills, readonly = false }: MyCompeten
     getSkillsForCompetence,
   } = useSkillsStore();
 
-  const { openModal } = useModalStore();
+  const { setActiveEditBlock, setHasUnsavedChanges } = useProfileEditStore();
+  const { openModal, closeModal } = useModalStore();
   const { mutate: updateProfile, isPending } = useUpdateProfileMeta();
   const { data: globalSkillsData } = useSkills();
   const [showSaveError, setShowSaveError] = useState(false);
+
+  const handleStartEditing = () => {
+    setActiveEditBlock('competencies');
+    setHasUnsavedChanges(hasChanges);
+    startEditing();
+  };
+
+  useEffect(() => {
+    if (isEditing) {
+      setHasUnsavedChanges(hasChanges);
+    }
+  }, [isEditing, hasChanges, setHasUnsavedChanges]);
+
+  const handleCancelEditing = () => {
+    if (hasChanges) {
+      openModal('CONFIRM_SAVE', {
+        title: 'Сохранить изменения?',
+        cancelText: 'Удалить',
+        confirmText: 'Сохранить',
+        onDecline: () => {
+          closeModal();
+          cancelEditing();
+          setActiveEditBlock(null);
+          setHasUnsavedChanges(false);
+        },
+        onConfirm: () => {
+          closeModal();
+          handleSave();
+        }
+      });
+    } else {
+      cancelEditing();
+      setActiveEditBlock(null);
+      setHasUnsavedChanges(false);
+    }
+  };
 
   useEffect(() => {
     if (globalSkillsData) {
@@ -70,6 +107,8 @@ export function MyCompetenciesList({ savedSkills, readonly = false }: MyCompeten
       {
         onSuccess: () => {
           saveChanges();
+          setActiveEditBlock(null);
+          setHasUnsavedChanges(false);
         }
       }
     );
@@ -84,7 +123,7 @@ export function MyCompetenciesList({ savedSkills, readonly = false }: MyCompeten
         {(!isEditing && !readonly) && (
           <button
             className={styles.editButton}
-            onClick={startEditing}
+            onClick={handleStartEditing}
             disabled={isPending}
           >
             <Pencil />
@@ -105,6 +144,7 @@ export function MyCompetenciesList({ savedSkills, readonly = false }: MyCompeten
               isEditing={isEditing}
               getSkillsForCompetence={getSkillsForCompetence}
               currentFullSkills={currentFullSkills}
+              isLastCompetency={draftData.length === 1}
             />
           </div>
         ))}
@@ -122,7 +162,7 @@ export function MyCompetenciesList({ savedSkills, readonly = false }: MyCompeten
       {isEditing && (
         <div className={styles.footerContainer}>
           <FooterBlockFields
-            handleCancel={cancelEditing}
+            handleCancel={handleCancelEditing}
             handleSubmit={handleSave}
             disabled={!hasChanges || isPending}
             customError={showSaveError && hasEmptyCompetencies ? "Выберите хотя бы по 1 навыку в каждой компетенции" : undefined}

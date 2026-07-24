@@ -16,6 +16,7 @@ type MyCompetenciesProps = {
   popoverOpenFor: string | null;
   setPopoverOpenFor: (competenceId: string | null) => void;
   getSkillsForCompetence: (competenceId: string) => void;
+  isLastCompetency?: boolean;
 
 };
 
@@ -28,7 +29,8 @@ export function MyCompetencies({
   removeCompetency,
   popoverOpenFor,
   setPopoverOpenFor,
-  getSkillsForCompetence
+  getSkillsForCompetence,
+  isLastCompetency
 }: MyCompetenciesProps) {
 
   if (!isEditing && data.skills.length === 0) {
@@ -78,7 +80,7 @@ export function MyCompetencies({
         </div>
       </div>
       {
-        isEditing &&
+        (isEditing && !isLastCompetency) &&
         <button className={styles.editButton} onClick={() => removeCompetency(data.roleTypeId)}>
           <Trash className={styles.trashIcon}/>
         </button>

@@ -1,7 +1,6 @@
 import {create} from "zustand";
 
-export type ModalType = 'COMPETENCY_CHOICE' | 'LINK_UPDATE' |null
-//'CONFIRM_DELETE'
+export type ModalType = 'COMPETENCY_CHOICE' | 'LINK_UPDATE' | 'CONFIRM_SAVE' | 'CONFIRM_CANCEL' | null
 
 interface ModalStore {
   activeModal: ModalType,
